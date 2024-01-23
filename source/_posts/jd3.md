@@ -56,4 +56,5 @@ console.log('Add your text here');
 ```
 
 Then bomm! It shows up in the console
+
 ![Console log](../images/jd3/2.png)
