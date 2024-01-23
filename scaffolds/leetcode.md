@@ -10,9 +10,9 @@ categories: [leetcode]
 
 ## Solution
 
-### 1. define a stack
+### define a stack
 
-### 2. traverse the heights
+### traverse the heights
 
 #### Note:
 
