@@ -2,7 +2,8 @@
 title: JavaScript Day 1 - VSCode Setting
 date: 2024-01-23 01:21:40
 tags: [VSCode, Theme]
-categories: [JavaScript]
+categories: 
+    - JavaScript
 ---
 ### Download VSCode
 

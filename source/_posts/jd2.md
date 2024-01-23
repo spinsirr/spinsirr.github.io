@@ -2,7 +2,8 @@
 title: JavaScript Day 2 - Hello World!
 date: 2024-01-23 02:11:44
 tags: 
-categories: [JavaScript]
+categories: 
+    - JavaScript
 ---
 
 ### Open The Console of the browser
