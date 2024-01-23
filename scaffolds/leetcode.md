@@ -14,7 +14,7 @@ categories: [leetcode]
 
 ### 2. traverse the heights
 
-### Note: We have to insert a "0" in both start and end of the height array, otherwise it will not return the correct anwser if the array is in ascending sequence
+#### Note:
 
 ## Runnable codes
 
