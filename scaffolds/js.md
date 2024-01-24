@@ -9,4 +9,4 @@ categories: [JavaScript]
 
 Open Chrome, right click on a blank webpage 
 
-![Open console](../images/jd2/1.png)
+#### Note
