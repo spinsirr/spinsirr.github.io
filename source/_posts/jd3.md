@@ -14,8 +14,8 @@ You can write ```JavaScript``` code inside of the ```HTML``` file, just like thi
 <body>
   <h1>JavaScript Fundamentals – P1</h1>
   <script>
-    let js = 'hello'
-    if (js === 'hello') alert('Hello World!')
+    let js = 'hello';
+    if (js === 'hello') alert('Hello World!');
   </script>
 </body>
 ```
@@ -31,8 +31,8 @@ create a new JavaScript file ```script.js``` ( do not use this name in a large w
 In the file write the following codes:
 
 ```JavaScript
-let js = 'hello'
-if (js === 'hello') alert('Hello World!')
+let js = 'hello';
+if (js === 'hello') alert('Hello World!');
 ```
 
 Then add the source to the ```HTML``` file
