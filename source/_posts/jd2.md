@@ -6,7 +6,7 @@ categories:
     - JavaScript
 ---
 
-### Open The Console of the browser
+### Open the console of the browser
 
 Open Chrome, right click on a blank webpage 
 

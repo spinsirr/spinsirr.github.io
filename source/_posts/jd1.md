@@ -9,7 +9,7 @@ categories:
 
 The best IDE for JavaScript developer is VSCode. For installing it, just click the [download link](https://code.visualstudio.com/Download) and download the latest version of VSCode installer ( For new developer. We recommend you to download the **User Installer** ).
 
-### VSCode Settings
+### VSCode settings
 
 #### Theme
 
@@ -25,7 +25,7 @@ If you did not find the theme you like, you can find it in extension menu.
 
 ![Change Theme for VSCode](../images/jd1/3.png)
 
-#### Auto Save
+#### Auto save
 
 Auto save is a important feature for IDEs. If you are using Jetbrain IDEs before. Then you might feel a little bit uncomfortable while using VSCode since everytime after you modify your code. You have to press **Ctrl + S** to save it. Don't worry, you can skip that by using auto save.
 

@@ -6,7 +6,7 @@ categories:
 date: 2024-01-23 14:13:59
 ---
 
-### Inline JavaScript Code
+### Inline JavaScript code
 
 You can write ```JavaScript``` code inside of the ```HTML``` file, just like this:
 
@@ -20,7 +20,7 @@ You can write ```JavaScript``` code inside of the ```HTML``` file, just like thi
 </body>
 ```
 
-### Seperate JavaScript Code
+### Seperate JavaScript code
 
 To increse the maintainability of your code, it is suggested to use a seperate JavaScript file
 
