@@ -42,7 +42,7 @@ let $bankAccount = -10;
 let _me = 'broken';
 ```
 
-For constant numbers like ```\Pi``` you can use full uppercase names
+For constant numbers like ```$\pi$``` you can use full uppercase names
 
 e.g.
 
