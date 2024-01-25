@@ -1,4 +1,4 @@
-## We come to my personal webpage
+# We come to my personal webpage
 
 Hi, everyone. I'm Spencer. Currently a student of [University of California, Irvine](https://uci.edu/) pursuing Master's degree of Computer Engineering.
 In this website. I will post some notes while learning new technologies or maybe some fun stuff. So keep track of it.
