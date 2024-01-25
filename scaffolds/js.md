@@ -1,5 +1,5 @@
 ---
-title: JavaScript Day 2 - Hello World!
+title: JavaScript Day 2 - Hello World
 date: {{ date }}
 tags: []
 categories: [JavaScript]
