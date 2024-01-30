@@ -67,3 +67,15 @@ console.log('18' === 18);
 The first equation is true because JavaScript automatically converte ```'18'``` to ```18```.
 
 #### Note: It is always suggested that use ```===``` operator and do the coersion manually
+
+### Different operator
+
+There are also two types or ```different operator```. strict ```!=``` and loose ```!==```.
+
+```JavaScript
+let age = 23
+console.log(23 != '23');
+// -> false because '23' == 23
+console.log(23 !== '23');
+// -> true 
+```
