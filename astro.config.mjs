@@ -6,8 +6,8 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	// Change this to your deployed URL (e.g. a Vercel domain or custom domain).
-	site: 'https://spinsirr-web.vercel.app',
+	// Deployed to GitHub Pages (user site, served at the root).
+	site: 'https://spinsirr.github.io',
 	integrations: [mdx(), sitemap()],
 	fonts: [
 		{
