@@ -1,63 +1,43 @@
-# Astro Starter Kit: Blog
+# spinsirr-web
 
-```sh
-bun create astro@latest -- --template blog
+Personal site for **Spencer (Yunpeng) Zhao** — cofounder at [CoreSpeed](https://corespeed.io), based in San Jose.
+
+Live at **[spinsirr-web.vercel.app](https://spinsirr-web.vercel.app)**.
+
+## Stack
+
+- [Astro](https://astro.build) (static output)
+- Bricolage Grotesque + JetBrains Mono via the Astro Fonts API
+- Markdown / MDX content collections for the blog, with RSS + sitemap
+- JSON-LD structured data (Person, WebSite, BlogPosting) for SEO
+- Hosted on Vercel — auto-deploys on push to `main`
+
+## Develop
+
+```bash
+bun install
+bun run dev        # dev server at http://localhost:4321
+bun run build      # static build → dist/
+bun run preview    # preview the build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Structure
 
 ```text
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+src/
+  consts.ts           # profile, projects, stack, stats — single source of truth
+  components/          # Header, Footer, BaseHead, ProjectCard, SocialLinks, FormattedDate
+  layouts/            # BlogPost
+  pages/              # index, projects, about, blog/, rss.xml
+  content/blog/       # posts (Markdown)
+  styles/global.css   # design tokens + utilities
+public/               # avatar, OG image, favicon
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Editing
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- **Profile, projects, stack, stats** → `src/consts.ts`
+- **Blog posts** → add a Markdown file to `src/content/blog/`
+- **Design tokens** (colors, fonts, spacing) → `:root` in `src/styles/global.css`
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+Push to `main` and Vercel deploys automatically.
