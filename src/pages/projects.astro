@@ -1,0 +1,91 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { PROFILE, PROJECTS, type ProjectGroup } from '../consts';
+
+const title = `Projects — ${PROFILE.name}`;
+const description = 'Agent infrastructure, full products, open source, and hardware I have built.';
+
+const groups: { key: ProjectGroup; blurb: string }[] = [
+	{ key: 'CoreSpeed', blurb: 'Agent infrastructure I work on at CoreSpeed.' },
+	{ key: 'Products', blurb: 'Full products designed and shipped end to end.' },
+	{ key: 'Open source', blurb: 'Tools and libraries released publicly.' },
+	{ key: 'Hardware', blurb: 'Electronics and embedded projects, for the love of it.' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+	<body>
+		<Header />
+		<main class="section">
+			<div class="wrap">
+				<div class="page-head">
+					<p class="eyebrow">Projects</p>
+					<h1>What I've built</h1>
+					<p class="lead">
+						From agent runtimes to a tiny lithium UPS — a record of things I've shipped and the
+						stacks behind them.
+					</p>
+				</div>
+
+				{
+					groups.map((group) => {
+						const items = PROJECTS.filter((p) => p.group === group.key);
+						if (items.length === 0) return null;
+						return (
+							<section class="group">
+								<div class="group-head">
+									<h2>{group.key}</h2>
+									<p>{group.blurb}</p>
+								</div>
+								<div class="sheet grid-2">
+									{items.map((p) => (
+										<ProjectCard project={p} />
+									))}
+								</div>
+							</section>
+						);
+					})
+				}
+			</div>
+		</main>
+		<Footer />
+
+		<style>
+			.page-head {
+				max-width: 60ch;
+				margin-bottom: 3.5rem;
+			}
+			.page-head h1 {
+				margin: 0.6rem 0 1rem;
+			}
+			.group + .group {
+				margin-top: 3.5rem;
+			}
+			.group-head {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: baseline;
+				gap: 0.25rem 1rem;
+				margin-bottom: 1.5rem;
+				padding-bottom: 0.8rem;
+				border-bottom: 1px solid var(--border);
+			}
+			.group-head h2 {
+				margin: 0;
+				font-size: 1.5rem;
+			}
+			.group-head p {
+				margin: 0;
+				font-size: 0.92rem;
+				color: var(--text-mute);
+			}
+		</style>
+	</body>
+</html>

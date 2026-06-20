@@ -1,0 +1,80 @@
+---
+import { NAV, PROFILE } from '../consts';
+import SocialLinks from './SocialLinks.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer>
+	<div class="wrap inner">
+		<div class="col">
+			<a class="brand" href="/">{PROFILE.name}<span class="dot">.</span></a>
+			<p class="tag">{PROFILE.role} @ {PROFILE.company} · {PROFILE.location}</p>
+		</div>
+
+		<nav class="nav" aria-label="Footer">
+			{NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+		</nav>
+
+		<SocialLinks />
+	</div>
+
+	<div class="wrap base">
+		<span>© {year} {PROFILE.fullName}</span>
+		<span>Built with Astro</span>
+	</div>
+</footer>
+
+<style>
+	footer {
+		margin-top: 2rem;
+		border-top: 1px solid var(--line);
+	}
+	.inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		padding-block: 2.5rem 1.5rem;
+	}
+	.brand {
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1.05rem;
+	}
+	.brand .dot {
+		color: var(--accent);
+	}
+	.tag {
+		margin: 0.5rem 0 0;
+		font-family: var(--font-mono);
+		font-size: 0.76rem;
+		color: var(--fg-3);
+	}
+	.nav {
+		display: flex;
+		gap: 1.4rem;
+		font-family: var(--font-mono);
+		font-size: 0.76rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+	}
+	.nav a {
+		color: var(--fg-2);
+	}
+	.nav a:hover {
+		color: var(--accent);
+	}
+	.base {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 0.5rem;
+		padding-block: 1.25rem;
+		border-top: 1px solid var(--line);
+		font-family: var(--font-mono);
+		font-size: 0.74rem;
+		color: var(--fg-3);
+	}
+</style>

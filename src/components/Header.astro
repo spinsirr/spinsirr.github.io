@@ -1,0 +1,83 @@
+---
+import { NAV, PROFILE } from '../consts';
+import SocialLinks from './SocialLinks.astro';
+
+const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isActive = (href: string) => href === pathname || (href !== '/' && pathname.startsWith(href));
+---
+
+<header>
+	<nav class="wrap">
+		<a class="brand" href="/">{PROFILE.name}<span class="dot">.</span></a>
+
+		<div class="links">
+			{
+				NAV.map((item) => (
+					<a href={item.href} class:list={['link', { active: isActive(item.href) }]}>
+						{item.label}
+					</a>
+				))
+			}
+		</div>
+
+		<div class="right">
+			<SocialLinks />
+		</div>
+	</nav>
+</header>
+
+<style>
+	header {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		border-bottom: 1px solid var(--line);
+		background: color-mix(in srgb, var(--bg) 82%, transparent);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+	}
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		height: 60px;
+	}
+	.brand {
+		font-family: var(--font-display);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		font-size: 1.05rem;
+	}
+	.brand .dot {
+		color: var(--accent);
+	}
+	.links {
+		display: flex;
+		gap: 1.5rem;
+		margin-inline: auto;
+	}
+	.link {
+		font-family: var(--font-mono);
+		font-size: 0.76rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--fg-3);
+	}
+	.link:hover,
+	.link.active {
+		color: var(--fg);
+	}
+	.right {
+		display: flex;
+	}
+	@media (max-width: 760px) {
+		.links {
+			margin-inline: 0;
+			gap: 1rem;
+		}
+		.right {
+			display: none;
+		}
+	}
+</style>

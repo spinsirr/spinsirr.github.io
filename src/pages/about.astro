@@ -1,0 +1,329 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import { PROFILE, STACK, STATS } from '../consts';
+
+const title = `About — ${PROFILE.name}`;
+const description = `About ${PROFILE.fullName}, ${PROFILE.role} at ${PROFILE.company}.`;
+
+// Edit these freely — they drive the timeline below.
+const EXPERIENCE = [
+	{
+		role: 'Cofounder',
+		org: 'CoreSpeed',
+		period: 'Present',
+		detail:
+			'Agent infrastructure: runtime, harness, and orchestration. Lead open-source work on Zypher Agent; building Sarea (agent platform) and HaaS (Harness as a Service).',
+	},
+	{
+		role: 'Indie / Open source',
+		org: 'Self-directed',
+		period: 'Ongoing',
+		detail:
+			'Shipping full products end to end — BuildLog, Fixo, Amazon Order Wizard, and Claude Max Gateway.',
+	},
+];
+
+const EDUCATION = [
+	{
+		role: 'Electrical Engineering & Computer Science',
+		org: 'University of California, Irvine',
+		period: '',
+		detail: 'Computer systems, software, and architecture.',
+	},
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+	<body>
+		<Header />
+		<main class="section">
+			<div class="wrap about">
+				<div class="about-top">
+					<figure class="portrait">
+						<img src="/avatar.jpg" alt="Spencer Zhao" width="400" height="400" />
+					</figure>
+					<div class="page-head">
+						<p class="eyebrow">About</p>
+						<h1>Hi, I'm Spencer.</h1>
+					</div>
+				</div>
+
+				<div class="bio">
+					<p>
+						I'm Spencer (Yunpeng) Zhao, cofounder at
+						<a href={PROFILE.companyUrl} target="_blank" rel="noopener">CoreSpeed</a>, based in San Jose,
+						California. I build agent infrastructure — the runtime, harness, and orchestration layers
+						that let teams of AI agents do real work instead of just chatting.
+					</p>
+					<p>
+						I like turning ideas into running systems fast. My work sits where LLMs meet real product
+						surfaces: agent frameworks like <strong>Zypher Agent</strong> (336★), platforms like
+						<strong>Sarea</strong> and <strong>HaaS</strong>, and full apps like <strong>BuildLog</strong>
+						and <strong>Fixo</strong>. I'm just as happy down at the metal — two of my favorite
+						early projects are an FPGA digital clock and a tiny lithium-battery UPS.
+					</p>
+					<blockquote>Empower the agents, then get out of the way.</blockquote>
+				</div>
+
+				<section class="block">
+					<h2>By the numbers</h2>
+					<div class="nums">
+						{
+							STATS.map((s) => (
+								<div>
+									<span class="nv">{s.value}</span>
+									<span class="nl">{s.label}</span>
+								</div>
+							))
+						}
+					</div>
+				</section>
+
+				<section class="block">
+					<h2>Experience</h2>
+					<ol class="timeline">
+						{
+							EXPERIENCE.map((item) => (
+								<li>
+									<div class="row">
+										<h3>
+											{item.role} · <span class="org">{item.org}</span>
+										</h3>
+										{item.period && <span class="period">{item.period}</span>}
+									</div>
+									<p>{item.detail}</p>
+								</li>
+							))
+						}
+					</ol>
+				</section>
+
+				<section class="block">
+					<h2>Education</h2>
+					<ol class="timeline">
+						{
+							EDUCATION.map((item) => (
+								<li>
+									<div class="row">
+										<h3>
+											{item.role} · <span class="org">{item.org}</span>
+										</h3>
+										{item.period && <span class="period">{item.period}</span>}
+									</div>
+									{item.detail && <p>{item.detail}</p>}
+								</li>
+							))
+						}
+					</ol>
+				</section>
+
+				<section class="block">
+					<h2>Toolbox</h2>
+					<div class="stack">
+						{
+							STACK.map((g) => (
+								<div class="stack-row">
+									<span class="stack-label">{g.label}</span>
+									<ul>
+										{g.items.map((i) => (
+											<li class="badge">{i}</li>
+										))}
+									</ul>
+								</div>
+							))
+						}
+					</div>
+				</section>
+
+				<section class="block">
+					<h2>Beyond code</h2>
+					<p>
+						I like building physical things too — a multi-function digital clock in Verilog on an
+						FPGA, and a tiny USB-powered lithium-battery UPS for Raspberry Pi and low-power MCUs (both
+						on <a href="https://github.com/spinsirr" target="_blank" rel="noopener">GitHub</a>).
+						Hardware keeps me honest: the real world doesn't accept hand-wavy abstractions.
+					</p>
+				</section>
+
+				<section class="block contact">
+					<h2>Get in touch</h2>
+					<p>The fastest way to reach me is email. I'm also around on the usual places.</p>
+					<p class="email"><a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a></p>
+					<SocialLinks />
+				</section>
+			</div>
+		</main>
+		<Footer />
+
+		<style>
+			.about {
+				max-width: 760px;
+			}
+			.page-head h1 {
+				margin-top: 0.6rem;
+				font-size: clamp(2.5rem, 7vw, 4.5rem);
+			}
+			.about-top {
+				display: flex;
+				align-items: flex-end;
+				gap: 1.6rem;
+				flex-wrap: wrap;
+				margin-bottom: 2rem;
+			}
+			.portrait {
+				margin: 0;
+				flex: 0 0 auto;
+			}
+			.portrait img {
+				display: block;
+				width: 150px;
+				height: 150px;
+				object-fit: cover;
+				border-radius: 50%;
+				border: 2px solid var(--fg);
+			}
+			.bio {
+				font-size: 1.08rem;
+				margin-bottom: 1rem;
+			}
+			.bio a {
+				color: var(--accent);
+				text-decoration: underline;
+				text-underline-offset: 3px;
+			}
+			.bio a:hover {
+				color: #fff;
+			}
+			.block {
+				margin-top: 3rem;
+			}
+			.block h2 {
+				font-size: 1.4rem;
+				margin-bottom: 1.5rem;
+				padding-bottom: 0.7rem;
+				border-bottom: 1px solid var(--border);
+			}
+			.timeline {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				display: grid;
+				gap: 1.6rem;
+			}
+			.timeline li {
+				position: relative;
+				padding-left: 1.4rem;
+			}
+			.timeline li::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0.55rem;
+				width: 8px;
+				height: 8px;
+				border-radius: 50%;
+				background: var(--accent);
+			}
+			.timeline .row {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: baseline;
+				justify-content: space-between;
+				gap: 0.5rem;
+			}
+			.timeline h3 {
+				margin: 0;
+				font-size: 1.08rem;
+			}
+			.timeline .org {
+				color: var(--text-dim);
+				font-weight: 500;
+			}
+			.timeline .period {
+				font-family: var(--font-mono);
+				font-size: 0.78rem;
+				color: var(--text-mute);
+			}
+			.timeline p {
+				margin: 0.4rem 0 0;
+				font-size: 0.95rem;
+			}
+			.stack {
+				display: grid;
+				gap: 1.2rem;
+			}
+			.stack-row {
+				display: grid;
+				gap: 0.6rem;
+			}
+			@media (min-width: 640px) {
+				.stack-row {
+					grid-template-columns: 140px 1fr;
+				}
+			}
+			.stack-label {
+				font-family: var(--font-mono);
+				font-size: 0.78rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: var(--text-mute);
+			}
+			.stack-row ul {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.contact .email {
+				font-family: var(--font-mono);
+				font-size: 1.05rem;
+				margin: 0.5rem 0 1.2rem;
+			}
+			.contact .email a {
+				color: var(--accent);
+			}
+			.contact .email a:hover {
+				color: #fff;
+			}
+			.nums {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				border-top: 1px solid var(--line);
+				border-left: 1px solid var(--line);
+			}
+			@media (min-width: 560px) {
+				.nums {
+					grid-template-columns: repeat(4, 1fr);
+				}
+			}
+			.nums > div {
+				display: flex;
+				flex-direction: column;
+				gap: 0.3rem;
+				padding: 1.2rem;
+				border-right: 1px solid var(--line);
+				border-bottom: 1px solid var(--line);
+			}
+			.nv {
+				font-family: var(--font-display);
+				font-weight: 700;
+				font-size: 1.8rem;
+				letter-spacing: -0.02em;
+			}
+			.nl {
+				font-family: var(--font-mono);
+				font-size: 0.72rem;
+				color: var(--fg-3);
+			}
+		</style>
+	</body>
+</html>

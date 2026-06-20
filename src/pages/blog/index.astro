@@ -1,0 +1,124 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import { PROFILE } from '../../consts';
+
+const title = `Blog — ${PROFILE.name}`;
+const description = 'Notes on agents, harness design, AI infrastructure, and shipping fast.';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+	<body>
+		<Header />
+		<main class="section">
+			<div class="wrap">
+				<div class="page-head">
+					<p class="eyebrow">Blog</p>
+					<h1>Writing</h1>
+					<p class="lead">{description}</p>
+				</div>
+
+				{
+					posts.length === 0 ? (
+						<p class="empty">No posts yet — check back soon.</p>
+					) : (
+						<ul class="posts">
+							{posts.map((post) => (
+								<li>
+									<a class="card post" href={`/blog/${post.id}/`}>
+										<span class="cover" aria-hidden="true" />
+										<div class="body">
+											<span class="date">
+												<FormattedDate date={post.data.pubDate} />
+											</span>
+											<h2>{post.data.title}</h2>
+											<p>{post.data.description}</p>
+											<span class="read">Read →</span>
+										</div>
+									</a>
+								</li>
+							))}
+						</ul>
+					)
+				}
+			</div>
+		</main>
+		<Footer />
+
+		<style>
+			.page-head {
+				max-width: 60ch;
+				margin-bottom: 3rem;
+			}
+			.page-head h1 {
+				margin: 0.6rem 0 1rem;
+			}
+			.posts {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				display: grid;
+				gap: 1.1rem;
+			}
+			@media (min-width: 760px) {
+				.posts {
+					grid-template-columns: repeat(2, 1fr);
+				}
+			}
+			.post {
+				display: flex;
+				flex-direction: column;
+				overflow: hidden;
+				height: 100%;
+			}
+			.cover {
+				height: 6px;
+				background: var(--accent);
+			}
+			.body {
+				display: flex;
+				flex-direction: column;
+				gap: 0.55rem;
+				padding: 1.5rem;
+				flex: 1;
+			}
+			.date {
+				font-family: var(--font-mono);
+				font-size: 0.78rem;
+				color: var(--text-mute);
+			}
+			.post h2 {
+				margin: 0;
+				font-size: 1.3rem;
+			}
+			.post p {
+				margin: 0;
+				flex: 1;
+				color: var(--text-dim);
+				font-size: 0.95rem;
+			}
+			.read {
+				font-family: var(--font-mono);
+				font-size: 0.85rem;
+				color: var(--accent);
+			}
+			.post:hover .read {
+				color: #fff;
+			}
+			.empty {
+				color: var(--text-mute);
+			}
+		</style>
+	</body>
+</html>

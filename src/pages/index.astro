@@ -1,0 +1,492 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { PROFILE, PROJECTS, SITE_DESCRIPTION, SITE_TITLE, STACK, STATS, WHATIDO } from '../consts';
+
+const featured = PROJECTS.filter((p) => p.featured);
+const spotlight = featured.find((p) => p.name === 'Zypher Agent') ?? featured[0];
+const rest = featured.filter((p) => p !== spotlight);
+const posts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<!-- Hero -->
+			<section class="hero wrap">
+				<div class="meta">
+					<span>{PROFILE.name}</span>
+					<span>{PROFILE.role} — {PROFILE.company}</span>
+					<span>{PROFILE.location}</span>
+				</div>
+				<hr class="rule" />
+				<div class="hero-grid g12">
+					<div class="hero-copy">
+						<h1 class="hero-h">I build the systems behind <span class="accent">AI&nbsp;agents</span>.</h1>
+						<p class="lead">{PROFILE.subhead}</p>
+						<div class="cta">
+							<a class="btn btn-primary" href="/projects">View work</a>
+							<a class="btn" href={`mailto:${PROFILE.email}`}>Email</a>
+						</div>
+					</div>
+					<figure class="hero-portrait">
+						<img src="/avatar.jpg" alt={PROFILE.name} width="400" height="400" loading="eager" />
+					</figure>
+				</div>
+			</section>
+
+			<!-- Stats -->
+			<section class="wrap">
+				<div class="sheet grid-4 stats">
+					{
+						STATS.map((s) => (
+							<div class="stat">
+								<span class="num">{s.value}</span>
+								<span class="lbl">{s.label}</span>
+							</div>
+						))
+					}
+				</div>
+			</section>
+
+			<!-- What I do -->
+			<section class="section wrap">
+				<p class="eyebrow">What I do</p>
+				<div class="rows">
+					{
+						WHATIDO.map((item) => (
+							<div class="row g12">
+								<span class="rn">{item.n}</span>
+								<div class="rc">
+									<h3>{item.title}</h3>
+									<p>{item.body}</p>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</section>
+
+			<!-- Tech stack -->
+			<section class="section wrap">
+				<div class="head">
+					<h2>Stack</h2>
+					<span class="seeall">what I build with</span>
+				</div>
+				<div class="stack">
+					{
+						STACK.map((g) => (
+							<div class="stack-row g12">
+								<span class="sl">{g.label}</span>
+								<ul class="si">
+									{g.items.map((i) => (
+										<li>{i}</li>
+									))}
+								</ul>
+							</div>
+						))
+					}
+				</div>
+			</section>
+
+			<!-- Selected work -->
+			<section class="section wrap">
+				<div class="head">
+					<h2>Selected<br />work</h2>
+					<a class="seeall" href="/projects">All projects →</a>
+				</div>
+				<a class="spotlight" href={spotlight.href} target="_blank" rel="noopener">
+					<div class="sp-main">
+						<span class="badge">{spotlight.badge ?? 'Flagship'}</span>
+						<h3>{spotlight.name}</h3>
+						<p>{spotlight.blurb}</p>
+						<ul class="sp-tags">
+							{spotlight.tags.map((t) => <li>{t}</li>)}
+						</ul>
+					</div>
+					<div class="sp-meta">
+						<span class="sp-star">★ {spotlight.stars}</span>
+						<span class="sp-sub">GitHub stars</span>
+						<span class="sp-go">View on GitHub ↗</span>
+					</div>
+				</a>
+				<div class="sheet grid-2">
+					{rest.map((p) => <ProjectCard project={p} />)}
+				</div>
+			</section>
+
+			<!-- Statement (inverted) -->
+			<section class="invert">
+				<div class="wrap statement g12">
+					<p class="eyebrow">Approach</p>
+					<p class="big">
+						I like turning ideas into running systems — <span class="accent">fast</span>. Most of what I
+						build sits where LLMs meet real products, from agent frameworks to full apps.
+					</p>
+				</div>
+			</section>
+
+			<!-- Writing -->
+			{
+				posts.length > 0 && (
+					<section class="section wrap">
+						<div class="head">
+							<h2>Writing</h2>
+							<a class="seeall" href="/blog">
+								All posts →
+							</a>
+						</div>
+						<div class="sheet grid-2">
+							{posts.map((post) => (
+								<a class="post" href={`/blog/${post.id}/`}>
+									<span class="pd">
+										<FormattedDate date={post.data.pubDate} />
+									</span>
+									<h3>{post.data.title}</h3>
+									<p>{post.data.description}</p>
+									<span class="more">Read →</span>
+								</a>
+							))}
+						</div>
+					</section>
+				)
+			}
+
+			<!-- Contact -->
+			<section class="section wrap contact">
+				<p class="eyebrow">Get in touch</p>
+				<h2>Let's talk.</h2>
+				<a class="email" href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a>
+			</section>
+		</main>
+		<Footer />
+
+		<style>
+			.hero {
+				padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3rem, 7vw, 5.5rem);
+			}
+			.meta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem 2rem;
+				font-family: var(--font-mono);
+				font-size: 0.74rem;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				color: var(--fg-3);
+			}
+			.rule {
+				margin: 0.9rem 0 clamp(1.5rem, 4vw, 3rem);
+			}
+			.hero-grid {
+				margin-top: clamp(1.5rem, 4vw, 2.5rem);
+				align-items: start;
+			}
+			.hero-copy {
+				grid-column: 1 / 8;
+			}
+			.hero-h {
+				max-width: 14ch;
+				font-size: clamp(2.6rem, 7vw, 5rem);
+			}
+			.hero-copy .lead {
+				margin: 1.6rem 0 0;
+			}
+			.cta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.6rem;
+				margin-top: 1.8rem;
+			}
+			.hero-portrait {
+				grid-column: 9 / -1;
+				align-self: center;
+				margin: 0;
+				display: flex;
+				justify-content: center;
+			}
+			.hero-portrait img {
+				display: block;
+				width: 100%;
+				max-width: 300px;
+				aspect-ratio: 1 / 1;
+				object-fit: cover;
+				border-radius: 50%;
+				border: 2px solid var(--fg);
+			}
+
+			/* Stats */
+			.stats .stat {
+				display: flex;
+				flex-direction: column;
+				gap: 0.4rem;
+				padding: 1.6rem;
+			}
+			.stats .num {
+				font-family: var(--font-display);
+				font-weight: 700;
+				font-size: clamp(2rem, 4vw, 3rem);
+				letter-spacing: -0.03em;
+			}
+			.stats .lbl {
+				font-family: var(--font-mono);
+				font-size: 0.74rem;
+				letter-spacing: 0.06em;
+				color: var(--fg-3);
+			}
+
+			/* What I do — numbered rows */
+			.rows {
+				margin-top: 2rem;
+				border-top: 1px solid var(--line);
+			}
+			.row {
+				padding-block: clamp(1.5rem, 3vw, 2.2rem);
+				border-bottom: 1px solid var(--line);
+				align-items: baseline;
+			}
+			.rn {
+				grid-column: 1 / 2;
+				font-family: var(--font-mono);
+				font-size: 0.9rem;
+				color: var(--accent);
+			}
+			.rc {
+				grid-column: 3 / -1;
+			}
+			.rc h3 {
+				font-size: clamp(1.4rem, 2.6vw, 2rem);
+				margin-bottom: 0.5rem;
+			}
+			.rc p {
+				margin: 0;
+				max-width: 56ch;
+			}
+
+			/* Section heads */
+			.head {
+				display: flex;
+				align-items: flex-end;
+				justify-content: space-between;
+				gap: 1rem;
+				margin-bottom: 2rem;
+			}
+			.seeall {
+				font-family: var(--font-mono);
+				font-size: 0.78rem;
+				letter-spacing: 0.04em;
+				color: var(--fg-2);
+				white-space: nowrap;
+			}
+			.seeall:hover {
+				color: var(--accent);
+			}
+
+			/* Statement */
+			.statement {
+				padding-block: clamp(3.5rem, 8vw, 6.5rem);
+				align-items: start;
+			}
+			.statement .eyebrow {
+				grid-column: 1 / 3;
+				padding-top: 0.8rem;
+			}
+			.statement .big {
+				grid-column: 3 / -1;
+				margin: 0;
+				font-family: var(--font-display);
+				font-weight: 500;
+				font-size: clamp(1.7rem, 4.5vw, 3.2rem);
+				line-height: 1.1;
+				letter-spacing: -0.03em;
+				color: var(--bg);
+			}
+
+			/* Posts */
+			.post {
+				display: flex;
+				flex-direction: column;
+				gap: 0.6rem;
+				padding: 1.8rem;
+			}
+			.post .pd {
+				font-family: var(--font-mono);
+				font-size: 0.74rem;
+				color: var(--fg-3);
+			}
+			.post h3 {
+				font-size: 1.3rem;
+			}
+			.post p {
+				margin: 0;
+				flex: 1;
+				font-size: 0.95rem;
+			}
+			.post .more {
+				font-family: var(--font-mono);
+				font-size: 0.78rem;
+				color: var(--accent);
+			}
+
+			/* Contact */
+			.contact h2 {
+				margin: 0.6rem 0 1.4rem;
+			}
+			.contact .email {
+				font-family: var(--font-display);
+				font-weight: 600;
+				font-size: clamp(1.4rem, 4vw, 2.4rem);
+				letter-spacing: -0.02em;
+				border-bottom: 2px solid var(--accent);
+				padding-bottom: 0.15rem;
+			}
+
+			/* Tech stack */
+			.stack {
+				border-top: 1px solid var(--line);
+			}
+			.stack-row {
+				padding-block: 1.1rem;
+				border-bottom: 1px solid var(--line);
+				align-items: baseline;
+			}
+			.stack-row .sl {
+				grid-column: 1 / 4;
+				font-family: var(--font-mono);
+				font-size: 0.78rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: var(--fg-3);
+			}
+			.stack-row .si {
+				grid-column: 4 / -1;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.stack-row .si li {
+				font-family: var(--font-mono);
+				font-size: 0.82rem;
+				color: var(--fg);
+				border: 1px solid var(--line);
+				padding: 0.2rem 0.6rem;
+			}
+
+			/* Spotlight */
+			.spotlight {
+				display: grid;
+				grid-template-columns: 1fr;
+				border: 1px solid var(--fg);
+				margin-bottom: 1px;
+			}
+			.spotlight:hover {
+				background: var(--bg-2);
+			}
+			.sp-main {
+				padding: clamp(1.6rem, 3vw, 2.4rem);
+			}
+			.sp-main .badge {
+				border-color: var(--accent);
+				color: var(--accent);
+			}
+			.sp-main h3 {
+				font-size: clamp(1.8rem, 4vw, 2.8rem);
+				margin: 0.8rem 0 0.7rem;
+			}
+			.sp-main p {
+				margin: 0 0 1.1rem;
+				max-width: 50ch;
+				color: var(--fg-2);
+			}
+			.sp-tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.4rem;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.sp-tags li {
+				font-family: var(--font-mono);
+				font-size: 0.72rem;
+				color: var(--fg-3);
+				border: 1px solid var(--line);
+				padding: 0.16rem 0.45rem;
+			}
+			.sp-meta {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				gap: 0.25rem;
+				padding: clamp(1.6rem, 3vw, 2.4rem);
+				border-top: 1px solid var(--fg);
+				background: var(--accent);
+				color: var(--on-accent);
+			}
+			.sp-star {
+				font-family: var(--font-display);
+				font-weight: 700;
+				font-size: clamp(2.6rem, 6vw, 3.6rem);
+				line-height: 1;
+			}
+			.sp-sub {
+				font-family: var(--font-mono);
+				font-size: 0.74rem;
+				opacity: 0.85;
+			}
+			.sp-go {
+				margin-top: 1rem;
+				font-family: var(--font-mono);
+				font-size: 0.78rem;
+			}
+			@media (min-width: 760px) {
+				.spotlight {
+					grid-template-columns: 2fr 1fr;
+				}
+				.sp-meta {
+					border-top: none;
+					border-left: 1px solid var(--fg);
+				}
+			}
+
+			@media (max-width: 760px) {
+				.hero-copy {
+					grid-column: 1 / -1;
+				}
+				.stack-row .sl,
+				.stack-row .si {
+					grid-column: 1 / -1;
+				}
+				.hero-portrait {
+					grid-column: 1 / -1;
+					order: -1;
+					max-width: 200px;
+				}
+				.rn {
+					grid-column: 1 / -1;
+				}
+				.rc {
+					grid-column: 1 / -1;
+				}
+				.statement .eyebrow,
+				.statement .big {
+					grid-column: 1 / -1;
+				}
+			}
+		</style>
+	</body>
+</html>

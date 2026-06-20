@@ -1,0 +1,86 @@
+---
+// Imported here so global.css is included on every page that uses <BaseHead />.
+import '../styles/global.css';
+import { Font } from 'astro:assets';
+import { PROFILE, SITE_TITLE, SOCIALS } from '../consts';
+
+interface Props {
+	title: string;
+	description: string;
+	/** Root-relative path to a social share image. */
+	image?: string;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const { title, description, image = '/og.png' } = Astro.props;
+const socialImage = new URL(image, Astro.site ?? Astro.url);
+
+const baseUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
+const personLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: PROFILE.name,
+	alternateName: PROFILE.fullName,
+	jobTitle: PROFILE.role,
+	worksFor: { '@type': 'Organization', name: PROFILE.company, url: PROFILE.companyUrl },
+	address: {
+		'@type': 'PostalAddress',
+		addressLocality: 'San Jose',
+		addressRegion: 'CA',
+		addressCountry: 'US',
+	},
+	url: baseUrl,
+	image: `${baseUrl}/avatar.jpg`,
+	sameAs: SOCIALS.filter((s) => s.icon !== 'email').map((s) => s.href),
+	knowsAbout: [
+		'AI agents',
+		'Agent infrastructure',
+		'LLM tooling',
+		'TypeScript',
+		'Vercel AI SDK',
+		'Next.js',
+	],
+};
+const websiteLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_TITLE, url: baseUrl };
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="#f4f3ee" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href={new URL('rss.xml', Astro.site)} />
+<meta name="generator" content={Astro.generator} />
+
+<Font cssVariable="--font-display" preload />
+<Font cssVariable="--font-sans" preload />
+<Font cssVariable="--font-mono" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={socialImage} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={socialImage} />
+<meta property="og:site_name" content={SITE_TITLE} />
+<meta name="twitter:creator" content="@zhao_spenc" />
+
+<!-- Structured data (JSON-LD) -->
+<script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
