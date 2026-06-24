@@ -3,7 +3,7 @@
 
 export const SITE_TITLE = 'Spencer Zhao — Cofounder';
 export const SITE_DESCRIPTION =
-	'Spencer (Yunpeng) Zhao — Cofounder at CoreSpeed, connecting AI agents to the apps you already use. Builds and ships products end to end.';
+	'Spencer (Yunpeng) Zhao — Cofounder at CoreSpeed, the access and control layer for AI agents. Builds and ships products end to end.';
 
 export const PROFILE = {
 	name: 'Spencer Zhao',
@@ -15,7 +15,7 @@ export const PROFILE = {
 	location: 'San Jose, CA',
 	email: 'yunpeng@corespeed.io',
 	subhead:
-		'Cofounder at CoreSpeed, where we connect AI agents to the apps you already use — so they do real work, not just chat. I also build and ship products end to end. Based in San Jose, California.',
+		'Cofounder at CoreSpeed — the access and control layer for AI agents. We connect them to the apps you already use and keep them in bounds. I also build and ship products end to end. Based in San Jose, California.',
 };
 
 export const STATS = [
@@ -29,7 +29,7 @@ export const WHATIDO = [
 	{
 		n: '01',
 		title: 'CoreSpeed',
-		body: 'The platform I am building: plug your AI agent into the apps you already use — 50+ via one OAuth — and it gets real work done. Connectors, built-in tools, memory, policy, and agent pay.',
+		body: 'The access and control layer for AI agents: plug your agent into the apps you already use — 50+ via one OAuth — with built-in tools, memory, and plain-English policy + agent pay to keep it in bounds.',
 	},
 	{
 		n: '02',
@@ -109,7 +109,7 @@ export const PROJECTS: Project[] = [
 	{
 		name: 'CoreSpeed',
 		blurb:
-			'Your AI agent is smart — now give it access. Plug your agent into 50+ apps through one OAuth and it gets real work done: connectors, built-in tools, memory, policy, and agent pay. Portable across Claude Code, Codex, and Cursor.',
+			'The access and control layer for AI agents. Plug your agent into 50+ apps through one OAuth so it gets real work done — connectors, built-in tools, and memory — with plain-English policy and agent pay to keep it in bounds. Portable across Claude Code, Codex, and Cursor.',
 		tags: ['Platform', 'Agents', 'Connectors'],
 		group: 'CoreSpeed',
 		href: 'https://corespeed.io',

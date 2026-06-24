@@ -27,5 +27,5 @@ GitHub, Stripe, and more — through a single OAuth. No per-service key manageme
 Your apps, memory, voice, and policy travel with the agent — not with the tool you run it in. Switch
 between Claude Code, Codex, or Cursor and nothing resets.
 
-The bet is simple: a smart agent isn't useful until it can _do_ things. CoreSpeed is the access layer
-that makes that real. [corespeed.io](https://corespeed.io)
+The bet is simple: a smart agent isn't useful until it can _do_ things — safely. CoreSpeed is the
+access and control layer that makes that real. [corespeed.io](https://corespeed.io)
