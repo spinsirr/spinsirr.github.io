@@ -32,7 +32,13 @@ const blogLd = {
 		<Header />
 		<main class="section">
 			<article class="wrap">
-				<a class="back" href="/blog">← All posts</a>
+				<div class="toprow">
+					<a class="back" href="/blog">← All posts</a>
+					<button class="copy-md" type="button" data-copy-md aria-label="Copy this post as Markdown">
+						<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1Z"></path><path fill="currentColor" d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Z"></path></svg>
+						<span>Copy as Markdown</span>
+					</button>
+				</div>
 				<header class="head">
 					<div class="meta">
 						<FormattedDate date={pubDate} />
@@ -56,15 +62,45 @@ const blogLd = {
 			article {
 				max-width: 720px;
 			}
-			.back {
-				display: inline-block;
+			.toprow {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
 				margin-bottom: 2rem;
+			}
+			.back {
 				font-family: var(--font-mono);
 				font-size: 0.85rem;
-				color: var(--text-mute);
+				color: var(--fg-3);
 			}
 			.back:hover {
-				color: #fff;
+				color: var(--fg);
+			}
+			.copy-md {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.4rem;
+				font-family: var(--font-mono);
+				font-size: 0.74rem;
+				color: var(--fg-2);
+				background: transparent;
+				border: 1px solid var(--line);
+				border-radius: 0;
+				padding: 0.35rem 0.6rem;
+				cursor: pointer;
+				white-space: nowrap;
+				transition:
+					color 0.16s ease,
+					border-color 0.16s ease;
+			}
+			.copy-md:hover {
+				color: var(--fg);
+				border-color: var(--fg);
+			}
+			.copy-md svg {
+				width: 14px;
+				height: 14px;
 			}
 			.head {
 				margin-bottom: 2.5rem;
@@ -120,5 +156,28 @@ const blogLd = {
 				border: 1px solid var(--border);
 			}
 		</style>
+		<script>
+			const btn = document.querySelector('[data-copy-md]');
+			if (btn) {
+				const label = btn.querySelector('span');
+				const orig = label ? label.textContent : '';
+				btn.addEventListener('click', async () => {
+					const url = location.pathname.replace(/\/+$/, '') + '.md';
+					try {
+						const md = await fetch(url).then((r) => r.text());
+						await navigator.clipboard.writeText(md);
+						if (label) {
+							label.textContent = 'Copied ✓';
+							setTimeout(() => (label.textContent = orig), 1800);
+						}
+					} catch (e) {
+						if (label) {
+							label.textContent = 'Copy failed';
+							setTimeout(() => (label.textContent = orig), 1800);
+						}
+					}
+				});
+			}
+		</script>
 	</body>
 </html>
