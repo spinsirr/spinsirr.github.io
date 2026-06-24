@@ -1,5 +1,6 @@
 ---
 import { NAV, PROFILE } from '../consts';
+import CommandPalette from './CommandPalette.astro';
 import SocialLinks from './SocialLinks.astro';
 
 const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
@@ -20,11 +21,18 @@ const isActive = (href: string) => href === pathname || (href !== '/' && pathnam
 			}
 		</div>
 
-		<div class="right">
-			<SocialLinks />
+		<div class="actions">
+			<button class="cmdk-trigger" data-cmdk-open type="button" aria-label="Open command menu">⌘K</button>
+			<button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle theme">
+				<svg class="ico-moon" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M6 .278a.768.768 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278Z"></path></svg>
+				<svg class="ico-sun" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path></svg>
+			</button>
+			<div class="socials-wrap"><SocialLinks /></div>
 		</div>
 	</nav>
 </header>
+
+<CommandPalette />
 
 <style>
 	header {
@@ -32,9 +40,9 @@ const isActive = (href: string) => href === pathname || (href !== '/' && pathnam
 		top: 0;
 		z-index: 50;
 		border-bottom: 1px solid var(--line);
-		background: color-mix(in srgb, var(--bg) 82%, transparent);
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
+		background: color-mix(in srgb, var(--bg) 80%, transparent);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
 	}
 	nav {
 		display: flex;
@@ -46,7 +54,7 @@ const isActive = (href: string) => href === pathname || (href !== '/' && pathnam
 	.brand {
 		font-family: var(--font-display);
 		font-weight: 700;
-		letter-spacing: -0.02em;
+		letter-spacing: -0.01em;
 		font-size: 1.05rem;
 	}
 	.brand .dot {
@@ -68,16 +76,73 @@ const isActive = (href: string) => href === pathname || (href !== '/' && pathnam
 	.link.active {
 		color: var(--fg);
 	}
-	.right {
+	.actions {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+	.socials-wrap {
 		display: flex;
 	}
-	@media (max-width: 760px) {
+	@media (max-width: 820px) {
 		.links {
 			margin-inline: 0;
 			gap: 1rem;
 		}
-		.right {
+		.socials-wrap {
 			display: none;
 		}
 	}
 </style>
+
+<script>
+	// Theme toggle
+	const root = document.documentElement;
+	const btn = document.getElementById('theme-toggle');
+	btn?.addEventListener('click', () => {
+		const dark = root.dataset.theme === 'dark';
+		if (dark) {
+			delete root.dataset.theme;
+			localStorage.setItem('theme', 'light');
+		} else {
+			root.dataset.theme = 'dark';
+			localStorage.setItem('theme', 'dark');
+		}
+	});
+
+	// Scroll reveal + count-up (motion-safe)
+	if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+		const counted = new WeakSet<Element>();
+		const countUp = (el: Element) => {
+			if (counted.has(el)) return;
+			const m = (el.textContent || '').trim().match(/^(\d[\d,]*)(\+?)$/);
+			if (!m) return;
+			const target = parseInt(m[1].replace(/,/g, ''), 10);
+			if (target >= 1900 && target <= 2100) return; // leave years static
+			counted.add(el);
+			const suffix = m[2] || '';
+			const dur = 900;
+			const t0 = performance.now();
+			const tick = (now: number) => {
+				const p = Math.min((now - t0) / dur, 1);
+				const eased = 1 - Math.pow(1 - p, 3);
+				el.textContent = Math.round(target * eased).toLocaleString() + suffix;
+				if (p < 1) requestAnimationFrame(tick);
+			};
+			requestAnimationFrame(tick);
+		};
+
+		const io = new IntersectionObserver(
+			(entries) => {
+				for (const e of entries) {
+					if (!e.isIntersecting) continue;
+					e.target.classList.add('is-in');
+					e.target.querySelectorAll('.stats .num, .nums .nv').forEach(countUp);
+					io.unobserve(e.target);
+				}
+			},
+			{ threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+		);
+		document.querySelectorAll('main section').forEach((s) => io.observe(s));
+	}
+</script>

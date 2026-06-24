@@ -1,0 +1,177 @@
+---
+import { NAV, PROFILE, SOCIALS } from '../consts';
+
+const items = [
+	...NAV.map((n) => ({ label: n.label, href: n.href, kind: 'Page', ext: false })),
+	{ label: 'CoreSpeed', href: PROFILE.companyUrl, kind: 'Link', ext: true },
+	...SOCIALS.map((s) => ({ label: s.name, href: s.href, kind: 'Link', ext: s.icon !== 'email' })),
+];
+---
+
+<div id="cmdk" class="cmdk" hidden>
+	<div class="cmdk-backdrop" data-close></div>
+	<div class="cmdk-panel" role="dialog" aria-modal="true" aria-label="Command menu">
+		<input id="cmdk-input" class="cmdk-input" type="text" placeholder="Jump to…" autocomplete="off" spellcheck="false" />
+		<ul id="cmdk-list" class="cmdk-list">
+			{
+				items.map((it) => (
+					<li>
+						<a
+							href={it.href}
+							target={it.ext ? '_blank' : undefined}
+							rel={it.ext ? 'noopener' : undefined}
+							data-label={it.label.toLowerCase()}
+						>
+							<span>{it.label}</span>
+							<span class="cmdk-kind">{it.kind}</span>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+		<div class="cmdk-hint"><kbd>↑↓</kbd> navigate <kbd>↵</kbd> open <kbd>esc</kbd> close</div>
+	</div>
+</div>
+
+<style>
+	.cmdk {
+		position: fixed;
+		inset: 0;
+		z-index: 100;
+		display: grid;
+		place-items: start center;
+		padding-top: 14vh;
+	}
+	.cmdk[hidden] {
+		display: none;
+	}
+	.cmdk-backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(8, 8, 10, 0.5);
+		backdrop-filter: blur(2px);
+	}
+	.cmdk-panel {
+		position: relative;
+		width: min(520px, 92vw);
+		background: var(--bg);
+		border: 1px solid var(--fg);
+		box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.5);
+	}
+	.cmdk-input {
+		width: 100%;
+		box-sizing: border-box;
+		border: none;
+		border-bottom: 1px solid var(--line);
+		background: transparent;
+		color: var(--fg);
+		font-family: var(--font-sans);
+		font-size: 1rem;
+		padding: 1rem 1.1rem;
+		outline: none;
+	}
+	.cmdk-list {
+		list-style: none;
+		margin: 0;
+		padding: 0.4rem;
+		max-height: 50vh;
+		overflow-y: auto;
+	}
+	.cmdk-list a {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.6rem 0.7rem;
+		color: var(--fg-2);
+		font-size: 0.95rem;
+	}
+	.cmdk-list li.active a,
+	.cmdk-list a:hover {
+		background: var(--bg-2);
+		color: var(--fg);
+	}
+	.cmdk-kind {
+		font-family: var(--font-mono);
+		font-size: 0.68rem;
+		color: var(--fg-3);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+	}
+	.cmdk-hint {
+		display: flex;
+		gap: 0.6rem;
+		padding: 0.6rem 1.1rem;
+		border-top: 1px solid var(--line);
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		color: var(--fg-3);
+	}
+	.cmdk-hint kbd {
+		border: 1px solid var(--line);
+		padding: 0 0.3rem;
+	}
+</style>
+
+<script>
+	const cmdk = document.getElementById('cmdk');
+	const input = document.getElementById('cmdk-input') as HTMLInputElement | null;
+	const list = document.getElementById('cmdk-list');
+
+	if (cmdk && input && list) {
+		let active = 0;
+		const visible = () => [...list.querySelectorAll('li')].filter((li) => !(li as HTMLElement).hidden);
+
+		const setActive = (i: number) => {
+			const its = visible();
+			if (!its.length) return;
+			active = (i + its.length) % its.length;
+			its.forEach((li, idx) => li.classList.toggle('active', idx === active));
+			its[active].scrollIntoView({ block: 'nearest' });
+		};
+
+		const filter = () => {
+			const q = input.value.trim().toLowerCase();
+			list.querySelectorAll('li').forEach((li) => {
+				const a = li.querySelector('a');
+				(li as HTMLElement).hidden = !!q && !a?.dataset.label?.includes(q);
+			});
+			setActive(0);
+		};
+
+		const open = () => {
+			cmdk.hidden = false;
+			input.value = '';
+			filter();
+			input.focus();
+			document.body.style.overflow = 'hidden';
+		};
+		const close = () => {
+			cmdk.hidden = true;
+			document.body.style.overflow = '';
+		};
+
+		document.addEventListener('keydown', (e) => {
+			if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+				e.preventDefault();
+				cmdk.hidden ? open() : close();
+				return;
+			}
+			if (cmdk.hidden) return;
+			if (e.key === 'Escape') close();
+			else if (e.key === 'ArrowDown') {
+				e.preventDefault();
+				setActive(active + 1);
+			} else if (e.key === 'ArrowUp') {
+				e.preventDefault();
+				setActive(active - 1);
+			} else if (e.key === 'Enter') {
+				e.preventDefault();
+				(visible()[active]?.querySelector('a') as HTMLAnchorElement | undefined)?.click();
+			}
+		});
+
+		input.addEventListener('input', filter);
+		cmdk.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', close));
+		document.querySelectorAll('[data-cmdk-open]').forEach((el) => el.addEventListener('click', open));
+	}
+</script>

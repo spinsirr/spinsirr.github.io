@@ -44,6 +44,16 @@ const personLd = {
 const websiteLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_TITLE, url: baseUrl };
 ---
 
+<!-- Set theme + enable reveal before paint (no flash) -->
+<script is:inline>
+	(() => {
+		try {
+			if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark';
+		} catch (e) {}
+		document.documentElement.classList.add('anim');
+	})();
+</script>
+
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />

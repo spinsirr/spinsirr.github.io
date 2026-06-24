@@ -342,3 +342,70 @@ blockquote {
 		transition: none !important;
 	}
 }
+
+/* ---------- Dark theme (token flip) ---------- */
+[data-theme='dark'] {
+	--bg: #0c0c0e;
+	--bg-2: #16161b;
+	--fg: #ededec;
+	--fg-2: #a4a4a0;
+	--fg-3: #74746f;
+	--line: rgba(255, 255, 255, 0.15);
+	--accent: #7d92ff;
+}
+
+/* ---------- Scroll reveal (no-flash via html.anim, motion-safe) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+	html.anim main section {
+		opacity: 0;
+		transform: translateY(16px);
+		transition: opacity 0.55s ease, transform 0.55s ease;
+	}
+	html.anim main section.is-in {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* ---------- Theme toggle + command trigger ---------- */
+.theme-toggle,
+.cmdk-trigger {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 34px;
+	border: 1px solid var(--line);
+	background: transparent;
+	color: var(--fg-3);
+	cursor: pointer;
+	border-radius: 0;
+	transition: color 0.16s ease, border-color 0.16s ease;
+}
+.theme-toggle {
+	width: 34px;
+}
+.theme-toggle:hover,
+.cmdk-trigger:hover {
+	color: var(--fg);
+	border-color: var(--fg);
+}
+.theme-toggle svg {
+	width: 16px;
+	height: 16px;
+}
+.theme-toggle .ico-sun {
+	display: none;
+}
+[data-theme='dark'] .theme-toggle .ico-sun {
+	display: block;
+}
+[data-theme='dark'] .theme-toggle .ico-moon {
+	display: none;
+}
+.cmdk-trigger {
+	padding: 0 0.6rem;
+	gap: 0.35rem;
+	font-family: var(--font-mono);
+	font-size: 0.74rem;
+	letter-spacing: 0.04em;
+}
