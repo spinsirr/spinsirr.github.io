@@ -3,7 +3,7 @@
 
 export const SITE_TITLE = 'Spencer Zhao — Cofounder';
 export const SITE_DESCRIPTION =
-	'Spencer (Yunpeng) Zhao — Cofounder at CoreSpeed building agent infrastructure: runtime, harness, and orchestration.';
+	'Spencer (Yunpeng) Zhao — Cofounder at CoreSpeed, connecting AI agents to the apps you already use. Builds and ships products end to end.';
 
 export const PROFILE = {
 	name: 'Spencer Zhao',
@@ -15,21 +15,21 @@ export const PROFILE = {
 	location: 'San Jose, CA',
 	email: 'yunpeng@corespeed.io',
 	subhead:
-		'Cofounder at CoreSpeed. I work on the runtime and tooling that let AI agents do real work, and I build and ship products end to end. Based in San Jose, California.',
+		'Cofounder at CoreSpeed, where we connect AI agents to the apps you already use — so they do real work, not just chat. I also build and ship products end to end. Based in San Jose, California.',
 };
 
 export const STATS = [
-	{ value: '336', label: '★ zypher-agent' },
 	{ value: '948', label: 'commits · last 12 mo' },
 	{ value: '148', label: 'PRs · last 12 mo' },
 	{ value: '37', label: 'public repos' },
+	{ value: '2020', label: 'on GitHub since' },
 ];
 
 export const WHATIDO = [
 	{
 		n: '01',
-		title: 'Agent infrastructure',
-		body: 'Runtime and tooling at CoreSpeed that let teams of AI agents actually do the work — Zypher Agent, Sarea, HaaS.',
+		title: 'CoreSpeed',
+		body: 'The platform I am building: plug your AI agent into the apps you already use — 50+ via one OAuth — and it gets real work done. Connectors, built-in tools, memory, policy, and agent pay.',
 	},
 	{
 		n: '02',
@@ -107,33 +107,14 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
 	{
-		name: 'Zypher Agent',
+		name: 'CoreSpeed',
 		blurb:
-			'A minimal yet powerful framework for building AI agents with full control over tools, providers, and execution flow.',
-		tags: ['TypeScript', 'Agents', 'Open source'],
-		group: 'CoreSpeed',
-		href: 'https://github.com/corespeed-io/zypher-agent',
-		repo: 'https://github.com/corespeed-io/zypher-agent',
-		stars: 336,
-		featured: true,
-		badge: 'OSS',
-	},
-	{
-		name: 'Sarea',
-		blurb: 'AI agent platform — run a team of agents that takes on the whole job, not just chat.',
-		tags: ['Platform', 'Agents', 'Orchestration'],
+			'Your AI agent is smart — now give it access. Plug your agent into 50+ apps through one OAuth and it gets real work done: connectors, built-in tools, memory, policy, and agent pay. Portable across Claude Code, Codex, and Cursor.',
+		tags: ['Platform', 'Agents', 'Connectors'],
 		group: 'CoreSpeed',
 		href: 'https://corespeed.io',
 		featured: true,
-	},
-	{
-		name: 'HaaS — Harness as a Service',
-		blurb:
-			'Runtime and harness infrastructure that gives agents a reliable execution loop. Empower the agents, then get out of the way.',
-		tags: ['Infrastructure', 'Runtime', 'Harness'],
-		group: 'CoreSpeed',
-		href: 'https://corespeed.io',
-		featured: true,
+		badge: 'Live',
 	},
 	{
 		name: 'BuildLog',
@@ -179,6 +160,18 @@ export const PROJECTS: Project[] = [
 		featured: true,
 	},
 	{
+		name: 'Zypher Agent',
+		blurb:
+			'A minimal, open-source framework for building AI agents with full control over tools, providers, and execution flow.',
+		tags: ['TypeScript', 'Agents', 'Open source'],
+		group: 'Open source',
+		href: 'https://github.com/corespeed-io/zypher-agent',
+		repo: 'https://github.com/corespeed-io/zypher-agent',
+		stars: 336,
+		badge: 'OSS',
+		featured: true,
+	},
+	{
 		name: 'FPGA Clock',
 		blurb: 'A multi-function digital clock built in Verilog, running on an FPGA.',
 		tags: ['Verilog', 'FPGA', 'Hardware'],
@@ -186,6 +179,7 @@ export const PROJECTS: Project[] = [
 		href: 'https://github.com/spinsirr/FPGA_Clock',
 		repo: 'https://github.com/spinsirr/FPGA_Clock',
 		stars: 6,
+		featured: true,
 	},
 	{
 		name: 'Mini-UPS',

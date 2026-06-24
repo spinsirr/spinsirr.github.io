@@ -17,11 +17,11 @@ The harness owns the unglamorous parts that decide whether an agent finishes the
 - **Staying on task** — keeping the model anchored to the goal across many turns.
 - **Control flow** — when to stop, retry, escalate, or hand off to another agent.
 
-## Why make it a service
+## Get the loop right once
 
 Re-implementing that loop in every project is wasted work, and subtle bugs in it are what make
-agents feel flaky. The idea behind **Harness as a Service** is to make the harness a reliable
-runtime you point an agent at — so the loop is solid once, everywhere.
+agents feel flaky. Treat the harness as real infrastructure — build it once, make it reliable, reuse
+it — instead of hand-rolling a fragile loop per project.
 
-Give agents a good harness and good tools, and they stop being a demo and start being
-infrastructure. That's the whole bet.
+Give agents a solid harness, good tools, and real access to the systems they work in, and they stop
+being a demo and start being infrastructure. That's the whole bet.

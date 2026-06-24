@@ -8,7 +8,7 @@ import ProjectCard from '../components/ProjectCard.astro';
 import { PROFILE, PROJECTS, SITE_DESCRIPTION, SITE_TITLE, STACK, STATS, WHATIDO } from '../consts';
 
 const featured = PROJECTS.filter((p) => p.featured);
-const spotlight = featured.find((p) => p.name === 'Zypher Agent') ?? featured[0];
+const spotlight = featured.find((p) => p.name === 'CoreSpeed') ?? featured[0];
 const rest = featured.filter((p) => p !== spotlight);
 const posts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -116,9 +116,9 @@ const posts = (await getCollection('blog'))
 						</ul>
 					</div>
 					<div class="sp-meta">
-						<span class="sp-star">★ {spotlight.stars}</span>
-						<span class="sp-sub">GitHub stars</span>
-						<span class="sp-go">View on GitHub ↗</span>
+						<span class="sp-star">50+</span>
+						<span class="sp-sub">app integrations</span>
+						<span class="sp-go">corespeed.io ↗</span>
 					</div>
 				</a>
 				<div class="sheet grid-2">

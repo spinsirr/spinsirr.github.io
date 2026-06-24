@@ -8,10 +8,9 @@ This is a reboot. The old version of this site was a student blog full of JavaSc
 tutorials and LeetCode write-ups — useful when I wrote them, but it stopped reflecting
 what I actually work on.
 
-These days I build agent infrastructure at CoreSpeed: the runtime, harness, and
-orchestration that let AI agents do real work instead of just chatting. So I rebuilt this
-place to match — a clean home for my projects, the stack I use, and notes on what I'm
-learning.
+These days I'm a cofounder at CoreSpeed, building the platform that connects AI agents to
+the apps you already use — so they do real work, not just chat. So I rebuilt this place to
+match — a clean home for my projects, the stack I use, and notes on what I'm learning.
 
 It's built with [Astro](https://astro.build/) and shipped as a static site. Expect more
 posts on agents, harness design, and shipping fast.

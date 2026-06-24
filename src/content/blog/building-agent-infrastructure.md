@@ -1,29 +1,31 @@
 ---
-title: 'What I am building: agent infrastructure at CoreSpeed'
-description: 'A quick tour of Zypher Agent, Sarea, and HaaS — and the idea tying them together.'
+title: "What I'm building at CoreSpeed"
+description: 'Most AI agents can think but cannot act. CoreSpeed gives them access to the apps you already use — so they do real work, not just chat.'
 pubDate: 'Jun 12 2026'
 ---
 
-Most "AI agents" today are a chat box wired to a model. That's a demo, not a system. The
-interesting problems start once you want a _team_ of agents to take on a whole job
-reliably — and that's the layer I work on at CoreSpeed.
+Most "AI agents" are smart and stuck. They can reason about your inbox, your CRM, your repo — but
+the moment they need to _act_, you're back to wiring API keys, OAuth flows, and glue code for every
+single service. That setup tax is where most agent projects quietly die.
 
-## Zypher Agent
+CoreSpeed is the platform I'm building to remove it.
 
-An open-source framework for building agents with full control over tools, providers, and
-execution flow. Minimal core, no magic. ([336★ on GitHub](https://github.com/corespeed-io/zypher-agent).)
+## One connection, real access
 
-## Sarea
+Plug your agent in once and it can operate across 50+ apps you already use — Gmail, Slack, Notion,
+GitHub, Stripe, and more — through a single OAuth. No per-service key management, no glue code.
 
-The platform. Run a team of agents that takes on the whole task, not just a single turn of
-chat.
+## More than connectors
 
-## HaaS — Harness as a Service
+- **Built-in tools** — web search, scraping, image generation, code sandboxes, email.
+- **Memory** — the agent remembers your contacts, your writing style, and past decisions.
+- **Policy in plain English** — approval rules and spending limits you can actually read.
+- **Agent Pay** — budgets and guardrails so an agent can transact without going rogue.
 
-The runtime underneath. A _harness_ is the loop around a model: how it sees tools, recovers
-from errors, and stays on task. HaaS turns that loop into a service you can point an agent
-at.
+## Your agent, anywhere
 
-The throughline is simple: **empower the agents, then get out of the way.** Give them a
-solid harness and good tools, and they stop being a parlor trick and start being
-infrastructure.
+Your apps, memory, voice, and policy travel with the agent — not with the tool you run it in. Switch
+between Claude Code, Codex, or Cursor and nothing resets.
+
+The bet is simple: a smart agent isn't useful until it can _do_ things. CoreSpeed is the access layer
+that makes that real. [corespeed.io](https://corespeed.io)
