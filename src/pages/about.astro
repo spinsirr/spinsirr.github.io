@@ -15,23 +15,31 @@ const EXPERIENCE = [
 		org: 'CoreSpeed',
 		period: 'Present',
 		detail:
-			'Building CoreSpeed — the access and control layer for AI agents: 50+ app integrations, built-in tools, memory, plus plain-English policy and agent pay to keep agents in bounds.',
+			'Building the access and control layer for AI agents — connect them to the apps you already use, and keep them in bounds.',
+		points: [
+			'The platform: 50+ app integrations through one OAuth, built-in tools, memory, plain-English policy, and agent pay. Portable across Claude Code, Codex, and Cursor.',
+			'Zypher Agent (open source, 336★) — a minimal framework for building agents with full control over tools, providers, and execution flow.',
+		],
 	},
 	{
-		role: 'Indie / Open source',
-		org: 'Self-directed',
+		role: 'Founder & builder',
+		org: 'Independent products',
 		period: 'Ongoing',
-		detail:
-			'Shipping full products end to end — BuildLog, Fixo, Amazon Order Wizard, and Claude Max Gateway.',
+		detail: 'Designing and shipping full products end to end.',
+		points: [
+			'BuildLog (buildlog.ink) — turns commits, PRs, and releases into draft social posts. Next.js 16 · Supabase · Vercel AI SDK.',
+			'Fixo — a mobile-mechanic platform where an AI agent diagnoses faults, writes the estimate, and drives Stripe payments.',
+			'Claude Max Gateway and Amazon Order Wizard — LLM developer tooling and a React 19 + Rust browser extension.',
+		],
 	},
 ];
 
 const EDUCATION = [
 	{
-		role: 'Electrical Engineering & Computer Science',
+		role: 'M.S., Electrical Engineering (MSEE)',
 		org: 'University of California, Irvine',
 		period: '',
-		detail: 'Computer systems, software, and architecture.',
+		detail: 'EECS — computer systems, software, and architecture.',
 	},
 ];
 ---
@@ -99,6 +107,13 @@ const EDUCATION = [
 										{item.period && <span class="period">{item.period}</span>}
 									</div>
 									<p>{item.detail}</p>
+									{item.points && (
+										<ul class="pts">
+											{item.points.map((p) => (
+												<li>{p}</li>
+											))}
+										</ul>
+									)}
 								</li>
 							))
 						}
@@ -254,6 +269,19 @@ const EDUCATION = [
 			.timeline p {
 				margin: 0.4rem 0 0;
 				font-size: 0.95rem;
+			}
+			.timeline .pts {
+				margin: 0.7rem 0 0;
+				padding-left: 1.1rem;
+				display: grid;
+				gap: 0.4rem;
+			}
+			.timeline .pts li {
+				font-size: 0.92rem;
+				color: var(--fg-2);
+			}
+			.timeline .pts li::marker {
+				color: var(--accent);
 			}
 			.stack {
 				display: grid;
