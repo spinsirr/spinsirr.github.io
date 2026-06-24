@@ -21,7 +21,7 @@ const year = new Date().getFullYear();
 
 	<div class="wrap base">
 		<span>© {year} {PROFILE.fullName}</span>
-		<span>Built with Astro</span>
+		<span><a href="/llms.txt">llms.txt</a> · Built with Astro</span>
 	</div>
 </footer>
 
@@ -51,6 +51,12 @@ const year = new Date().getFullYear();
 		font-family: var(--font-mono);
 		font-size: 0.76rem;
 		color: var(--fg-3);
+	}
+	.base a {
+		color: var(--fg-2);
+	}
+	.base a:hover {
+		color: var(--accent);
 	}
 	.nav {
 		display: flex;
