@@ -172,7 +172,7 @@ const blogLd = {
 			.prose :global(li) { padding-left: 0.25em; margin-bottom: 0.45em; }
 			.prose :global(li::marker) { color: var(--accent); }
 			.prose :global(blockquote) { margin: 2rem 0; padding: 0.4rem 0 0.4rem 1.4rem; border-left: 3px solid var(--accent); font-size: 1.45rem; }
-			.prose :global(p:has(> img:only-child)) { width: min(calc(100vw - 3rem), 1020px); margin: 2.4rem 0 0.65rem 50%; transform: translateX(-50%); }
+			.prose :global(p:has(> img:only-child)) { width: 100%; margin: 2.4rem 0 0.65rem; }
 			.prose :global(p:has(> img:only-child) img) { width: 100%; display: block; border: 1px solid var(--fg); background: #101113; }
 			.prose :global(p:has(> em:only-child)) { font-family: var(--font-mono); font-size: 0.68rem; line-height: 1.5; color: var(--fg-3); border-left: 2px solid var(--accent); padding-left: 0.75rem; margin: 0.65rem 0 2.4rem; }
 			.prose :global(table) { width: 100%; border-collapse: collapse; margin: 2rem 0; font-family: var(--font-sans); font-size: 0.88rem; }
@@ -207,7 +207,6 @@ const blogLd = {
 			}
 			@media (max-width: 700px) {
 				.article-head h1 { font-size: clamp(2.8rem, 13vw, 4.6rem); }
-				.prose :global(p:has(> img:only-child)) { width: calc(100vw - 2rem); }
 				.related ul { grid-template-columns: 1fr; gap: 0; }
 				.related li { border-bottom: 1px solid var(--line); padding: 0.9rem 0; }
 			}
