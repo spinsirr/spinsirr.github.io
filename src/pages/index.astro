@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { PROFILE, PROJECTS, SITE_DESCRIPTION, SITE_TITLE, STACK, STATS, WHATIDO } from '../consts';
+import { CONTACT_PATH, PROFILE, PROJECTS, SITE_DESCRIPTION, SITE_TITLE, STACK, STATS, WHATIDO } from '../consts';
 import { published } from '../utils/posts';
 
 const featured = PROJECTS.filter((p) => p.featured);
@@ -36,7 +36,7 @@ const posts = published(await getCollection('blog')).slice(0, 3);
 						<p class="lead">{PROFILE.subhead}</p>
 						<div class="cta">
 							<a class="btn btn-primary" href="/projects">View work</a>
-							<a class="btn" href={`mailto:${PROFILE.email}`}>Email</a>
+							<a class="btn" href={CONTACT_PATH}>Email</a>
 						</div>
 					</div>
 					<figure class="hero-portrait">
@@ -61,7 +61,7 @@ const posts = published(await getCollection('blog')).slice(0, 3);
 
 			<!-- What I do -->
 			<section class="section wrap">
-				<p class="eyebrow">What I do</p>
+				<h2 class="eyebrow">What I do</h2>
 				<div class="rows">
 					{
 						WHATIDO.map((item) => (
@@ -166,7 +166,7 @@ const posts = published(await getCollection('blog')).slice(0, 3);
 			<section class="section wrap contact">
 				<p class="eyebrow">Get in touch</p>
 				<h2>Let's talk.</h2>
-				<a class="email" href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a>
+				<a class="email" href={CONTACT_PATH}>{PROFILE.email}</a>
 			</section>
 		</main>
 		<Footer />

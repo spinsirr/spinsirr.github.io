@@ -1,6 +1,13 @@
 ---
 import { SOCIALS, type SocialIcon } from '../consts';
 
+interface Props {
+	includeEmail?: boolean;
+}
+
+const { includeEmail = true } = Astro.props;
+const socials = includeEmail ? SOCIALS : SOCIALS.filter((social) => social.icon !== 'email');
+
 // Icon paths (16x16 viewBox, currentColor).
 const ICONS: Record<SocialIcon, string> = {
 	github:
@@ -15,7 +22,7 @@ const ICONS: Record<SocialIcon, string> = {
 
 <div class="socials">
 	{
-		SOCIALS.map((s) => (
+		socials.map((s) => (
 			<a href={s.href} target={s.icon === 'email' ? undefined : '_blank'} rel="noopener" aria-label={s.name}>
 				<svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true">
 					<path fill="currentColor" d={ICONS[s.icon]} />

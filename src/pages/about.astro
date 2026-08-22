@@ -167,11 +167,16 @@ const EDUCATION = [
 					</p>
 				</section>
 
-				<section class="block contact">
+				<section class="block contact" id="contact">
 					<h2>Get in touch</h2>
-					<p>The fastest way to reach me is email. I'm also around on the usual places.</p>
-					<p class="email"><a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a></p>
-					<SocialLinks />
+					<p>The fastest way to reach me is email. Copy the address, or open your mail app.</p>
+					<p class="email-address" data-email-address>{PROFILE.email}</p>
+					<div class="contact-actions">
+						<button class="btn btn-primary" type="button" data-copy-email data-email={PROFILE.email}>Copy email</button>
+						<a class="btn" href={`mailto:${PROFILE.email}`}>Open mail app</a>
+						<span class="copy-status" role="status" aria-live="polite" data-copy-status></span>
+					</div>
+					<SocialLinks includeEmail={false} />
 				</section>
 			</div>
 		</main>
@@ -224,6 +229,11 @@ const EDUCATION = [
 				margin-bottom: 1.5rem;
 				padding-bottom: 0.7rem;
 				border-bottom: 1px solid var(--border);
+			}
+			.block > p a {
+				color: var(--accent);
+				text-decoration: underline;
+				text-underline-offset: 0.18em;
 			}
 			.timeline {
 				list-style: none;
@@ -311,16 +321,28 @@ const EDUCATION = [
 				padding: 0;
 				list-style: none;
 			}
-			.contact .email {
+			.contact {
+				scroll-margin-top: 5rem;
+			}
+			.email-address {
 				font-family: var(--font-mono);
-				font-size: 1.05rem;
-				margin: 0.5rem 0 1.2rem;
+				font-size: clamp(1rem, 3vw, 1.35rem);
+				color: var(--fg);
+				margin: 1rem 0 0;
+				user-select: all;
 			}
-			.contact .email a {
-				color: var(--accent);
+			.contact-actions {
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap;
+				gap: 0.6rem;
+				margin: 1rem 0 1.4rem;
 			}
-			.contact .email a:hover {
-				color: #fff;
+			.copy-status {
+				min-height: 1em;
+				font-family: var(--font-mono);
+				font-size: 0.72rem;
+				color: var(--fg-2);
 			}
 			.nums {
 				display: grid;
@@ -353,5 +375,30 @@ const EDUCATION = [
 				color: var(--fg-3);
 			}
 		</style>
+		<script>
+			const copyEmail = document.querySelector<HTMLButtonElement>('[data-copy-email]');
+			const copyStatus = document.querySelector<HTMLElement>('[data-copy-status]');
+			const emailAddress = document.querySelector<HTMLElement>('[data-email-address]');
+
+			copyEmail?.addEventListener('click', async () => {
+				const address = copyEmail.dataset.email;
+				if (!address || !copyStatus) return;
+
+				try {
+					if (!navigator.clipboard || !window.isSecureContext) throw new Error('Clipboard unavailable');
+					await navigator.clipboard.writeText(address);
+					copyStatus.textContent = 'Copied to clipboard.';
+				} catch {
+					if (emailAddress) {
+						const range = document.createRange();
+						range.selectNodeContents(emailAddress);
+						const selection = window.getSelection();
+						selection?.removeAllRanges();
+						selection?.addRange(range);
+					}
+					copyStatus.textContent = 'Address selected. Copy it manually.';
+				}
+			});
+		</script>
 	</body>
 </html>

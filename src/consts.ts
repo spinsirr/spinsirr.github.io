@@ -5,6 +5,8 @@ export const SITE_TITLE = 'Spencer Zhao — Cofounder';
 export const SITE_DESCRIPTION =
 	'Spencer (Yunpeng) Zhao — Cofounder at CoreSpeed, the access and control layer for AI agents. Builds and ships products end to end.';
 
+export const CONTACT_PATH = '/about/#contact';
+
 export const PROFILE = {
 	name: 'Spencer Zhao',
 	fullName: 'Yunpeng "Spencer" Zhao',
@@ -62,7 +64,7 @@ export const SOCIALS: Social[] = [
 	},
 	{
 		name: 'Email',
-		href: 'mailto:yunpeng@corespeed.io',
+		href: CONTACT_PATH,
 		icon: 'email',
 		handle: 'yunpeng@corespeed.io',
 	},

@@ -128,7 +128,16 @@ const items = [
 
 	if (cmdk && input && list) {
 		let active = 0;
+		let previousFocus: HTMLElement | null = null;
+		const background = [...document.body.children].filter((element) => element !== cmdk);
+		const trigger = document.querySelector<HTMLElement>('[data-cmdk-open]');
 		const visible = () => [...list.querySelectorAll('li')].filter((li) => !(li as HTMLElement).hidden);
+		const focusable = () => [
+			input,
+			...visible()
+				.map((li) => li.querySelector('a'))
+				.filter((link): link is HTMLAnchorElement => !!link),
+		];
 
 		const setActive = (i: number) => {
 			const its = visible();
@@ -148,7 +157,12 @@ const items = [
 		};
 
 		const open = () => {
+			previousFocus = document.activeElement instanceof HTMLElement && document.activeElement !== document.body
+				? document.activeElement
+				: trigger;
 			cmdk.hidden = false;
+			trigger?.setAttribute('aria-expanded', 'true');
+			background.forEach((element) => element.setAttribute('inert', ''));
 			input.value = '';
 			filter();
 			input.focus();
@@ -156,7 +170,10 @@ const items = [
 		};
 		const close = () => {
 			cmdk.hidden = true;
+			trigger?.setAttribute('aria-expanded', 'false');
+			background.forEach((element) => element.removeAttribute('inert'));
 			document.body.style.overflow = '';
+			previousFocus?.focus();
 		};
 
 		document.addEventListener('keydown', (e) => {
@@ -166,8 +183,21 @@ const items = [
 				return;
 			}
 			if (cmdk.hidden) return;
-			if (e.key === 'Escape') close();
-			else if (e.key === 'ArrowDown') {
+			if (e.key === 'Escape') {
+				e.preventDefault();
+				close();
+			} else if (e.key === 'Tab') {
+				const controls = focusable();
+				const first = controls[0];
+				const last = controls[controls.length - 1];
+				if (e.shiftKey && document.activeElement === first) {
+					e.preventDefault();
+					last.focus();
+				} else if (!e.shiftKey && document.activeElement === last) {
+					e.preventDefault();
+					first.focus();
+				}
+			} else if (e.key === 'ArrowDown') {
 				e.preventDefault();
 				setActive(active + 1);
 			} else if (e.key === 'ArrowUp') {

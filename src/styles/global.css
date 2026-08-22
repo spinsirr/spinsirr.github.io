@@ -11,7 +11,7 @@
 	--bg-2: #ebe9e1; /* panel */
 	--fg: #100f0d; /* ink */
 	--fg-2: #55534c; /* muted */
-	--fg-3: #8b887d; /* faint */
+	--fg-3: #68665f; /* faint, AA on paper at small sizes */
 	--line: rgba(16, 15, 13, 0.22); /* hairline */
 	--line-soft: rgba(16, 15, 13, 0.1);
 
@@ -351,10 +351,11 @@ blockquote {
 	--bg-2: #16161b;
 	--fg: #ededec;
 	--fg-2: #a4a4a0;
-	--fg-3: #74746f;
+	--fg-3: #8d8d87;
 	--line: rgba(255, 255, 255, 0.15);
 	--accent: #7d92ff;
 	--signal: var(--accent);
+	--on-accent: #0c0c0e;
 }
 
 /* ---------- Scroll reveal (no-flash via html.anim, motion-safe) ---------- */
