@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import { KIND_LABELS, published, readingTime } from '../../utils/posts';
+
+const posts = published(await getCollection('blog'));
+const years = [...new Set(posts.map((post) => post.data.pubDate.getFullYear()))];
+const title = 'Archive — Spencer Zhao';
+const description = 'Every published research note, essay, field note, and project note.';
+---
+
+<!doctype html>
+<html lang="en"><head><BaseHead {title} {description} /></head><body><Header />
+	<main class="wrap archive-page"><header><a href="/blog/">← Writing</a><p class="eyebrow">Complete ledger</p><h1>Archive.</h1><p>{posts.length} pieces, newest first.</p></header>
+		{years.map((year) => <section><h2>{year}</h2><ol>{posts.filter((post) => post.data.pubDate.getFullYear() === year).map((post, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><a href={`/blog/${post.id}/`}><strong>{post.data.title}</strong><small>{KIND_LABELS[post.data.kind]} · {readingTime(post)} min · <FormattedDate date={post.data.pubDate} /></small></a></li>)}</ol></section>)}
+	</main><Footer />
+	<style>
+		.archive-page { padding-top: clamp(3rem, 8vw, 7rem); padding-bottom: 7rem; }
+		header > a { font-family: var(--font-mono); font-size: 0.68rem; }
+		header .eyebrow { color: var(--signal); margin-top: 4rem; }
+		header h1 { font-size: clamp(5rem, 15vw, 11rem); margin: 0.6rem 0; }
+		header > p:last-child { font-family: var(--font-serif); font-size: 1.3rem; }
+		section { display: grid; grid-template-columns: 1fr 3fr; gap: 2rem; border-top: 1px solid var(--fg); margin-top: 4rem; }
+		section h2 { font-size: clamp(2.5rem, 7vw, 5rem); padding-top: 1rem; color: var(--signal); }
+		ol { list-style: none; padding: 0; margin: 0; }
+		li { display: grid; grid-template-columns: 2rem 1fr; gap: 1rem; border-bottom: 1px solid var(--line); padding: 1rem 0; }
+		li > span, small { font-family: var(--font-mono); font-size: 0.62rem; color: var(--fg-3); }
+		li a { display: flex; justify-content: space-between; gap: 1rem; }
+		li strong { font-family: var(--font-display); font-size: 1.15rem; }
+		@media (max-width: 700px) { section { grid-template-columns: 1fr; gap: 0; } li a { flex-direction: column; gap: 0.35rem; } }
+	</style></body></html>

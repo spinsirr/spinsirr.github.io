@@ -2,6 +2,13 @@
 title: 'We retrieved the memory, then dropped the answer'
 description: 'A 200-question conflict run scored 0.800 at the parent-Memory boundary and 0.635 at the evidence boundary. The gap was in what reached the reader.'
 pubDate: 'Aug 22 2026'
+kind: research
+tags: ['Memory systems', 'Retrieval', 'Evaluation']
+featured: true
+series:
+  slug: 'memory-systems'
+  title: 'Memory systems'
+  order: 1
 ogImage: '/blog/we-retrieved-the-memory-then-dropped-the-answer/cover.png'
 ---
 

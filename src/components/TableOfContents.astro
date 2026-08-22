@@ -1,0 +1,88 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+	headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+const sections = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+---
+
+{
+	sections.length > 0 && (
+		<nav class="toc" aria-label="On this page">
+			<p>On this page</p>
+			<ol>
+				{sections.map((heading) => (
+					<li class:list={[`depth-${heading.depth}`]}>
+						<a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a>
+					</li>
+				))}
+			</ol>
+		</nav>
+	)
+}
+
+<style>
+	.toc {
+		position: sticky;
+		top: 5.5rem;
+		font-family: var(--font-mono);
+	}
+	p {
+		font-size: 0.66rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--fg);
+		padding-bottom: 0.65rem;
+		border-bottom: 1px solid var(--fg);
+		margin: 0 0 0.55rem;
+	}
+	ol {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	li {
+		border-bottom: 1px solid var(--line-soft);
+	}
+	.depth-3 {
+		padding-left: 0.8rem;
+	}
+	a {
+		display: block;
+		padding: 0.55rem 0;
+		font-size: 0.68rem;
+		line-height: 1.35;
+		color: var(--fg-3);
+	}
+	a:hover,
+	a.active {
+		color: var(--accent);
+	}
+	@media (max-width: 1050px) {
+		.toc {
+			display: none;
+		}
+	}
+</style>
+
+<script>
+	const links = [...document.querySelectorAll<HTMLElement>('[data-toc-link]')];
+	const headings = links
+		.map((link) => document.getElementById(link.dataset.tocLink ?? ''))
+		.filter((heading): heading is HTMLElement => Boolean(heading));
+	if (links.length && headings.length) {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (!entry.isIntersecting) continue;
+					links.forEach((link) => link.classList.toggle('active', link.dataset.tocLink === entry.target.id));
+				}
+			},
+			{ rootMargin: '-18% 0px -72% 0px' },
+		);
+		headings.forEach((heading) => observer.observe(heading));
+	}
+</script>

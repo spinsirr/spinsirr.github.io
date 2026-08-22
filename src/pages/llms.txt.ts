@@ -1,13 +1,12 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import { PROFILE, PROJECTS, SOCIALS } from '../consts';
+import { published } from '../utils/posts';
 
 // /llms.txt — an index of the site for LLMs/agents (llmstxt.org convention).
 export const GET: APIRoute = async ({ site }) => {
 	const base = (site?.toString() || 'https://spinsirr.github.io').replace(/\/$/, '');
-	const posts = (await getCollection('blog')).sort(
-		(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-	);
+	const posts = published(await getCollection('blog'));
 	const featured = PROJECTS.filter((p) => p.featured);
 
 	const out: string[] = [];
@@ -26,6 +25,8 @@ export const GET: APIRoute = async ({ site }) => {
 	out.push(`- [Home](${base}/): overview, selected work, and stack`);
 	out.push(`- [Projects](${base}/projects/): CoreSpeed, products, open source, hardware`);
 	out.push(`- [About](${base}/about/): bio, experience, education, and contact`);
+	out.push(`- [Search](${base}/search/): full-text index of published writing`);
+	out.push(`- [Archive](${base}/blog/archive/): chronological index of every post`);
 	out.push('');
 	out.push('## Writing');
 	out.push('');

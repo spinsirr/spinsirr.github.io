@@ -2,6 +2,8 @@
 title: 'The setup tax: why connecting AI agents to apps is hard'
 description: 'Connecting AI agents to apps means OAuth, token refresh, scopes, rate limits, pagination, and webhooks per service. Here''s why that work stalls agent projects.'
 pubDate: 'Jun 21 2026'
+kind: essay
+tags: ['Agents', 'Infrastructure', 'Integrations']
 ---
 
 Open any agent demo cold and the model looks brilliant. It reads the situation, picks the right action, writes a clean plan. Then it tries to actually do the thing, and the illusion drops. The first call to a real app needs an OAuth flow, a stored token, a refresh path when that token expires, and a server somewhere to run all of it. The model gives you none of that. It decided to act; it can't.

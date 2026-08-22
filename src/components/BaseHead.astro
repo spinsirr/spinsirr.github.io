@@ -9,10 +9,11 @@ interface Props {
 	description: string;
 	/** Root-relative path to a social share image. */
 	image?: string;
+	type?: 'website' | 'article';
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const { title, description, image = '/og.png' } = Astro.props;
+const { title, description, image = '/og.png', type = 'website' } = Astro.props;
 const socialImage = new URL(image, Astro.site ?? Astro.url);
 
 const baseUrl = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
@@ -64,7 +65,7 @@ const websiteLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 
 <meta name="generator" content={Astro.generator} />
 
 <Font cssVariable="--font-display" preload />
-<Font cssVariable="--font-sans" preload />
+<Font cssVariable="--font-serif" preload />
 <Font cssVariable="--font-mono" />
 
 <!-- Canonical URL -->
@@ -76,7 +77,7 @@ const websiteLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={type} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -92,5 +93,5 @@ const websiteLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 
 <meta name="twitter:creator" content="@zhao_spenc" />
 
 <!-- Structured data (JSON-LD) -->
-<script type="application/ld+json" set:html={JSON.stringify(personLd)} />
-<script type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(personLd)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(websiteLd)} />

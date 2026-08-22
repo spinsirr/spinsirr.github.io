@@ -1,186 +1,272 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import PostCard from '../components/PostCard.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import type { Post } from '../utils/posts';
+import { KIND_LABELS, readingTime, tagSlug } from '../utils/posts';
 
-type Props = CollectionEntry<'blog'>['data'];
+interface Props {
+	post: Post;
+	headings: MarkdownHeading[];
+	related: Post[];
+	previous?: Post;
+	next?: Post;
+}
 
-const { title, description, pubDate, updatedDate, ogImage } = Astro.props;
-
+const { post, headings, related, previous, next } = Astro.props;
+const { title, description, pubDate, updatedDate, kind, tags, series } = post.data;
+const ogImage = post.data.ogImage ?? `/og/${post.id}.png`;
 const postUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const blogLd = {
 	'@context': 'https://schema.org',
-	'@type': 'BlogPosting',
+	'@type': kind === 'research' ? 'ScholarlyArticle' : 'BlogPosting',
 	headline: title,
 	description,
 	datePublished: pubDate.toISOString(),
 	...(updatedDate ? { dateModified: updatedDate.toISOString() } : {}),
-	author: { '@type': 'Person', name: 'Spencer Zhao', url: 'https://github.com/spinsirr' },
+	author: { '@type': 'Person', name: 'Spencer Zhao', url: 'https://spinsirr.github.io' },
+	keywords: tags.join(', '),
 	url: postUrl,
 	mainEntityOfPage: postUrl,
-	...(ogImage ? { image: new URL(ogImage, Astro.site).toString() } : {}),
+	image: new URL(ogImage, Astro.site).toString(),
 };
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} image={ogImage} />
-		<script type="application/ld+json" set:html={JSON.stringify(blogLd)} />
+		<BaseHead title={title} description={description} image={ogImage} type="article" />
+		<meta property="article:published_time" content={pubDate.toISOString()} />
+		{updatedDate && <meta property="article:modified_time" content={updatedDate.toISOString()} />}
+		{tags.map((tag) => <meta property="article:tag" content={tag} />)}
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(blogLd)} />
 	</head>
 	<body>
+		<div class="reading-progress" aria-hidden="true"><span data-progress></span></div>
 		<Header />
-		<main class="section">
-			<article class="wrap">
-				<div class="toprow">
-					<a class="back" href="/blog">← All posts</a>
-					<button class="copy-md" type="button" data-copy-md aria-label="Copy this post as Markdown">
-						<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1Z"></path><path fill="currentColor" d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Z"></path></svg>
-						<span>Copy as Markdown</span>
-					</button>
-				</div>
-				<header class="head">
-					<div class="meta">
-						<FormattedDate date={pubDate} />
-						{
-							updatedDate && (
-								<span class="updated">· updated <FormattedDate date={updatedDate} /></span>
-							)
-						}
+		<main>
+			<div class="article-shell wrap">
+				<aside class="article-rail" aria-label="Article metadata">
+					<a class="back" href="/blog">← Writing</a>
+					<dl>
+						<div><dt>Filed as</dt><dd>{KIND_LABELS[kind]}</dd></div>
+						<div><dt>Published</dt><dd><FormattedDate date={pubDate} /></dd></div>
+						<div><dt>Reading time</dt><dd>{readingTime(post)} min</dd></div>
+						{series && <div><dt>Series</dt><dd><a href={`/blog/series/${series.slug}/`}>{series.title} / {String(series.order).padStart(2, '0')}</a></dd></div>}
+					</dl>
+					<div class="rail-actions">
+						<button type="button" data-copy-md>Copy .md</button>
+						<button type="button" data-share>Share</button>
 					</div>
-					<h1>{title}</h1>
-					{description && <p class="desc">{description}</p>}
-				</header>
-				<div class="prose">
-					<slot />
-				</div>
-			</article>
+				</aside>
+
+				<article data-pagefind-body>
+					<header class="article-head">
+						<div class="register" aria-hidden="true"><span>FIELD NOTE</span><span>SP—{pubDate.getFullYear()}</span></div>
+						<p class="kindline">{KIND_LABELS[kind]} <span>·</span> {readingTime(post)} minute read</p>
+						<h1 data-pagefind-meta="title">{title}</h1>
+						<p class="dek" data-pagefind-meta="description">{description}</p>
+						<ul class="tags" aria-label="Tags">
+							{tags.map((tag) => <li><a href={`/blog/tags/${tagSlug(tag)}/`}>#{tag}</a></li>)}
+						</ul>
+					</header>
+					<div class="prose">
+						<slot />
+					</div>
+					<footer class="article-end">
+						<span class="end-mark" aria-hidden="true">■</span>
+						<p>Written by Spencer Zhao. Building systems behind AI agents at <a href="https://corespeed.io">CoreSpeed</a>.</p>
+						{updatedDate && <p class="updated">Last revised <FormattedDate date={updatedDate} />.</p>}
+					</footer>
+				</article>
+
+				<aside class="toc-rail">
+					<TableOfContents headings={headings} />
+				</aside>
+			</div>
+
+			<div class="post-nav wrap">
+				{previous ? <a href={`/blog/${previous.id}/`}><span>Previous</span><strong>{previous.data.title}</strong></a> : <span></span>}
+				{next ? <a class="next" href={`/blog/${next.id}/`}><span>Next</span><strong>{next.data.title}</strong></a> : <span></span>}
+			</div>
+
+			{related.length > 0 && (
+				<section class="related wrap">
+					<div class="section-title"><span>Continue reading</span><span>Selected by subject overlap</span></div>
+					<div class="related-grid">{related.map((item) => <PostCard post={item} />)}</div>
+				</section>
+			)}
 		</main>
 		<Footer />
 
 		<style>
-			article {
-				max-width: 720px;
+			.reading-progress {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 3px;
+				z-index: 100;
+				pointer-events: none;
 			}
-			.toprow {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				gap: 1rem;
-				margin-bottom: 2rem;
+			.reading-progress span { display: block; width: 0; height: 100%; background: var(--signal); }
+			.article-shell {
+				display: grid;
+				grid-template-columns: minmax(130px, 0.75fr) minmax(0, 720px) minmax(180px, 1fr);
+				gap: clamp(1.5rem, 4vw, 4rem);
+				align-items: start;
+				padding-top: clamp(2rem, 5vw, 4.5rem);
+			}
+			.article-rail,
+			.toc-rail {
+				position: sticky;
+				top: 5.5rem;
 			}
 			.back {
+				display: inline-block;
 				font-family: var(--font-mono);
-				font-size: 0.85rem;
+				font-size: 0.68rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				margin-bottom: 2.5rem;
+			}
+			dl { margin: 0; }
+			dl div { border-top: 1px solid var(--line); padding: 0.6rem 0 0.8rem; }
+			dt {
+				font-family: var(--font-mono);
+				font-size: 0.6rem;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
 				color: var(--fg-3);
 			}
-			.back:hover {
-				color: var(--fg);
-			}
-			.copy-md {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.4rem;
-				font-family: var(--font-mono);
-				font-size: 0.74rem;
+			dd { margin: 0.18rem 0 0; font-size: 0.84rem; color: var(--fg-2); line-height: 1.35; }
+			.rail-actions { display: flex; flex-direction: column; align-items: start; gap: 0.55rem; margin-top: 1.5rem; }
+			.rail-actions button {
+				border: 0;
+				border-bottom: 1px solid var(--line);
+				padding: 0 0 0.2rem;
+				background: none;
 				color: var(--fg-2);
-				background: transparent;
-				border: 1px solid var(--line);
-				border-radius: 0;
-				padding: 0.35rem 0.6rem;
-				cursor: pointer;
-				white-space: nowrap;
-				transition:
-					color 0.16s ease,
-					border-color 0.16s ease;
-			}
-			.copy-md:hover {
-				color: var(--fg);
-				border-color: var(--fg);
-			}
-			.copy-md svg {
-				width: 14px;
-				height: 14px;
-			}
-			.head {
-				margin-bottom: 2.5rem;
-				padding-bottom: 2rem;
-				border-bottom: 1px solid var(--border);
-			}
-			.meta {
 				font-family: var(--font-mono);
-				font-size: 0.82rem;
-				color: var(--text-mute);
-				margin-bottom: 1rem;
+				font-size: 0.68rem;
+				cursor: pointer;
 			}
-			.updated {
-				font-style: italic;
+			.article-head { padding-bottom: 2.5rem; border-bottom: 1px solid var(--fg); }
+			.register {
+				display: flex;
+				justify-content: space-between;
+				padding: 0.35rem 0;
+				border-top: 1px solid var(--fg);
+				border-bottom: 1px solid var(--line);
+				font-family: var(--font-mono);
+				font-size: 0.57rem;
+				letter-spacing: 0.16em;
+				color: var(--fg-3);
 			}
-			.head h1 {
-				margin: 0;
-				font-size: clamp(2.75rem, 6vw, 4.5rem);
-				line-height: 0.98;
+			.kindline { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--signal); margin: 2.4rem 0 1rem; }
+			.kindline span { color: var(--fg-3); }
+			.article-head h1 { font-size: clamp(3rem, 7vw, 6rem); line-height: 0.92; text-wrap: balance; }
+			.dek {
+				font-family: var(--font-serif);
+				font-size: clamp(1.25rem, 2.2vw, 1.62rem);
+				line-height: 1.35;
+				color: var(--fg-2);
+				margin: 1.5rem 0 0;
+				max-width: 58ch;
 			}
-			.desc {
-				margin: 1rem 0 0;
-				font-size: 1.15rem;
-				color: var(--text-dim);
-			}
-			/* Markdown content lives in the slot, so reach it with :global. */
+			.tags { display: flex; flex-wrap: wrap; gap: 0.45rem 1rem; list-style: none; padding: 0; margin: 1.6rem 0 0; }
+			.tags a { font-family: var(--font-mono); font-size: 0.65rem; color: var(--fg-3); }
+			.tags a:hover { color: var(--accent); }
 			.prose {
-				font-size: 1.05rem;
+				font-family: var(--font-serif);
+				font-size: clamp(1.14rem, 1.5vw, 1.28rem);
+				line-height: 1.72;
+				padding-top: 2.5rem;
 			}
-			.prose :global(h2) {
-				margin-top: 2.5rem;
-				font-size: 1.6rem;
+			.prose :global(p) { color: var(--fg); margin: 0 0 1.35em; }
+			.prose :global(h2), .prose :global(h3) { scroll-margin-top: 6rem; }
+			.prose :global(h2) { font-size: clamp(2rem, 4vw, 3.15rem); line-height: 1; margin: 2.3em 0 0.65em; padding-top: 0.35em; border-top: 1px solid var(--fg); }
+			.prose :global(h2::before) { content: '§'; color: var(--signal); font-family: var(--font-serif); font-weight: 400; margin-right: 0.25em; }
+			.prose :global(h3) { font-size: 1.55rem; margin: 2em 0 0.7em; }
+			.prose :global(a) { color: var(--accent); text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+			.prose :global(ul), .prose :global(ol) { color: var(--fg); padding-left: 1.4em; margin: 0 0 1.5em; }
+			.prose :global(li) { padding-left: 0.25em; margin-bottom: 0.45em; }
+			.prose :global(li::marker) { color: var(--signal); }
+			.prose :global(blockquote) { margin: 2rem 0; padding: 0.4rem 0 0.4rem 1.4rem; border-left: 3px solid var(--signal); font-size: 1.45rem; }
+			.prose :global(p:has(> img:only-child)) { width: min(calc(100vw - 3rem), 1020px); margin: 2.4rem 0 0.65rem 50%; transform: translateX(-50%); }
+			.prose :global(p:has(> img:only-child) img) { width: 100%; display: block; border: 1px solid var(--fg); background: #101113; }
+			.prose :global(p:has(> em:only-child)) { font-family: var(--font-mono); font-size: 0.68rem; line-height: 1.5; color: var(--fg-3); border-left: 2px solid var(--signal); padding-left: 0.75rem; margin: 0.65rem 0 2.4rem; }
+			.prose :global(table) { width: 100%; border-collapse: collapse; margin: 2rem 0; font-family: var(--font-sans); font-size: 0.88rem; }
+			.prose :global(th), .prose :global(td) { border-bottom: 1px solid var(--line); text-align: left; padding: 0.65rem 0.5rem; }
+			.prose :global(th) { border-color: var(--fg); font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; }
+			.prose :global(.footnotes) { margin-top: 3rem; border-top: 1px solid var(--fg); font-size: 0.9rem; }
+			.prose :global(.expressive-code) { margin: 2rem 0; font-family: var(--font-mono); }
+			.article-end { margin: 4rem 0 0; border-top: 1px solid var(--fg); padding: 1.2rem 0 0; font-family: var(--font-mono); font-size: 0.7rem; }
+			.article-end p { color: var(--fg-3); margin: 0 0 0.45rem; }
+			.end-mark { color: var(--signal); display: inline-block; margin-bottom: 1rem; }
+			.post-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 5rem; background: var(--line); border: 1px solid var(--line); padding: 0; }
+			.post-nav > a, .post-nav > span { background: var(--bg); padding: 1.3rem; min-height: 7rem; }
+			.post-nav a { display: flex; flex-direction: column; gap: 0.5rem; }
+			.post-nav a:hover { background: var(--bg-2); color: var(--fg); }
+			.post-nav span { font-family: var(--font-mono); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-3); }
+			.post-nav strong { font-family: var(--font-display); font-size: 1.15rem; max-width: 28ch; }
+			.post-nav .next { text-align: right; align-items: end; }
+			.related { padding-top: 6rem; padding-bottom: 6rem; }
+			.section-title { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--fg); padding-bottom: 0.5rem; font-family: var(--font-mono); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-3); }
+			.section-title span:first-child { color: var(--fg); }
+			.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+			@media (max-width: 1050px) {
+				.article-shell { grid-template-columns: minmax(120px, 0.25fr) minmax(0, 720px); justify-content: center; }
+				.toc-rail { display: none; }
 			}
-			.prose :global(h3) {
-				margin-top: 2rem;
-			}
-			.prose :global(a) {
-				color: var(--accent);
-				text-decoration: underline;
-				text-underline-offset: 3px;
-			}
-			.prose :global(a:hover) {
-				color: #fff;
-			}
-			.prose :global(ul),
-			.prose :global(ol) {
-				padding-left: 1.3rem;
-				color: var(--text-dim);
-			}
-			.prose :global(li) {
-				margin-bottom: 0.5rem;
-			}
-			.prose :global(img) {
-				border-radius: var(--radius-sm);
-				border: 1px solid var(--border);
+			@media (max-width: 760px) {
+				.article-shell { display: block; padding-top: 1.5rem; }
+				.article-rail { position: static; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+				.article-rail dl { display: none; }
+				.article-rail .back { margin: 0; }
+				.rail-actions { flex-direction: row; margin: 0; }
+				.article-head h1 { font-size: clamp(2.8rem, 13vw, 4.6rem); }
+				.prose :global(p:has(> img:only-child)) { width: calc(100vw - 2rem); }
+				.related-grid { grid-template-columns: 1fr; }
+				.section-title span:last-child { display: none; }
 			}
 		</style>
 		<script>
-			const btn = document.querySelector('[data-copy-md]');
-			if (btn) {
-				const label = btn.querySelector('span');
-				const orig = label ? label.textContent : '';
-				btn.addEventListener('click', async () => {
+			const progress = document.querySelector<HTMLElement>('[data-progress]');
+			const article = document.querySelector<HTMLElement>('article[data-pagefind-body]');
+			const updateProgress = () => {
+				if (!progress || !article) return;
+				const start = article.offsetTop;
+				const distance = Math.max(1, article.offsetHeight - innerHeight);
+				const value = Math.max(0, Math.min(1, (scrollY - start) / distance));
+				progress.style.width = `${value * 100}%`;
+			};
+			addEventListener('scroll', updateProgress, { passive: true });
+			updateProgress();
+
+			const copyButton = document.querySelector<HTMLButtonElement>('[data-copy-md]');
+			copyButton?.addEventListener('click', async () => {
+				try {
 					const url = location.pathname.replace(/\/+$/, '') + '.md';
-					try {
-						const md = await fetch(url).then((r) => r.text());
-						await navigator.clipboard.writeText(md);
-						if (label) {
-							label.textContent = 'Copied ✓';
-							setTimeout(() => (label.textContent = orig), 1800);
-						}
-					} catch (e) {
-						if (label) {
-							label.textContent = 'Copy failed';
-							setTimeout(() => (label.textContent = orig), 1800);
-						}
-					}
-				});
-			}
+					const markdown = await fetch(url).then((response) => response.text());
+					await navigator.clipboard.writeText(markdown);
+					copyButton.textContent = 'Copied ✓';
+					setTimeout(() => (copyButton.textContent = 'Copy .md'), 1600);
+				} catch { copyButton.textContent = 'Copy failed'; }
+			});
+
+			const shareButton = document.querySelector<HTMLButtonElement>('[data-share]');
+			shareButton?.addEventListener('click', async () => {
+				if (navigator.share) await navigator.share({ title: document.title, url: location.href });
+				else {
+					await navigator.clipboard.writeText(location.href);
+					shareButton.textContent = 'Link copied ✓';
+					setTimeout(() => (shareButton.textContent = 'Share'), 1600);
+				}
+			});
 		</script>
 	</body>
 </html>

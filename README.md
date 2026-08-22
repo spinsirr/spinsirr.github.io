@@ -1,43 +1,48 @@
-# spinsirr-web
+# spinsirr.github.io
 
-Personal site for **Spencer (Yunpeng) Zhao** — cofounder at [CoreSpeed](https://corespeed.io), based in San Jose.
+Spencer (Yunpeng) Zhao’s personal site and field journal. Live at [spinsirr.github.io](https://spinsirr.github.io).
 
-Live at **[spinsirr-web.vercel.app](https://spinsirr-web.vercel.app)**.
+## Publishing system
 
-## Stack
-
-- [Astro](https://astro.build) (static output)
-- Bricolage Grotesque + JetBrains Mono via the Astro Fonts API
-- Markdown / MDX content collections for the blog, with RSS + sitemap
-- JSON-LD structured data (Person, WebSite, BlogPosting) for SEO
-- Hosted on Vercel — auto-deploys on push to `main`
+- Astro static site, deployed to GitHub Pages
+- Markdown and MDX with a typed content schema
+- Research, essay, field-note, and project-note formats
+- Tags, numbered series, archive, table of contents, related reading, and reading time
+- Pagefind full-text search and command palette
+- Expressive Code, RSS, sitemap, canonical URLs, JSON-LD, and generated social cards
+- Raw Markdown per article, plus `llms.txt` and `llms-full.txt`
 
 ## Develop
 
 ```bash
 bun install
-bun run dev        # dev server at http://localhost:4321
-bun run build      # static build → dist/
-bun run preview    # preview the build
+bun run dev
+bun run build
+bun run preview
 ```
 
-## Structure
+`bun run build` type-checks the site, builds the static output, and creates the Pagefind index.
 
-```text
-src/
-  consts.ts           # profile, projects, stack, stats — single source of truth
-  components/          # Header, Footer, BaseHead, ProjectCard, SocialLinks, FormattedDate
-  layouts/            # BlogPost
-  pages/              # index, projects, about, blog/, rss.xml
-  content/blog/       # posts (Markdown)
-  styles/global.css   # design tokens + utilities
-public/               # avatar, OG image, favicon
+## Write
+
+Add a `.md` or `.mdx` file to `src/content/blog/`:
+
+```yaml
+---
+title: 'A concrete title'
+description: 'One sentence that says what the reader will learn.'
+pubDate: 'Aug 22 2026'
+kind: research # research | essay | field-note | project-note
+tags: ['Memory systems', 'Evaluation']
+featured: false
+draft: false
+series: # optional
+  slug: 'memory-systems'
+  title: 'Memory systems'
+  order: 1
+---
 ```
 
-## Editing
+Use Markdown for normal prose and static figures. Reach for MDX only when an article needs an interactive or reusable component.
 
-- **Profile, projects, stack, stats** → `src/consts.ts`
-- **Blog posts** → add a Markdown file to `src/content/blog/`
-- **Design tokens** (colors, fonts, spacing) → `:root` in `src/styles/global.css`
-
-Push to `main` and Vercel deploys automatically.
+Site data lives in `src/consts.ts`; publication utilities live in `src/utils/posts.ts`; the visual system starts in `src/styles/global.css`.

@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import Footer from '../../../components/Footer.astro';
+import Header from '../../../components/Header.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { published } from '../../../utils/posts';
+
+export async function getStaticPaths() {
+	const posts = published(await getCollection('blog'));
+	const series = new Map<string, typeof posts>();
+	for (const post of posts) {
+		if (!post.data.series) continue;
+		series.set(post.data.series.slug, [...(series.get(post.data.series.slug) ?? []), post]);
+	}
+	return [...series.entries()].map(([slug, entries]) => ({ params: { series: slug }, props: { posts: entries.sort((a, b) => (a.data.series?.order ?? 0) - (b.data.series?.order ?? 0)) } }));
+}
+
+const { posts } = Astro.props;
+const series = posts[0].data.series!;
+const title = `${series.title} — Spencer Zhao`;
+const description = `A numbered series on ${series.title.toLowerCase()}.`;
+---
+
+<!doctype html>
+<html lang="en">
+	<head><BaseHead {title} {description} /></head>
+	<body><Header /><main class="wrap series-page"><header><a href="/blog/">← Writing</a><p class="eyebrow">Numbered series</p><h1>{series.title}</h1><p>{description}</p></header><ol>{posts.map((post) => <li><span>{String(post.data.series?.order).padStart(2, '0')}</span><PostCard {post} /></li>)}</ol></main><Footer />
+	<style>
+		.series-page { padding-top: clamp(3rem, 8vw, 7rem); padding-bottom: 7rem; }
+		header { border-bottom: 1px solid var(--fg); padding-bottom: 2rem; }
+		header > a { font-family: var(--font-mono); font-size: 0.68rem; }
+		header .eyebrow { margin-top: 4rem; color: var(--signal); }
+		h1 { font-size: clamp(4rem, 12vw, 9rem); margin: 0.6rem 0 1rem; }
+		header > p:last-child { font-family: var(--font-serif); font-size: 1.3rem; }
+		ol { list-style: none; padding: 0; margin: 2rem 0 0; }
+		li { display: grid; grid-template-columns: 4rem 1fr; gap: 1rem; }
+		li > span { font-family: var(--font-mono); font-size: 0.7rem; color: var(--signal); padding-top: 1.4rem; }
+	</style></body>
+</html>

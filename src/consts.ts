@@ -71,7 +71,7 @@ export const SOCIALS: Social[] = [
 export const NAV = [
 	{ href: '/', label: 'Home' },
 	{ href: '/projects', label: 'Projects' },
-	{ href: '/blog', label: 'Blog' },
+	{ href: '/blog', label: 'Writing' },
 	{ href: '/about', label: 'About' },
 ];
 
@@ -192,4 +192,3 @@ export const PROJECTS: Project[] = [
 		stars: 5,
 	},
 ];
-

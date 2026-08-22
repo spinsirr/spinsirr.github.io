@@ -1,0 +1,83 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+const title = 'Search — Spencer Zhao';
+const description = 'Search Spencer Zhao’s writing and research notes.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head><BaseHead {title} {description} /></head>
+	<body>
+		<Header />
+		<main class="search-page wrap">
+			<header>
+				<p class="eyebrow">Full-text index</p>
+				<h1>Find a note.</h1>
+				<p>Searches titles, summaries, headings, and the complete article text.</p>
+			</header>
+			<form data-search-form role="search">
+				<label class="sr-only" for="query">Search the archive</label>
+				<span aria-hidden="true">⌕</span>
+				<input id="query" name="q" type="search" placeholder="memory boundaries, OAuth, agent tools…" autocomplete="off" autofocus />
+				<kbd>ESC</kbd>
+			</form>
+			<p class="status" data-search-status>Start typing to search the archive.</p>
+			<ol class="results" data-search-results></ol>
+		</main>
+		<Footer />
+		<style>
+			.search-page { min-height: 70vh; padding-top: clamp(3rem, 8vw, 7rem); padding-bottom: 7rem; }
+			header { display: grid; grid-template-columns: 1fr 2fr; gap: 1rem; align-items: end; border-bottom: 1px solid var(--fg); padding-bottom: 2rem; }
+			header .eyebrow { align-self: start; }
+			header h1 { font-size: clamp(4rem, 11vw, 9rem); grid-column: 2; }
+			header > p:last-child { grid-column: 2; font-family: var(--font-serif); font-size: 1.3rem; }
+			form { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; border-bottom: 2px solid var(--fg); padding: 1.2rem 0; margin-top: 2rem; }
+			form > span { color: var(--signal); font-size: 2rem; }
+			input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--fg); font-family: var(--font-display); font-weight: 600; font-size: clamp(1.4rem, 4vw, 2.6rem); }
+			input::placeholder { color: var(--fg-3); }
+			input::-webkit-search-cancel-button { appearance: none; }
+			kbd { font-family: var(--font-mono); font-size: 0.6rem; border: 1px solid var(--line); padding: 0.25rem 0.4rem; color: var(--fg-3); }
+			.status { font-family: var(--font-mono); font-size: 0.68rem; color: var(--fg-3); margin: 1rem 0 2rem; }
+			.results { list-style: none; padding: 0; margin: 0; }
+			.results :global(li) { border-top: 1px solid var(--line); }
+			.results :global(a) { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr) auto; gap: 2rem; align-items: baseline; padding: 1.2rem 0; }
+			.results :global(h2) { font-size: 1.45rem; }
+			.results :global(p) { font-family: var(--font-serif); color: var(--fg-2); margin: 0; }
+			.results :global(mark) { background: color-mix(in srgb, var(--signal) 38%, transparent); color: inherit; }
+			.results :global(span) { font-family: var(--font-mono); font-size: 0.62rem; color: var(--signal); }
+			@media (max-width: 700px) { header { display: block; } header h1 { margin: 1rem 0; } .results :global(a) { grid-template-columns: 1fr auto; gap: 0.7rem; } .results :global(p) { grid-column: 1 / -1; } }
+		</style>
+		<script>
+			const form = document.querySelector<HTMLFormElement>('[data-search-form]');
+			const input = form?.querySelector<HTMLInputElement>('input');
+			const list = document.querySelector<HTMLOListElement>('[data-search-results]');
+			const status = document.querySelector<HTMLElement>('[data-search-status]');
+			let timer: number | undefined;
+			const escapeHtml = (value: string) => value.replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[character] ?? character);
+			const search = async () => {
+				const query = input?.value.trim() ?? '';
+				if (!query || !list || !status) { if (list) list.innerHTML = ''; if (status) status.textContent = 'Start typing to search the archive.'; return; }
+				status.textContent = 'Searching…';
+				try {
+					// Pagefind writes this module after Astro has built the site.
+					const pagefindPath = '/pagefind/pagefind.js';
+					const pagefind = await import(/* @vite-ignore */ pagefindPath);
+					const index = pagefind.createInstance({ noWorker: true });
+					await index.init();
+					const response = await index.search(query);
+					const entries = await Promise.all(response.results.slice(0, 12).map((result: { data: () => Promise<{ url: string; meta: { title?: string; description?: string }; excerpt: string }> }) => result.data()));
+					status.textContent = `${response.results.length} result${response.results.length === 1 ? '' : 's'}`;
+					list.innerHTML = entries.map((entry, index) => `<li><a href="${escapeHtml(entry.url)}"><h2>${escapeHtml(entry.meta.title ?? 'Untitled')}</h2><p>${entry.excerpt}</p><span>${String(index + 1).padStart(2, '0')} ↗</span></a></li>`).join('');
+				} catch { status.textContent = 'The search index is available in the production build.'; }
+			};
+			form?.addEventListener('submit', (event) => event.preventDefault());
+			input?.addEventListener('input', () => { clearTimeout(timer); timer = window.setTimeout(search, 120); });
+			document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && input) { input.value = ''; search(); input.focus(); } });
+			const initialQuery = new URLSearchParams(location.search).get('q');
+			if (initialQuery && input) { input.value = initialQuery; search(); }
+		</script>
+	</body>
+</html>

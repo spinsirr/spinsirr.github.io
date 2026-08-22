@@ -1,8 +1,17 @@
 ---
 import { NAV, PROFILE, SOCIALS } from '../consts';
+import { getCollection } from 'astro:content';
+import { KIND_LABELS, published } from '../utils/posts';
 
 const items = [
+	{ label: 'Search the archive', href: '/search/', kind: 'Search', ext: false },
 	...NAV.map((n) => ({ label: n.label, href: n.href, kind: 'Page', ext: false })),
+	...published(await getCollection('blog')).map((post) => ({
+		label: post.data.title,
+		href: `/blog/${post.id}/`,
+		kind: KIND_LABELS[post.data.kind],
+		ext: false,
+	})),
 	{ label: 'CoreSpeed', href: PROFILE.companyUrl, kind: 'Link', ext: true },
 	...SOCIALS.map((s) => ({ label: s.name, href: s.href, kind: 'Link', ext: s.icon !== 'email' })),
 ];
@@ -11,7 +20,7 @@ const items = [
 <div id="cmdk" class="cmdk" hidden>
 	<div class="cmdk-backdrop" data-close></div>
 	<div class="cmdk-panel" role="dialog" aria-modal="true" aria-label="Command menu">
-		<input id="cmdk-input" class="cmdk-input" type="text" placeholder="Jump to…" autocomplete="off" spellcheck="false" />
+		<input id="cmdk-input" class="cmdk-input" type="text" placeholder="Jump to a page or article…" autocomplete="off" spellcheck="false" />
 		<ul id="cmdk-list" class="cmdk-list">
 			{
 				items.map((it) => (

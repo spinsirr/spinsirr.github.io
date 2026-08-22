@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import Footer from '../../../components/Footer.astro';
+import Header from '../../../components/Header.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { allTags, published, tagSlug } from '../../../utils/posts';
+
+export async function getStaticPaths() {
+	const posts = published(await getCollection('blog'));
+	return allTags(posts).map((tag) => ({
+		params: { tag: tag.slug },
+		props: { tag, posts: posts.filter((post) => post.data.tags.some((item) => tagSlug(item) === tag.slug)) },
+	}));
+}
+
+const { tag, posts } = Astro.props;
+const title = `${tag.name} — Spencer Zhao`;
+const description = `${posts.length} piece${posts.length === 1 ? '' : 's'} filed under ${tag.name}.`;
+---
+
+<!doctype html>
+<html lang="en">
+	<head><BaseHead {title} {description} /></head>
+	<body>
+		<Header />
+		<main class="wrap tag-page">
+			<header><a href="/blog/">← Subject index</a><p class="eyebrow">Filed under</p><h1>#{tag.name}</h1><p>{description}</p></header>
+			<div class="posts">{posts.map((post) => <PostCard {post} />)}</div>
+		</main>
+		<Footer />
+		<style>
+			.tag-page { padding-top: clamp(3rem, 8vw, 7rem); padding-bottom: 7rem; }
+			header { border-bottom: 1px solid var(--fg); padding-bottom: 2rem; margin-bottom: 2rem; }
+			header > a { font-family: var(--font-mono); font-size: 0.68rem; }
+			header .eyebrow { margin-top: 4rem; color: var(--signal); }
+			h1 { font-size: clamp(4rem, 12vw, 9rem); margin: 0.6rem 0 1rem; }
+			header > p:last-child { font-family: var(--font-serif); font-size: 1.3rem; }
+			.posts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 2rem; }
+			@media (max-width: 700px) { .posts { grid-template-columns: 1fr; } }
+		</style>
+	</body>
+</html>

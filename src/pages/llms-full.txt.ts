@@ -1,13 +1,12 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import { PROFILE } from '../consts';
+import { published } from '../utils/posts';
 
 // /llms-full.txt — every blog post inline, in one fetch.
 export const GET: APIRoute = async ({ site }) => {
 	const base = (site?.toString() || 'https://spinsirr.github.io').replace(/\/$/, '');
-	const posts = (await getCollection('blog')).sort(
-		(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-	);
+	const posts = published(await getCollection('blog'));
 
 	const out: string[] = [];
 	out.push(`# ${PROFILE.fullName} — all writing`);

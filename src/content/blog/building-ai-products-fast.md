@@ -2,6 +2,8 @@
 title: 'Building AI products fast: my stack and patterns'
 description: 'The stack and patterns I use for building AI products fast — Vercel AI SDK, Deno + Hono, Supabase, Drizzle, Stripe, AG-UI — drawn from BuildLog and Fixo.'
 pubDate: 'Jun 20 2026'
+kind: field-note
+tags: ['AI products', 'Engineering', 'Tooling']
 ---
 
 Building AI products fast is mostly about not re-deciding. The speed doesn't come from a clever framework or a fast model. It comes from a default stack I've stopped re-litigating per project, plus a handful of patterns that keep holding up after a demo turns into a product. The stack is the boring part. The patterns are the part worth writing down.

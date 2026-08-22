@@ -2,122 +2,114 @@
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
+import PostCard from '../../components/PostCard.astro';
 import Header from '../../components/Header.astro';
 import { PROFILE } from '../../consts';
+import { KIND_LABELS, allTags, published } from '../../utils/posts';
 
-const title = `Blog — ${PROFILE.name}`;
-const description = 'Notes on agents, harness design, AI infrastructure, and shipping fast.';
-
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const title = `Writing — ${PROFILE.name}`;
+const description = 'Research notes and field reports on agent infrastructure, memory, evaluation, and shipping software.';
+const posts = published(await getCollection('blog'));
+const featured = posts.find((post) => post.data.featured) ?? posts[0];
+const remaining = posts.filter((post) => post.id !== featured?.id);
+const tags = allTags(posts);
+const kinds = [...new Set(posts.map((post) => post.data.kind))];
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-	</head>
+	<head><BaseHead {title} {description} /></head>
 	<body>
 		<Header />
-		<main class="section">
-			<div class="wrap">
-				<div class="page-head">
-					<p class="eyebrow">Blog</p>
-					<h1>Writing</h1>
-					<p class="lead">{description}</p>
+		<main>
+			<section class="masthead wrap">
+				<div class="issue-line"><span>SPENCER ZHAO / FIELD JOURNAL</span><span>EST. 2020 — UPDATED CONTINUOUSLY</span></div>
+				<div class="mast-grid">
+					<div>
+						<p class="eyebrow">Research · systems · field notes</p>
+						<h1>Working<br />notes.</h1>
+					</div>
+					<div class="intro">
+						<p>{description}</p>
+						<div class="actions">
+							<a href="/search/">Search the archive <kbd>⌘K</kbd></a>
+							<a href="/rss.xml">RSS ↗</a>
+							<a href="/llms-full.txt">LLM text ↗</a>
+						</div>
+					</div>
 				</div>
+			</section>
 
-				{
-					posts.length === 0 ? (
-						<p class="empty">No posts yet — check back soon.</p>
-					) : (
-						<ul class="posts">
-							{posts.map((post) => (
-								<li>
-									<a class="card post" href={`/blog/${post.id}/`}>
-										<span class="cover" aria-hidden="true" />
-										<div class="body">
-											<span class="date">
-												<FormattedDate date={post.data.pubDate} />
-											</span>
-											<h2>{post.data.title}</h2>
-											<p>{post.data.description}</p>
-											<span class="read">Read →</span>
-										</div>
-									</a>
-								</li>
-							))}
-						</ul>
-					)
-				}
-			</div>
+			{featured && (
+				<section class="featured wrap">
+					<div class="section-label"><span>Lead story</span><span>01 / {String(posts.length).padStart(2, '0')}</span></div>
+					<PostCard post={featured} featured />
+				</section>
+			)}
+
+			<section class="archive wrap">
+				<div class="archive-head">
+					<div>
+						<p class="eyebrow">The archive</p>
+						<h2>Everything, in order.</h2>
+					</div>
+					<a href="/blog/archive/">Year index →</a>
+				</div>
+				<nav class="filters" aria-label="Browse by format">
+					<a class="active" href="/blog/">All <sup>{posts.length}</sup></a>
+					{kinds.map((kind) => <span>{KIND_LABELS[kind]} <sup>{posts.filter((post) => post.data.kind === kind).length}</sup></span>)}
+				</nav>
+				<div class="post-grid">{remaining.map((post) => <PostCard {post} />)}</div>
+			</section>
+
+			<section class="subject-index wrap">
+				<div class="section-label"><span>Subject index</span><span>{tags.length} indexed terms</span></div>
+				<div class="tag-grid">
+					{tags.map((tag, index) => <a href={`/blog/tags/${tag.slug}/`}><span>{String(index + 1).padStart(2, '0')}</span><strong>{tag.name}</strong><sup>{tag.count}</sup></a>)}
+				</div>
+			</section>
 		</main>
 		<Footer />
 
 		<style>
-			.page-head {
-				max-width: 60ch;
-				margin-bottom: 3rem;
+			.masthead { padding-top: 2rem; padding-bottom: clamp(4rem, 9vw, 8rem); }
+			.issue-line, .section-label {
+				display: flex; justify-content: space-between; gap: 1rem; padding: 0.45rem 0;
+				border-top: 1px solid var(--fg); border-bottom: 1px solid var(--line);
+				font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.13em; color: var(--fg-3);
 			}
-			.page-head h1 {
-				margin: 0.6rem 0 1rem;
-			}
-			.posts {
-				list-style: none;
-				margin: 0;
-				padding: 0;
-				display: grid;
-				gap: 1.1rem;
-			}
-			@media (min-width: 760px) {
-				.posts {
-					grid-template-columns: repeat(2, 1fr);
-				}
-			}
-			.post {
-				display: flex;
-				flex-direction: column;
-				overflow: hidden;
-				height: 100%;
-			}
-			.cover {
-				height: 6px;
-				background: var(--accent);
-			}
-			.body {
-				display: flex;
-				flex-direction: column;
-				gap: 0.55rem;
-				padding: 1.5rem;
-				flex: 1;
-			}
-			.date {
-				font-family: var(--font-mono);
-				font-size: 0.78rem;
-				color: var(--text-mute);
-			}
-			.post h2 {
-				margin: 0;
-				font-size: 1.3rem;
-			}
-			.post p {
-				margin: 0;
-				flex: 1;
-				color: var(--text-dim);
-				font-size: 0.95rem;
-			}
-			.read {
-				font-family: var(--font-mono);
-				font-size: 0.85rem;
-				color: var(--accent);
-			}
-			.post:hover .read {
-				color: #fff;
-			}
-			.empty {
-				color: var(--text-mute);
+			.mast-grid { display: grid; grid-template-columns: 2fr 1fr; gap: clamp(2rem, 7vw, 7rem); align-items: end; padding-top: clamp(2.5rem, 7vw, 6rem); }
+			.mast-grid h1 { font-size: clamp(5rem, 15vw, 11rem); line-height: 0.72; margin-top: 1.2rem; }
+			.intro { padding-bottom: 0.4rem; }
+			.intro > p { font-family: var(--font-serif); font-size: clamp(1.25rem, 2.3vw, 1.65rem); line-height: 1.35; color: var(--fg); }
+			.actions { display: flex; flex-direction: column; align-items: start; gap: 0.65rem; margin-top: 2rem; }
+			.actions a, .archive-head > a { font-family: var(--font-mono); font-size: 0.7rem; border-bottom: 1px solid var(--line); padding-bottom: 0.2rem; }
+			kbd { font-family: var(--font-mono); font-size: 0.58rem; color: var(--fg-3); }
+			.featured { padding-bottom: clamp(5rem, 10vw, 9rem); }
+			.section-label { margin-bottom: 1rem; text-transform: uppercase; }
+			.section-label span:first-child { color: var(--fg); }
+			.archive { padding-bottom: clamp(5rem, 10vw, 9rem); }
+			.archive-head { display: flex; justify-content: space-between; align-items: end; gap: 2rem; padding-bottom: 1.5rem; }
+			.archive-head h2 { font-size: clamp(2.8rem, 7vw, 5.5rem); margin-top: 0.65rem; }
+			.filters { display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--fg); border-bottom: 1px solid var(--fg); margin-bottom: 2.5rem; }
+			.filters a, .filters span { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.8rem 1rem; border-right: 1px solid var(--line); color: var(--fg-3); }
+			.filters .active { background: var(--fg); color: var(--bg); }
+			.filters sup { color: var(--signal); margin-left: 0.15rem; }
+			.post-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 2.2rem; }
+			.subject-index { padding-bottom: 7rem; }
+			.tag-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+			.tag-grid a { display: grid; grid-template-columns: auto 1fr auto; gap: 0.7rem; align-items: center; padding: 1rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+			.tag-grid a:hover { background: var(--signal); color: #100f0d; }
+			.tag-grid span, .tag-grid sup { font-family: var(--font-mono); font-size: 0.6rem; color: var(--fg-3); }
+			.tag-grid a:hover span, .tag-grid a:hover sup { color: #100f0d; }
+			.tag-grid strong { font-family: var(--font-display); font-size: 1rem; }
+			@media (max-width: 760px) {
+				.mast-grid { grid-template-columns: 1fr; align-items: start; }
+				.mast-grid h1 { font-size: clamp(4.7rem, 25vw, 7rem); }
+				.issue-line span:last-child { display: none; }
+				.post-grid, .tag-grid { grid-template-columns: 1fr; }
+				.filters { overflow-x: auto; flex-wrap: nowrap; }
+				.filters a, .filters span { white-space: nowrap; }
 			}
 		</style>
 	</body>

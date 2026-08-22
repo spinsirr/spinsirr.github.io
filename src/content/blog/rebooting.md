@@ -2,6 +2,8 @@
 title: 'Rebooting this site'
 description: 'Why I rebuilt my corner of the internet — and what I am working on now.'
 pubDate: 'Jun 19 2026'
+kind: field-note
+tags: ['Meta', 'Astro']
 ---
 
 This is a reboot. The old version of this site was a student blog full of JavaScript

@@ -2,6 +2,8 @@
 title: 'A dual-format gateway for Claude Max'
 description: 'Point your existing OpenAI- or Anthropic-SDK code at a Claude Max subscription, no rewrites.'
 pubDate: 'Jun 05 2026'
+kind: project-note
+tags: ['Open source', 'LLM infrastructure', 'Claude']
 ---
 
 If you pay for Claude Max, you already have a lot of model access — but most tools and SDKs
