@@ -65,8 +65,6 @@ const result = streamText({
 });
 ```
 
-I won't re-derive the SDK here — the deeper how-to is in [/blog/vercel-ai-sdk-agents/](/blog/vercel-ai-sdk-agents/). This section is the *why it's the default*; that post is the *how*.
-
 ## Deno + Hono for agent backends
 
 The split is the idea worth keeping: the product UI lives in Next.js, and the agent gets its own service. In Fixo that service is Deno + Hono — the API the agent runs behind while it diagnoses, estimates, and pushes the order forward.
@@ -77,7 +75,7 @@ Why Deno + Hono for this layer:
 - **A small, fast HTTP layer** — Hono gets out of the way, which is what you want under an agent loop.
 - **A clean boundary** — tool execution, retries, and control flow live here, separate from the web app's request lifecycle.
 
-An agent loop and a web request want different things. A web request is short and stateless; an agent loop is multi-step, retries, recovers from a failed tool call, and has to stay on task across all of it. That loop is real infrastructure — worth building once and treating seriously, not bolting onto a page handler. What the loop actually contains is its own post: [/blog/agent-harness/](/blog/agent-harness/).
+An agent loop and a web request want different things. A web request is short and stateless; an agent loop is multi-step, retries, recovers from a failed tool call, and has to stay on task across all of it. That loop is real infrastructure — worth building once and treating seriously, not bolting onto a page handler.
 
 The honest trade-off: splitting the backend out costs you a service to run. Only pay that when the agent does real multi-step work, like Fixo. When generation is request-shaped, keep it in the app — which is exactly why BuildLog has no separate agent service.
 
@@ -97,7 +95,7 @@ Payments show up earlier in agent products than people expect. Fixo's agent does
 
 Stripe is the default for the same reason as everything else here: the least glue. The agent's job — produce an estimate, request payment — maps cleanly onto a Checkout flow, with little impedance between what the agent decides and what Stripe needs.
 
-But once an agent can spend or charge, the controls stop being optional. You want spending limits and human-in-the-loop approvals around it, because an agent moving money is exactly where you don't want surprises. This is the productized version of that problem: CoreSpeed's Agent Pay gives you budgets and spending limits, and plain-English policy gives you approval rules you can actually read. The full picture — policy, approvals, and pay — is in [/blog/ai-agent-guardrails/](/blog/ai-agent-guardrails/). Stripe drives the order and payment; the guardrails decide what the agent is allowed to do with it.
+But once an agent can spend or charge, the controls stop being optional. You want spending limits and human-in-the-loop approvals around it, because an agent moving money is exactly where you don't want surprises. Stripe drives the order and payment; the guardrails decide what the agent is allowed to do with it.
 
 ## AG-UI: giving the agent a real product surface
 
@@ -105,7 +103,7 @@ A chat box is the lowest-effort agent UI, and it shows. Text scrolling in a wind
 
 AG-UI is the fix: a protocol for streaming agent state and actions into the frontend, so the UI reflects what the agent is doing rather than printing what it said. In Fixo, the chat is the entry point — but AG-UI is what makes the rest feel like software instead of a transcript.
 
-This is also why AG-UI pairs with the Deno/Hono backend. The agent service emits state and actions; AG-UI carries them to the Next.js surface; the UI renders them as real interface. Those are the halves of making an agent a participant in the product instead of a text generator bolted to the side of it. The deeper treatment is in [/blog/ag-ui-agent-surfaces/](/blog/ag-ui-agent-surfaces/) — this is the where-it-fits-in-the-stack view.
+This is also why AG-UI pairs with the Deno/Hono backend. The agent service emits state and actions; AG-UI carries them to the Next.js surface; the UI renders them as real interface. Those are the halves of making an agent a participant in the product instead of a text generator bolted to the side of it.
 
 ## Shipping discipline: cut scope, ship, iterate
 
@@ -117,6 +115,6 @@ The discipline is short:
 - **Ship the thin slice** that does the one thing the product is for.
 - **Let real usage tell you what to build next** instead of guessing in the planning doc. The doc is always wrong in ways only usage reveals.
 
-There's a meta-version of this, and it's most of what I think about at CoreSpeed. The slowest part of building AI products isn't the model or the UI — it's wiring every integration and guardrail by hand. Every app the agent touches is another OAuth flow, another set of keys, another spending limit you implement from scratch. That's the setup tax, and it's exactly the access-and-control layer CoreSpeed removes: one connection to the apps you already use, built-in tools, and policy you can read. I've written about that bet in [/blog/building-agent-infrastructure/](/blog/building-agent-infrastructure/), and the whole pitch is at [corespeed.io](https://corespeed.io).
+There's a meta-version of this, and it's most of what I think about at CoreSpeed. The slowest part of building AI products isn't the model or the UI — it's wiring every integration and guardrail by hand. Every app the agent touches is another OAuth flow, another set of keys, another spending limit you implement from scratch. That's the setup tax, and it's exactly the access-and-control layer CoreSpeed removes: one connection to the apps you already use, built-in tools, and policy you can read.
 
 Builder to builder: the stack isn't sacred, the patterns are. Stream everything, tools over prompts, validate your output, keep a human on the money. Get those right and let real usage steer. The rest is just shipping.

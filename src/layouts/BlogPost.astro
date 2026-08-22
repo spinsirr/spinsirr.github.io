@@ -7,7 +7,7 @@ import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate } = Astro.props;
+const { title, description, pubDate, updatedDate, ogImage } = Astro.props;
 
 const postUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const blogLd = {
@@ -20,12 +20,13 @@ const blogLd = {
 	author: { '@type': 'Person', name: 'Spencer Zhao', url: 'https://github.com/spinsirr' },
 	url: postUrl,
 	mainEntityOfPage: postUrl,
+	...(ogImage ? { image: new URL(ogImage, Astro.site).toString() } : {}),
 };
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} image={ogImage} />
 		<script type="application/ld+json" set:html={JSON.stringify(blogLd)} />
 	</head>
 	<body>
@@ -118,6 +119,8 @@ const blogLd = {
 			}
 			.head h1 {
 				margin: 0;
+				font-size: clamp(2.75rem, 6vw, 4.5rem);
+				line-height: 0.98;
 			}
 			.desc {
 				margin: 1rem 0 0;

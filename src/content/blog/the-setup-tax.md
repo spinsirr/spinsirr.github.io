@@ -16,7 +16,7 @@ Every app has its own OAuth dialect. Different authorize and token endpoints. Di
 
 Then the tokens expire, and a new layer appears. You need somewhere to store refresh tokens, a path that refreshes before expiry rather than after a failed call, and handling for when the refresh itself fails: a revoked grant, a password change, an uninstalled app. Miss that last case and your agent works beautifully for an hour, then silently starts returning 401s while the user watches it do nothing.
 
-And all of this has to live somewhere. The moment you have one real integration you are running a secrets store and a callback server. With ten you are operating infrastructure whose entire purpose is to hold credentials and catch redirects — infrastructure that has nothing to do with your product. This is the exact wall I described in [MCP vs. connectors](/blog/mcp-vs-connectors/): the protocol defines the shape of the call, not the auth or the accounts behind it. A standard interface doesn't issue you a token.
+And all of this has to live somewhere. The moment you have one real integration you are running a secrets store and a callback server. With ten you are operating infrastructure whose entire purpose is to hold credentials and catch redirects — infrastructure that has nothing to do with your product. A standard tool interface can define the call, but it still does not issue you a token.
 
 ## Scopes and permissions you only discover at runtime
 
@@ -44,7 +44,7 @@ Real integrations fail in ways the happy-path demo never shows. Expired tokens. 
 
 An agent makes all of this worse than a normal client would, because it chains calls. One silent failure three steps back doesn't surface as an error — it surfaces as a confident, wrong final answer built on a gap nobody noticed. So your errors can't just be logged for a human to read later; they have to be legible to the model, so the agent itself can tell "try again," "ask a person," and "stop" apart.
 
-That decision — retry, escalate, or halt — is policy, not a try/catch. It's exactly where guardrails belong: approvals and human-in-the-loop on the actions that matter, which I covered in [AI agent guardrails](/blog/ai-agent-guardrails/). And to be honest about the proportions: across Fixo and BuildLog, the auth-and-failure handling wrapped around a single call routinely dwarfs the call itself. The line that hits the API is the small part.
+That decision — retry, escalate, or halt — is policy, not a try/catch. It's exactly where approvals and human-in-the-loop controls belong. And to be honest about the proportions: across Fixo and BuildLog, the auth-and-failure handling wrapped around a single call routinely dwarfs the call itself. The line that hits the API is the small part.
 
 ## The multiplication problem: N apps times ongoing maintenance
 
@@ -52,7 +52,7 @@ Everything above is per app. One integration is a project. Ten is a team's full-
 
 This is the mechanism behind stalled agent projects. A team budgets for the model and the prompt, ships the demo, then spends the rest of the quarter on token refresh and webhook retries. The interesting work starves while the plumbing eats the calendar.
 
-The same multiplication hits the agent's own capabilities, not just your app integrations. Web search, scraping, code sandboxes, image generation, email — if the platform doesn't ship them, each one becomes its own keys, its own quirks, its own small toolchain to maintain. I wrote about that side in [the tools every platform should ship built in](/blog/agent-built-in-tools/). Same tax, different counter.
+The same multiplication hits the agent's own capabilities, not just your app integrations. Web search, scraping, code sandboxes, image generation, email — if the platform doesn't ship them, each one becomes its own keys, its own quirks, its own small toolchain to maintain. Same tax, different counter.
 
 ## What removes it: one OAuth, hosted
 

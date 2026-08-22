@@ -90,6 +90,12 @@ const isActive = (href: string) => href === pathname || (href !== '/' && pathnam
 			gap: 1rem;
 		}
 		.socials-wrap {
+			 display: none;
+		}
+	}
+	@media (max-width: 640px) {
+		.links .link:first-child,
+		.actions {
 			display: none;
 		}
 	}
