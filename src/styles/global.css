@@ -16,7 +16,7 @@
 	--line-soft: rgba(16, 15, 13, 0.1);
 
 	--accent: #2438ff; /* electric blue — the one bold accent */
-	--signal: #ec6b2d; /* experiment marks */
+	--signal: var(--accent);
 	--on-accent: #ffffff;
 
 	/* Back-compat aliases so older component styles inherit the new palette. */
@@ -58,8 +58,6 @@ body {
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
 	overflow-wrap: break-word;
-	background-image: radial-gradient(rgba(16, 15, 13, 0.045) 0.6px, transparent 0.6px);
-	background-size: 5px 5px;
 }
 
 h1,
@@ -356,7 +354,7 @@ blockquote {
 	--fg-3: #74746f;
 	--line: rgba(255, 255, 255, 0.15);
 	--accent: #7d92ff;
-	--signal: #ff965e;
+	--signal: var(--accent);
 }
 
 /* ---------- Scroll reveal (no-flash via html.anim, motion-safe) ---------- */

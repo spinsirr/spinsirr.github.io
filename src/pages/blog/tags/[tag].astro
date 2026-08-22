@@ -25,7 +25,7 @@ const description = `${posts.length} piece${posts.length === 1 ? '' : 's'} filed
 	<body>
 		<Header />
 		<main class="wrap tag-page">
-			<header><a href="/blog/">← Subject index</a><p class="eyebrow">Filed under</p><h1>#{tag.name}</h1><p>{description}</p></header>
+			<header><a href="/blog/">← Writing</a><p class="eyebrow">Tag</p><h1>#{tag.name}</h1><p>{description}</p></header>
 			<div class="posts">{posts.map((post) => <PostCard {post} />)}</div>
 		</main>
 		<Footer />

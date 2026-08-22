@@ -25,7 +25,7 @@ const description = `A numbered series on ${series.title.toLowerCase()}.`;
 <!doctype html>
 <html lang="en">
 	<head><BaseHead {title} {description} /></head>
-	<body><Header /><main class="wrap series-page"><header><a href="/blog/">← Writing</a><p class="eyebrow">Numbered series</p><h1>{series.title}</h1><p>{description}</p></header><ol>{posts.map((post) => <li><span>{String(post.data.series?.order).padStart(2, '0')}</span><PostCard {post} /></li>)}</ol></main><Footer />
+	<body><Header /><main class="wrap series-page"><header><a href="/blog/">← Writing</a><p class="eyebrow">Series</p><h1>{series.title}</h1><p>{description}</p></header><ol>{posts.map((post) => <li><span>{String(post.data.series?.order).padStart(2, '0')}</span><PostCard {post} /></li>)}</ol></main><Footer />
 	<style>
 		.series-page { padding-top: clamp(3rem, 8vw, 7rem); padding-bottom: 7rem; }
 		header { border-bottom: 1px solid var(--fg); padding-bottom: 2rem; }
