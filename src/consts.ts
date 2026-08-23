@@ -5,7 +5,8 @@ export const SITE_TITLE = 'Spencer Zhao — Cofounder';
 export const SITE_DESCRIPTION =
 	'Spencer (Yunpeng) Zhao — Cofounder at CoreSpeed, the access and control layer for AI agents. Builds and ships products end to end.';
 
-export const CONTACT_PATH = '/about/#contact';
+export const CONTACT_EMAIL = 'yunpeng@corespeed.io';
+export const CONTACT_PATH = `mailto:${CONTACT_EMAIL}`;
 
 export const PROFILE = {
 	name: 'Spencer Zhao',
@@ -15,7 +16,7 @@ export const PROFILE = {
 	company: 'CoreSpeed',
 	companyUrl: 'https://corespeed.io',
 	location: 'San Jose, CA',
-	email: 'yunpeng@corespeed.io',
+	email: CONTACT_EMAIL,
 	subhead:
 		'Cofounder at CoreSpeed — the access and control layer for AI agents. We connect them to the apps you already use and keep them in bounds. I also build and ship products end to end. Based in San Jose, California.',
 };
@@ -95,6 +96,8 @@ export type ProjectGroup = 'CoreSpeed' | 'Products' | 'Open source' | 'Hardware'
 export interface Project {
 	name: string;
 	blurb: string;
+	/** When the project began. Used to order the public timeline. */
+	started: string;
 	tags: string[];
 	group: ProjectGroup;
 	/** Primary link — live product or repo. */
@@ -111,7 +114,8 @@ export const PROJECTS: Project[] = [
 	{
 		name: 'CoreSpeed',
 		blurb:
-			'The access and control layer for AI agents. Plug your agent into 50+ apps through one OAuth so it gets real work done — connectors, built-in tools, and memory — with plain-English policy and agent pay to keep it in bounds. Portable across Claude Code, Codex, and Cursor.',
+			'The access and control layer for AI agents. One OAuth connects agents to 50+ apps, built-in tools, and memory. Plain-English policy and agent pay keep actions in bounds.',
+		started: '2025-01-01',
 		tags: ['Platform', 'Agents', 'Connectors'],
 		group: 'CoreSpeed',
 		href: 'https://corespeed.io',
@@ -120,8 +124,8 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'BuildLog',
-		blurb:
-			"Turns your team's commits, PRs, and releases into marketing — AI drafts social posts you review and publish to X, LinkedIn, and Bluesky.",
+		blurb: "Turns a team's commits, PRs, and releases into draft posts for X, LinkedIn, and Bluesky.",
+		started: '2026-03-17',
 		tags: ['Next.js 16', 'Supabase', 'AI SDK'],
 		group: 'Products',
 		href: 'https://buildlog.ink',
@@ -132,7 +136,8 @@ export const PROJECTS: Project[] = [
 	{
 		name: 'Fixo',
 		blurb:
-			'Mobile-mechanic platform — an AI agent diagnoses car faults from a chat, writes the repair estimate, and drives scheduling and Stripe payments.',
+			'A mobile-mechanic platform where an AI agent diagnoses faults, writes estimates, then handles scheduling and Stripe payments.',
+		started: '2025-11-21',
 		tags: ['Next.js', 'Deno + Hono', 'Stripe', 'AG-UI'],
 		group: 'Products',
 		href: 'https://github.com/hmls-autos/hmls',
@@ -142,7 +147,8 @@ export const PROJECTS: Project[] = [
 	{
 		name: 'Amazon Order Wizard',
 		blurb:
-			'Offline-first browser extension for tracking Amazon orders with optional cloud sync — a React 19 extension backed by a Rust (Axum) + MongoDB API.',
+			'An offline-first browser extension for tracking Amazon orders, with optional sync through a Rust and MongoDB API.',
+		started: '2026-01-02',
 		tags: ['Browser extension', 'React', 'Rust'],
 		group: 'Products',
 		href: 'https://github.com/spinsirr/order-wizard',
@@ -152,7 +158,8 @@ export const PROJECTS: Project[] = [
 	{
 		name: 'Claude Max Gateway',
 		blurb:
-			'Dual-format API gateway for a Claude Max subscription — exposes both OpenAI- and Anthropic-style Messages APIs through the Claude Code CLI.',
+			'A dual-format API gateway that exposes OpenAI and Anthropic Messages APIs through the Claude Code CLI.',
+		started: '2026-03-15',
 		tags: ['TypeScript', 'LLM', 'Gateway'],
 		group: 'Open source',
 		href: 'https://github.com/spinsirr/claude-max-gateway',
@@ -165,17 +172,31 @@ export const PROJECTS: Project[] = [
 		name: 'Zypher Agent',
 		blurb:
 			'A minimal, open-source framework for building AI agents with full control over tools, providers, and execution flow.',
+		started: '2025-03-03',
 		tags: ['TypeScript', 'Agents', 'Open source'],
 		group: 'Open source',
 		href: 'https://github.com/corespeed-io/zypher-agent',
 		repo: 'https://github.com/corespeed-io/zypher-agent',
-		stars: 336,
+		stars: 329,
 		badge: 'OSS',
 		featured: true,
 	},
 	{
+		name: 'Lore',
+		blurb:
+			'Open-source memory infrastructure for users and their agents, backed by Postgres, pgvector, and row-level security.',
+		started: '2026-06-26',
+		tags: ['Postgres', 'pgvector', 'RLS'],
+		group: 'Open source',
+		href: 'https://github.com/corespeed-io/lore',
+		repo: 'https://github.com/corespeed-io/lore',
+		stars: 5,
+		badge: 'OSS',
+	},
+	{
 		name: 'FPGA Clock',
 		blurb: 'A multi-function digital clock built in Verilog, running on an FPGA.',
+		started: '2021-12-22',
 		tags: ['Verilog', 'FPGA', 'Hardware'],
 		group: 'Hardware',
 		href: 'https://github.com/spinsirr/FPGA_Clock',
@@ -187,6 +208,7 @@ export const PROJECTS: Project[] = [
 		name: 'Mini-UPS',
 		blurb:
 			'A USB-powered lithium-battery uninterruptible power supply for Raspberry Pi and low-power MCUs.',
+		started: '2021-12-22',
 		tags: ['Hardware', 'Power', 'Embedded'],
 		group: 'Hardware',
 		href: 'https://github.com/spinsirr/Mini-UPS',

@@ -2,18 +2,24 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import ProjectCard from '../components/ProjectCard.astro';
 import { PROFILE, PROJECTS, type ProjectGroup } from '../consts';
 
 const title = `Projects — ${PROFILE.name}`;
-const description = 'Agent infrastructure, full products, open source, and hardware I have built.';
+const description = 'Selected systems, products, open-source tools, and hardware, ordered by start date.';
 
-const groups: { key: ProjectGroup; blurb: string }[] = [
-	{ key: 'CoreSpeed', blurb: 'The platform I am building at CoreSpeed.' },
-	{ key: 'Products', blurb: 'Full products designed and shipped end to end.' },
-	{ key: 'Open source', blurb: 'Tools and libraries released publicly.' },
-	{ key: 'Hardware', blurb: 'Electronics and embedded projects, for the love of it.' },
-];
+const groupLabels: Record<ProjectGroup, string> = {
+	CoreSpeed: 'Company',
+	Products: 'Product',
+	'Open source': 'Open Source',
+	Hardware: 'Hardware',
+};
+
+const projects = [...PROJECTS].sort((a, b) => b.started.localeCompare(a.started));
+const years = [...new Set(projects.map((project) => project.started.slice(0, 4)))];
+const month = (started: string) =>
+	new Intl.DateTimeFormat('en', { month: 'short', timeZone: 'UTC' })
+		.format(new Date(`${started}T00:00:00Z`))
+		.toUpperCase();
 ---
 
 <!doctype html>
@@ -22,33 +28,65 @@ const groups: { key: ProjectGroup; blurb: string }[] = [
 		<BaseHead title={title} description={description} />
 	</head>
 	<body>
+		<a class="skip-link" href="#main-content">Skip to content</a>
 		<Header />
-		<main class="section">
-			<div class="wrap">
-				<div class="page-head">
-					<p class="eyebrow">Projects</p>
-					<h1>What I've built</h1>
-					<p class="lead">
-						From agent runtimes to a tiny lithium UPS — a record of things I've shipped and the
-						stacks behind them.
-					</p>
+		<main id="main-content">
+			<header class="page-head wrap">
+				<div class="head-meta">
+					<span>Selected Projects</span>
+					<span class="year-range">{years.at(-1)} → {years[0]}</span>
 				</div>
+				<h1>Selected<br />Work.</h1>
+				<p class="lead">Ordered by when each project started.</p>
+			</header>
 
+			<div class="timeline wrap">
 				{
-					groups.map((group) => {
-						const items = PROJECTS.filter((p) => p.group === group.key);
-						if (items.length === 0) return null;
+					years.map((year) => {
+						const entries = projects.filter((project) => project.started.startsWith(year));
+
 						return (
-							<section class="group">
-								<div class="group-head">
-									<h2>{group.key}</h2>
-									<p>{group.blurb}</p>
-								</div>
-								<div class="sheet grid-2">
-									{items.map((p) => (
-										<ProjectCard project={p} />
+							<section class="year-block" aria-labelledby={`year-${year}`} data-no-reveal>
+								<header class="year-head">
+									<h2 id={`year-${year}`}>{year}</h2>
+									<p>{entries.length} {entries.length === 1 ? 'Project' : 'Projects'}</p>
+								</header>
+
+								<ol class="year-items">
+									{entries.map((project) => (
+										<li class="timeline-item">
+											<div class="date-rail">
+												<time datetime={project.started}>{month(project.started)}</time>
+												<span class="node" aria-hidden="true"></span>
+											</div>
+
+											<article>
+												<header class="project-head">
+													<div>
+														<p class="kind">{groupLabels[project.group]}{project.badge && project.badge !== 'OSS' && ` / ${project.badge}`}</p>
+														<h3>
+															{project.href ? (
+																<a href={project.href} target="_blank" rel="noopener">
+																	<span>{project.name}</span>
+																	<span class="title-arrow" aria-hidden="true">↗</span>
+																</a>
+															) : project.name}
+														</h3>
+													</div>
+												</header>
+
+												<p class="summary">{project.blurb}</p>
+
+												<footer class="project-foot">
+													<ul aria-label={`${project.name} technologies`}>
+														{project.tags.map((tag) => <li translate="no">{tag}</li>)}
+													</ul>
+											{project.repo && project.repo !== project.href && <a href={project.repo} target="_blank" rel="noopener">View source</a>}
+												</footer>
+											</article>
+										</li>
 									))}
-								</div>
+								</ol>
 							</section>
 						);
 					})
@@ -58,33 +96,261 @@ const groups: { key: ProjectGroup; blurb: string }[] = [
 		<Footer />
 
 		<style>
+			.skip-link {
+				position: fixed;
+				top: 0.75rem;
+				left: 0.75rem;
+				z-index: 1000;
+				padding: 0.65rem 0.9rem;
+				border: 1px solid var(--fg);
+				background: var(--bg);
+				font-family: var(--font-mono);
+				font-size: 0.75rem;
+				transform: translateY(-160%);
+				transition: transform 0.15s ease;
+			}
+			.skip-link:focus-visible {
+				transform: translateY(0);
+			}
 			.page-head {
-				max-width: 60ch;
-				margin-bottom: 3.5rem;
+				padding-top: clamp(3.5rem, 8vw, 7rem);
+				padding-bottom: clamp(4rem, 9vw, 8rem);
+			}
+			.head-meta {
+				display: flex;
+				justify-content: space-between;
+				gap: 1rem;
+				padding-bottom: 0.8rem;
+				border-bottom: 1px solid var(--fg);
+				font-family: var(--font-mono);
+				font-size: 0.68rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: var(--fg-3);
+			}
+			.year-range,
+			.year-head h2,
+			.date-rail time {
+				font-variant-numeric: tabular-nums;
 			}
 			.page-head h1 {
-				margin: 0.6rem 0 1rem;
+				max-width: 8ch;
+				margin-top: clamp(2rem, 5vw, 4rem);
+				font-size: clamp(4.3rem, 13vw, 10rem);
+				line-height: 0.82;
+				text-wrap: balance;
 			}
-			.group + .group {
-				margin-top: 3.5rem;
+			.page-head .lead {
+				margin: 1.8rem 0 0;
+				font-family: var(--font-serif);
+				font-size: clamp(1.2rem, 2vw, 1.55rem);
+				text-wrap: pretty;
 			}
-			.group-head {
+			.timeline {
+				max-width: 1120px;
+				padding-bottom: clamp(5rem, 10vw, 9rem);
+			}
+			.year-block {
+				display: grid;
+				grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+				gap: clamp(2rem, 6vw, 5rem);
+				border-top: 1px solid var(--fg);
+				padding: 1.3rem 0 clamp(4.5rem, 9vw, 8rem);
+			}
+			.year-head {
+				position: sticky;
+				top: 5.2rem;
+				align-self: start;
+			}
+			.year-head h2 {
+				font-size: clamp(2.6rem, 5vw, 4.4rem);
+				line-height: 0.9;
+				white-space: nowrap;
+				scroll-margin-top: 5.5rem;
+			}
+			.year-head p {
+				margin: 0.7rem 0 0;
+				font-family: var(--font-mono);
+				font-size: 0.68rem;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: var(--fg-3);
+			}
+			.year-items {
+				position: relative;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			.year-items::before {
+				content: '';
+				position: absolute;
+				top: 0.5rem;
+				bottom: 0;
+				left: 4.4rem;
+				width: 1px;
+				background: var(--line);
+			}
+			.timeline-item {
+				display: grid;
+				grid-template-columns: 5.8rem minmax(0, 1fr);
+				gap: 1rem;
+				position: relative;
+				min-width: 0;
+			}
+			.timeline-item + .timeline-item {
+				margin-top: clamp(2.8rem, 6vw, 5rem);
+			}
+			.date-rail {
+				display: grid;
+				grid-template-columns: 3.4rem 1fr;
+				align-items: start;
+				position: relative;
+				padding-top: 0.25rem;
+			}
+			.date-rail time {
+				font-family: var(--font-mono);
+				font-size: 0.68rem;
+				letter-spacing: 0.08em;
+				color: var(--fg-3);
+			}
+			.node {
+				position: relative;
+				z-index: 1;
+				display: block;
+				width: 0.72rem;
+				height: 0.72rem;
+				margin-top: 0.05rem;
+				border: 2px solid var(--bg);
+				outline: 1px solid var(--accent);
+				background: var(--accent);
+			}
+			.timeline-item article {
+				min-width: 0;
+				padding-bottom: clamp(2rem, 5vw, 3.5rem);
+				border-bottom: 1px solid var(--line);
+			}
+			.project-head {
+				display: flex;
+				align-items: start;
+				justify-content: space-between;
+				gap: 1.5rem;
+			}
+			.project-head > div {
+				min-width: 0;
+			}
+			.kind {
+				margin: 0 0 0.65rem;
+				font-family: var(--font-mono);
+				font-size: 0.65rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: var(--accent);
+			}
+			.project-head h3 {
+				font-size: clamp(1.8rem, 4.5vw, 3.4rem);
+				line-height: 0.95;
+				text-wrap: balance;
+				overflow-wrap: anywhere;
+			}
+			.project-head h3 a {
+				display: inline-flex;
+				align-items: flex-start;
+				gap: 0.35em;
+				min-height: 2.75rem;
+				text-decoration: none;
+			}
+			.title-arrow {
+				flex: 0 0 auto;
+				margin-top: 0.05em;
+				font-family: var(--font-mono);
+				font-size: 0.36em;
+				line-height: 1;
+				color: var(--accent);
+			}
+			.summary {
+				max-width: 58ch;
+				margin: 1.1rem 0 1.4rem;
+				font-family: var(--font-serif);
+				font-size: clamp(1.08rem, 1.7vw, 1.3rem);
+				line-height: 1.55;
+				text-wrap: pretty;
+				overflow-wrap: anywhere;
+			}
+			.project-foot {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+			}
+			.project-foot ul {
 				display: flex;
 				flex-wrap: wrap;
-				align-items: baseline;
-				gap: 0.25rem 1rem;
-				margin-bottom: 1.5rem;
-				padding-bottom: 0.8rem;
-				border-bottom: 1px solid var(--border);
-			}
-			.group-head h2 {
+				gap: 0.35rem 0.9rem;
+				list-style: none;
 				margin: 0;
-				font-size: 1.5rem;
+				padding: 0;
 			}
-			.group-head p {
-				margin: 0;
-				font-size: 0.92rem;
-				color: var(--text-mute);
+			.project-foot li,
+			.project-foot > a {
+				font-family: var(--font-mono);
+				font-size: 0.68rem;
+				color: var(--fg-3);
+			}
+			.project-foot li::before {
+				content: '#';
+				color: var(--accent);
+			}
+			.project-foot > a {
+				min-height: 2.75rem;
+				display: inline-flex;
+				align-items: center;
+				text-decoration: underline;
+				text-underline-offset: 0.18em;
+				touch-action: manipulation;
+			}
+
+			@media (max-width: 720px) {
+				.page-head h1 {
+					font-size: clamp(4rem, 22vw, 7rem);
+				}
+				.year-block {
+					display: block;
+					padding-bottom: 4.5rem;
+				}
+				.year-head {
+					position: static;
+					display: flex;
+					align-items: end;
+					justify-content: space-between;
+					margin-bottom: 2.5rem;
+				}
+				.year-head p {
+					margin-bottom: 0.25rem;
+				}
+				.timeline-item {
+					grid-template-columns: 4.7rem minmax(0, 1fr);
+					gap: 0.4rem;
+				}
+				.year-items::before {
+					left: 3.75rem;
+				}
+				.date-rail {
+					grid-template-columns: 3rem 1fr;
+				}
+				.project-head h3 {
+					font-size: clamp(1.75rem, 9vw, 2.7rem);
+				}
+				.project-foot {
+					align-items: flex-start;
+					flex-direction: column;
+				}
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.skip-link {
+					transition: none;
+				}
 			}
 		</style>
 	</body>

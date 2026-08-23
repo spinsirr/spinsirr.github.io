@@ -96,6 +96,7 @@ a {
 	color: var(--fg);
 	text-decoration: none;
 	transition: color 0.15s ease;
+	touch-action: manipulation;
 }
 a:hover {
 	color: var(--accent);
@@ -347,6 +348,7 @@ blockquote {
 
 /* ---------- Dark theme (token flip) ---------- */
 [data-theme='dark'] {
+	color-scheme: dark;
 	--bg: #0c0c0e;
 	--bg-2: #16161b;
 	--fg: #ededec;
@@ -360,12 +362,12 @@ blockquote {
 
 /* ---------- Scroll reveal (no-flash via html.anim, motion-safe) ---------- */
 @media (prefers-reduced-motion: no-preference) {
-	html.anim main section {
+	html.anim main section:not([data-no-reveal]) {
 		opacity: 0;
 		transform: translateY(16px);
 		transition: opacity 0.55s ease, transform 0.55s ease;
 	}
-	html.anim main section.is-in {
+	html.anim main section:not([data-no-reveal]).is-in {
 		opacity: 1;
 		transform: none;
 	}

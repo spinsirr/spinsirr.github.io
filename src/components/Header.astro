@@ -105,6 +105,11 @@ const isActive = (href: string) => href === pathname || (href !== '/' && pathnam
 	// Theme toggle
 	const root = document.documentElement;
 	const btn = document.getElementById('theme-toggle');
+	const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+	const syncThemeColor = () => {
+		if (themeColor) themeColor.content = root.dataset.theme === 'dark' ? '#0c0c0e' : '#f4f3ee';
+	};
+	syncThemeColor();
 	btn?.addEventListener('click', () => {
 		const dark = root.dataset.theme === 'dark';
 		if (dark) {
@@ -114,6 +119,7 @@ const isActive = (href: string) => href === pathname || (href !== '/' && pathnam
 			root.dataset.theme = 'dark';
 			localStorage.setItem('theme', 'dark');
 		}
+		syncThemeColor();
 	});
 
 	// Scroll reveal + count-up (motion-safe)
@@ -149,6 +155,6 @@ const isActive = (href: string) => href === pathname || (href !== '/' && pathnam
 			},
 			{ threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
 		);
-		document.querySelectorAll('main section').forEach((s) => io.observe(s));
+		document.querySelectorAll('main section:not([data-no-reveal])').forEach((s) => io.observe(s));
 	}
 </script>
