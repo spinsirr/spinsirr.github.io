@@ -13,11 +13,11 @@ export const GET: APIRoute = async ({ site }) => {
 	out.push(`# ${PROFILE.fullName}`);
 	out.push('');
 	out.push(
-		`> ${PROFILE.role} at ${PROFILE.company} — the access and control layer for AI agents. Personal site: projects, writing on AI agents and infrastructure, and contact. Based in ${PROFILE.location}.`,
+		`> ${PROFILE.role} at ${PROFILE.company}. Personal site with projects, writing on agent infrastructure and memory, and contact information. Based in ${PROFILE.location}.`,
 	);
 	out.push('');
 	out.push(
-		`Spencer builds CoreSpeed (${PROFILE.companyUrl}): connect an AI agent to 50+ apps through one OAuth, with built-in tools, memory, plain-English policy, and agent pay. He also ships products end to end (BuildLog, Fixo) and open source (Zypher Agent, Claude Max Gateway). Every blog post is available as raw Markdown by appending \`.md\` to its URL.`,
+		`Spencer builds infrastructure for cloud agents at CoreSpeed (${PROFILE.companyUrl}), with work across connectors, memory, gateways, billing, and the public product surface. He also builds complete products such as BuildLog and Fixo, and open-source systems including Lore, Zypher Agent, and Claude Max Gateway. Every blog post is available as raw Markdown by appending \`.md\` to its URL.`,
 	);
 	out.push('');
 	out.push('## Pages');

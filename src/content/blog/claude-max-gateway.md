@@ -6,12 +6,12 @@ kind: project-note
 tags: ['Open source', 'LLM infrastructure', 'Claude']
 ---
 
-If you pay for Claude Max, you already have a lot of model access — but most tools and SDKs
+If you pay for Claude Max, you already have a lot of model access, but most tools and SDKs
 expect a raw API key, not a subscription. **Claude Max Gateway** bridges that gap.
 
 It's a small gateway that speaks **both** the OpenAI Chat Completions format and the Anthropic
-Messages format, and routes requests through the Claude Code CLI. So whatever you've already
-built — an OpenAI-SDK app, an Anthropic-SDK app, some agent framework — can point at the gateway
+Messages format, and routes requests through the Claude Code CLI. An OpenAI SDK app, an Anthropic
+SDK app, or an agent framework can point at the gateway
 and just work, backed by your Max plan.
 
 The point is leverage: stop maintaining two integrations and stop paying twice for access you

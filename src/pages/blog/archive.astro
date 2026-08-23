@@ -8,13 +8,13 @@ import { KIND_LABELS, published, readingTime } from '../../utils/posts';
 
 const posts = published(await getCollection('blog'));
 const years = [...new Set(posts.map((post) => post.data.pubDate.getFullYear()))];
-const title = 'Archive — Spencer Zhao';
+const title = 'Archive | Spencer Zhao';
 const description = 'Every published research note, essay, field note, and project note.';
 ---
 
 <!doctype html>
 <html lang="en"><head><BaseHead {title} {description} /></head><body><Header />
-	<main class="wrap archive-page"><header><a href="/blog/">← Writing</a><p class="eyebrow">Archive</p><h1>All posts.</h1><p>{posts.length} pieces, newest first.</p></header>
+	<main id="main-content" class="wrap archive-page"><header><a href="/blog/">← Writing</a><p class="eyebrow">Archive</p><h1>All posts.</h1><p>{posts.length} pieces, newest first.</p></header>
 		{years.map((year) => <section><h2>{year}</h2><ol>{posts.filter((post) => post.data.pubDate.getFullYear() === year).map((post, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><a href={`/blog/${post.id}/`}><strong>{post.data.title}</strong><small>{KIND_LABELS[post.data.kind]} · {readingTime(post)} min · <FormattedDate date={post.data.pubDate} /></small></a></li>)}</ol></section>)}
 	</main><Footer />
 	<style>

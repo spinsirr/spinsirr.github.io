@@ -5,8 +5,8 @@ import Header from '../components/Header.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import { PROFILE, STACK, STATS } from '../consts';
 
-const title = `About — ${PROFILE.name}`;
-const description = `About ${PROFILE.fullName}, ${PROFILE.role} at ${PROFILE.company}.`;
+const title = `About | ${PROFILE.name}`;
+const description = `${PROFILE.fullName} is a CoreSpeed cofounder and engineer building agent infrastructure, open-source systems, and complete products.`;
 
 // Edit these freely — they drive the timeline below.
 const EXPERIENCE = [
@@ -14,22 +14,22 @@ const EXPERIENCE = [
 		role: 'Cofounder',
 		org: 'CoreSpeed',
 		period: 'Present',
-		detail:
-			'Building the access and control layer for AI agents — connect them to the apps you already use, and keep them in bounds.',
+		detail: 'Building managed app access, tools, and memory for cloud agents.',
 		points: [
-			'The platform: 50+ app integrations through one OAuth, built-in tools, memory, plain-English policy, and agent pay. Portable across Claude Code, Codex, and Cursor.',
-			'Zypher Agent (open source, 336★) — a minimal framework for building agents with full control over tools, providers, and execution flow.',
+			'I own the payment gateway and work across model routing, usage metering, connectors, memory, and the public product.',
+			'Before the current product, we built CoreSpeed PaaS, AG0, xclaw, and Sarea. Their gateway and billing systems carried forward.',
 		],
 	},
 	{
-		role: 'Founder & builder',
-		org: 'Independent products',
+		role: 'Builder',
+		org: 'Independent work',
 		period: 'Ongoing',
-		detail: 'Designing and shipping full products end to end.',
+		detail: 'Building complete products and publishing the engineering behind them.',
 		points: [
-			'BuildLog (buildlog.ink) — turns commits, PRs, and releases into draft social posts. Next.js 16 · Supabase · Vercel AI SDK.',
-			'Fixo — a mobile-mechanic platform where an AI agent diagnoses faults, writes the estimate, and drives Stripe payments.',
-			'Claude Max Gateway and Amazon Order Wizard — LLM developer tooling and a React 19 + Rust browser extension.',
+			'BuildLog reads commits, PRs, and releases, then drafts posts for X, LinkedIn, and Bluesky.',
+			'Fixo takes a mobile-mechanic workflow from diagnosis to estimate, scheduling, and Stripe payment.',
+			'Lore is open-source memory infrastructure on Postgres and pgvector. Its evaluations separate a parent-memory hit from answer-bearing evidence.',
+			'Claude Max Gateway exposes OpenAI and Anthropic API formats through the Claude Code CLI.',
 		],
 	},
 ];
@@ -39,7 +39,7 @@ const EDUCATION = [
 		role: 'M.S., Electrical Engineering (MSEE)',
 		org: 'University of California, Irvine',
 		period: '',
-		detail: 'EECS — computer systems, software, and architecture.',
+		detail: '',
 	},
 ];
 ---
@@ -51,7 +51,7 @@ const EDUCATION = [
 	</head>
 	<body>
 		<Header />
-		<main class="section">
+		<main id="main-content" class="section">
 			<div class="wrap about">
 				<div class="about-top">
 					<figure class="portrait">
@@ -65,19 +65,17 @@ const EDUCATION = [
 
 				<div class="bio">
 					<p>
-						I'm Spencer (Yunpeng) Zhao, cofounder at
-						<a href={PROFILE.companyUrl} target="_blank" rel="noopener">CoreSpeed</a>, based in San Jose,
-						California. We build the access and control layer for AI agents — 50+ app integrations
-						through one OAuth, with built-in tools, memory, and plain-English policy + agent pay — so
-						agents do real work, safely, instead of just chatting.
+						I'm Spencer (Yunpeng) Zhao, a cofounder and engineer at
+						<a href={PROFILE.companyUrl} target="_blank" rel="noopener">CoreSpeed</a> in San Jose,
+						California. I work on the non-model parts of cloud agents: app authorization, connectors,
+						tools, memory, routing, usage metering, and payments.
 					</p>
 					<p>
-						I like turning ideas into running systems fast, and I build and ship products end to end:
-						<strong>BuildLog</strong> (commits → marketing) and <strong>Fixo</strong> (an AI mechanic).
-						I'm just as happy down at the metal — two of my favorite early projects are an FPGA digital
-						clock and a tiny lithium-battery UPS.
+						Recent work on <strong>Lore</strong> focuses on an easy measurement mistake: counting a
+						retrieved record as a success before its answer-bearing evidence reaches the model. I also
+						build complete products such as <strong>BuildLog</strong> and <strong>Fixo</strong>, and keep
+						my early hardware projects on GitHub.
 					</p>
-					<blockquote>Empower the agents, then get out of the way.</blockquote>
 				</div>
 
 				<section class="block">
@@ -160,10 +158,9 @@ const EDUCATION = [
 				<section class="block">
 					<h2>Beyond code</h2>
 					<p>
-						I like building physical things too — a multi-function digital clock in Verilog on an
-						FPGA, and a tiny USB-powered lithium-battery UPS for Raspberry Pi and low-power MCUs (both
-						on <a href="https://github.com/spinsirr" target="_blank" rel="noopener">GitHub</a>).
-						Hardware keeps me honest: the real world doesn't accept hand-wavy abstractions.
+						My early projects were hardware: a multi-function digital clock in Verilog on an FPGA and
+						a small USB-powered lithium-battery UPS for Raspberry Pi and low-power MCUs. Both are on
+						<a href="https://github.com/spinsirr" target="_blank" rel="noopener">GitHub</a>.
 					</p>
 				</section>
 

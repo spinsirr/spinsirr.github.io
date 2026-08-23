@@ -3,7 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 
-const title = 'Search — Spencer Zhao';
+const title = 'Search | Spencer Zhao';
 const description = 'Search Spencer Zhao’s writing and research notes.';
 ---
 
@@ -12,7 +12,7 @@ const description = 'Search Spencer Zhao’s writing and research notes.';
 	<head><BaseHead {title} {description} /></head>
 	<body>
 		<Header />
-		<main class="search-page wrap">
+		<main id="main-content" class="search-page wrap">
 			<header>
 				<p class="eyebrow">Full-text index</p>
 				<h1>Find a note.</h1>
@@ -21,10 +21,10 @@ const description = 'Search Spencer Zhao’s writing and research notes.';
 			<form data-search-form role="search">
 				<label class="sr-only" for="query">Search the archive</label>
 				<span aria-hidden="true">⌕</span>
-				<input id="query" name="q" type="search" placeholder="memory boundaries, OAuth, agent tools…" autocomplete="off" autofocus />
+				<input id="query" name="q" type="search" placeholder="memory boundaries, OAuth, agent tools…" autocomplete="off" />
 				<kbd>ESC</kbd>
 			</form>
-			<p class="status" data-search-status>Start typing to search the archive.</p>
+			<p class="status" role="status" aria-live="polite" data-search-status>Start typing to search the archive.</p>
 			<ol class="results" data-search-results></ol>
 		</main>
 		<Footer />
@@ -34,7 +34,8 @@ const description = 'Search Spencer Zhao’s writing and research notes.';
 			header .eyebrow { align-self: start; }
 			header h1 { font-size: clamp(4rem, 11vw, 9rem); grid-column: 2; }
 			header > p:last-child { grid-column: 2; font-family: var(--font-serif); font-size: 1.3rem; }
-			form { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; border-bottom: 2px solid var(--fg); padding: 1.2rem 0; margin-top: 2rem; }
+			form { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 1rem; border-bottom: 2px solid var(--fg); padding: 1.2rem 0; margin-top: 2rem; }
+			form:focus-within { border-color: var(--accent); }
 			form > span { color: var(--signal); font-size: 2rem; }
 			input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--fg); font-family: var(--font-display); font-weight: 600; font-size: clamp(1.4rem, 4vw, 2.6rem); }
 			input::placeholder { color: var(--fg-3); }
@@ -59,6 +60,9 @@ const description = 'Search Spencer Zhao’s writing and research notes.';
 			const escapeHtml = (value: string) => value.replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[character] ?? character);
 			const search = async () => {
 				const query = input?.value.trim() ?? '';
+				const url = new URL(location.href);
+				if (query) url.searchParams.set('q', query); else url.searchParams.delete('q');
+				history.replaceState(null, '', `${url.pathname}${url.search}`);
 				if (!query || !list || !status) { if (list) list.innerHTML = ''; if (status) status.textContent = 'Start typing to search the archive.'; return; }
 				status.textContent = 'Searching…';
 				try {

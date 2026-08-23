@@ -4,7 +4,7 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { PROFILE, PROJECTS, type ProjectGroup } from '../consts';
 
-const title = `Projects — ${PROFILE.name}`;
+const title = `Projects | ${PROFILE.name}`;
 const description = 'Selected systems, products, open-source tools, and hardware, presented chronologically.';
 
 const groupLabels: Record<ProjectGroup, string> = {
@@ -28,7 +28,6 @@ const month = (started: string) =>
 		<BaseHead title={title} description={description} />
 	</head>
 	<body>
-		<a class="skip-link" href="#main-content">Skip to content</a>
 		<Header />
 		<main id="main-content">
 			<header class="page-head wrap">
@@ -96,22 +95,6 @@ const month = (started: string) =>
 		<Footer />
 
 		<style>
-			.skip-link {
-				position: fixed;
-				top: 0.75rem;
-				left: 0.75rem;
-				z-index: 1000;
-				padding: 0.65rem 0.9rem;
-				border: 1px solid var(--fg);
-				background: var(--bg);
-				font-family: var(--font-mono);
-				font-size: 0.75rem;
-				transform: translateY(-160%);
-				transition: transform 0.15s ease;
-			}
-			.skip-link:focus-visible {
-				transform: translateY(0);
-			}
 			.page-head {
 				padding-top: clamp(3.5rem, 8vw, 7rem);
 				padding-bottom: clamp(4rem, 9vw, 8rem);
@@ -347,11 +330,6 @@ const month = (started: string) =>
 				}
 			}
 
-			@media (prefers-reduced-motion: reduce) {
-				.skip-link {
-					transition: none;
-				}
-			}
 		</style>
 	</body>
 </html>

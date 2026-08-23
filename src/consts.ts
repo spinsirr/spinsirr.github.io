@@ -3,9 +3,9 @@ import githubStats from './data/github-stats.json';
 // Single source of truth for site content.
 // Edit values here and they update across every page.
 
-export const SITE_TITLE = 'Spencer Zhao — Cofounder';
+export const SITE_TITLE = 'Spencer Zhao | Cofounder and engineer';
 export const SITE_DESCRIPTION =
-	'Spencer (Yunpeng) Zhao — Cofounder at CoreSpeed, the access and control layer for AI agents. Builds and ships products end to end.';
+	'Spencer (Yunpeng) Zhao is a CoreSpeed cofounder and engineer building gateways, memory, billing, and product systems for cloud agents.';
 
 export const CONTACT_EMAIL = 'yunpeng@corespeed.io';
 export const CONTACT_PATH = `mailto:${CONTACT_EMAIL}`;
@@ -14,13 +14,13 @@ export const PROFILE = {
 	name: 'Spencer Zhao',
 	fullName: 'Yunpeng "Spencer" Zhao',
 	handle: 'spinsirr',
-	role: 'Cofounder',
+	role: 'Cofounder and engineer',
 	company: 'CoreSpeed',
 	companyUrl: 'https://corespeed.io',
 	location: 'San Jose, CA',
 	email: CONTACT_EMAIL,
 	subhead:
-		'Cofounder at CoreSpeed — the access and control layer for AI agents. We connect them to the apps you already use and keep them in bounds. I also build and ship products end to end. Based in San Jose, California.',
+		'Cofounder and engineer at CoreSpeed. I work on app access, model routing, durable memory, usage metering, and payments. Based in San Jose, California.',
 };
 
 export const STATS = [
@@ -34,17 +34,17 @@ export const WHATIDO = [
 	{
 		n: '01',
 		title: 'CoreSpeed',
-		body: 'The access and control layer for AI agents: plug your agent into the apps you already use — 50+ via one OAuth — with built-in tools, memory, and plain-English policy + agent pay to keep it in bounds.',
+		body: 'I co-founded CoreSpeed. The current product gives cloud agents managed access to apps, built-in tools, and durable memory.',
 	},
 	{
 		n: '02',
-		title: 'Full products',
-		body: 'Ideas taken end to end and shipped: BuildLog, Fixo, Amazon Order Wizard.',
+		title: 'Systems around the model',
+		body: 'I build OAuth and connector paths, model gateways, usage metering, Stripe billing, and the evidence packet sent to the model.',
 	},
 	{
 		n: '03',
-		title: 'Open source & hardware',
-		body: 'Public tools like Claude Max Gateway, plus electronics — an FPGA clock and a tiny lithium UPS.',
+		title: 'Memory research & open source',
+		body: 'Lore measures the gap between retrieving the right record and sending the right evidence to the model. I also maintain Zypher Agent and Claude Max Gateway.',
 	},
 ];
 
@@ -87,10 +87,10 @@ export interface StackGroup {
 
 export const STACK: StackGroup[] = [
 	{ label: 'Languages', items: ['TypeScript', 'Python', 'Rust', 'Kotlin', 'C / Verilog'] },
-	{ label: 'Runtimes', items: ['Deno', 'Bun', 'Node.js'] },
-	{ label: 'Web', items: ['Next.js', 'React', 'Astro', 'Tailwind', 'Hono'] },
-	{ label: 'AI', items: ['Vercel AI SDK', 'MCP', 'AG-UI', 'Claude', 'Gemini'] },
-	{ label: 'Data & infra', items: ['Postgres', 'Supabase', 'Drizzle', 'MongoDB', 'Stripe', 'Vercel'] },
+	{ label: 'Runtimes', items: ['Cloudflare Workers', 'Bun', 'Node.js', 'Deno'] },
+	{ label: 'Web', items: ['React', 'Next.js', 'Astro', 'Hono', 'Tailwind'] },
+	{ label: 'AI', items: ['MCP', 'Vercel AI SDK', 'Claude', 'Codex', 'Gemini'] },
+	{ label: 'Data & infra', items: ['Postgres', 'pgvector', 'Drizzle', 'Stripe', 'Supabase', 'Railway'] },
 ];
 
 export type ProjectGroup = 'CoreSpeed' | 'Products' | 'Open source' | 'Hardware';
@@ -106,7 +106,6 @@ export interface Project {
 	href?: string;
 	/** Source link, when different from href. */
 	repo?: string;
-	stars?: number;
 	featured?: boolean;
 	/** Small status label, e.g. "Live", "Current", "Sunset", or "OSS". */
 	badge?: string;
@@ -116,9 +115,9 @@ export const PROJECTS: Project[] = [
 	{
 		name: 'CoreSpeed',
 		blurb:
-			'The access and control layer for AI agents. One OAuth connects agents to 50+ apps, built-in tools, and memory. Plain-English policy and agent pay keep actions in bounds.',
+			'Managed app access, built-in tools, and durable memory for cloud agents. I work on its gateway, billing, and public launch.',
 		started: '2026-06-10',
-		tags: ['Platform', 'Agents', 'Connectors'],
+		tags: ['Connectors', 'Memory', 'Agent infrastructure'],
 		group: 'CoreSpeed',
 		href: 'https://corespeed.io',
 		featured: true,
@@ -127,7 +126,7 @@ export const PROJECTS: Project[] = [
 	{
 		name: 'CoreSpeed PaaS',
 		blurb:
-			'CoreSpeed\'s infrastructure-platform phase: a Git-driven PaaS for deploying agent applications, built around Kubernetes and a Rust control plane.',
+			'A Git-driven PaaS for agent applications, with Kubernetes underneath and a Rust control plane.',
 		started: '2025-08-22',
 		tags: ['Rust', 'Kubernetes', 'PaaS'],
 		group: 'CoreSpeed',
@@ -241,7 +240,6 @@ export const PROJECTS: Project[] = [
 		group: 'Open source',
 		href: 'https://github.com/spinsirr/claude-max-gateway',
 		repo: 'https://github.com/spinsirr/claude-max-gateway',
-		stars: 1,
 		badge: 'OSS',
 		featured: true,
 	},
@@ -254,20 +252,18 @@ export const PROJECTS: Project[] = [
 		group: 'Open source',
 		href: 'https://github.com/corespeed-io/zypher-agent',
 		repo: 'https://github.com/corespeed-io/zypher-agent',
-		stars: 329,
 		badge: 'OSS',
 		featured: true,
 	},
 	{
 		name: 'Lore',
 		blurb:
-			'Open-source memory infrastructure for users and their agents, backed by Postgres, pgvector, and row-level security.',
+			'Open-source memory infrastructure on Postgres and pgvector, with row-level tenant isolation and evaluations that distinguish retrieval hits from answer-bearing evidence.',
 		started: '2026-06-26',
 		tags: ['Postgres', 'pgvector', 'RLS'],
 		group: 'Open source',
 		href: 'https://github.com/corespeed-io/lore',
 		repo: 'https://github.com/corespeed-io/lore',
-		stars: 5,
 		badge: 'OSS',
 	},
 	{
@@ -278,7 +274,6 @@ export const PROJECTS: Project[] = [
 		group: 'Hardware',
 		href: 'https://github.com/spinsirr/FPGA_Clock',
 		repo: 'https://github.com/spinsirr/FPGA_Clock',
-		stars: 6,
 		featured: true,
 	},
 	{
@@ -290,6 +285,5 @@ export const PROJECTS: Project[] = [
 		group: 'Hardware',
 		href: 'https://github.com/spinsirr/Mini-UPS',
 		repo: 'https://github.com/spinsirr/Mini-UPS',
-		stars: 5,
 	},
 ];

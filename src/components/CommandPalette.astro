@@ -18,9 +18,9 @@ const items = [
 ---
 
 <div id="cmdk" class="cmdk" hidden>
-	<div class="cmdk-backdrop" data-close></div>
+	<button class="cmdk-backdrop" type="button" aria-label="Close command menu" data-close></button>
 	<div class="cmdk-panel" role="dialog" aria-modal="true" aria-label="Command menu">
-		<input id="cmdk-input" class="cmdk-input" type="text" placeholder="Jump to a page or article…" autocomplete="off" spellcheck="false" />
+		<input id="cmdk-input" class="cmdk-input" type="text" aria-label="Search pages and articles" name="site-search" placeholder="Jump to a page or article…" autocomplete="off" spellcheck="false" />
 		<ul id="cmdk-list" class="cmdk-list">
 			{
 				items.map((it) => (
@@ -57,6 +57,9 @@ const items = [
 	.cmdk-backdrop {
 		position: absolute;
 		inset: 0;
+		width: 100%;
+		border: 0;
+		padding: 0;
 		background: rgba(8, 8, 10, 0.5);
 		backdrop-filter: blur(2px);
 	}
@@ -66,6 +69,7 @@ const items = [
 		background: var(--bg);
 		border: 1px solid var(--fg);
 		box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.5);
+		overscroll-behavior: contain;
 	}
 	.cmdk-input {
 		width: 100%;
@@ -78,6 +82,9 @@ const items = [
 		font-size: 1rem;
 		padding: 1rem 1.1rem;
 		outline: none;
+	}
+	.cmdk-input:focus-visible {
+		box-shadow: inset 0 0 0 2px var(--accent);
 	}
 	.cmdk-list {
 		list-style: none;

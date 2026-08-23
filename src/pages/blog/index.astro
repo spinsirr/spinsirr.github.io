@@ -8,7 +8,7 @@ import PostCard from '../../components/PostCard.astro';
 import { PROFILE } from '../../consts';
 import { KIND_LABELS, published, readingTime } from '../../utils/posts';
 
-const title = `Writing — ${PROFILE.name}`;
+const title = `Writing | ${PROFILE.name}`;
 const description = 'Notes on agent infrastructure, memory, evaluation, and shipping software.';
 const posts = published(await getCollection('blog'));
 const featured = posts.find((post) => post.data.featured) ?? posts[0];
@@ -20,7 +20,7 @@ const remaining = posts.filter((post) => post.id !== featured?.id);
 	<head><BaseHead {title} {description} /></head>
 	<body>
 		<Header />
-		<main class="wrap writing-page">
+		<main id="main-content" class="wrap writing-page">
 			<header class="page-head">
 				<div>
 					<p class="eyebrow">Writing</p>

@@ -9,7 +9,7 @@ export const GET: APIRoute = async ({ site }) => {
 	const posts = published(await getCollection('blog'));
 
 	const out: string[] = [];
-	out.push(`# ${PROFILE.fullName} — all writing`);
+	out.push(`# ${PROFILE.fullName}: all writing`);
 	out.push('');
 	out.push(`> Every blog post in one file. Site: ${base}`);
 	out.push('');

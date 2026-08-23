@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 }
 
 const { tag, posts } = Astro.props;
-const title = `${tag.name} — Spencer Zhao`;
+const title = `${tag.name} | Spencer Zhao`;
 const description = `${posts.length} piece${posts.length === 1 ? '' : 's'} filed under ${tag.name}.`;
 ---
 
@@ -24,7 +24,7 @@ const description = `${posts.length} piece${posts.length === 1 ? '' : 's'} filed
 	<head><BaseHead {title} {description} /></head>
 	<body>
 		<Header />
-		<main class="wrap tag-page">
+		<main id="main-content" class="wrap tag-page">
 			<header><a href="/blog/">← Writing</a><p class="eyebrow">Tag</p><h1>#{tag.name}</h1><p>{description}</p></header>
 			<div class="posts">{posts.map((post) => <PostCard {post} />)}</div>
 		</main>

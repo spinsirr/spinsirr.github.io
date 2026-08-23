@@ -21,12 +21,12 @@ const posts = published(await getCollection('blog')).slice(0, 3);
 	</head>
 	<body>
 		<Header />
-		<main>
+		<main id="main-content">
 			<!-- Hero -->
 			<section class="hero wrap">
 				<div class="meta">
 					<span>{PROFILE.name}</span>
-					<span>{PROFILE.role} — {PROFILE.company}</span>
+					<span>{PROFILE.company} · {PROFILE.role}</span>
 					<span>{PROFILE.location}</span>
 				</div>
 				<hr class="rule" />
@@ -115,8 +115,8 @@ const posts = published(await getCollection('blog')).slice(0, 3);
 						</ul>
 					</div>
 					<div class="sp-meta">
-						<span class="sp-star">50+</span>
-						<span class="sp-sub">app integrations</span>
+						<span class="sp-star">APPS</span>
+						<span class="sp-sub">tools + memory</span>
 						<span class="sp-go">corespeed.io ↗</span>
 					</div>
 				</a>
@@ -130,8 +130,8 @@ const posts = published(await getCollection('blog')).slice(0, 3);
 				<div class="wrap statement g12">
 					<p class="eyebrow">Approach</p>
 					<p class="big">
-						I like turning ideas into running systems — <span class="accent">fast</span>. Most of what I
-						build sits where LLMs meet real products, from agent frameworks to full apps.
+						A model call rarely decides whether an agent works. The failure usually sits one boundary
+						earlier: <span class="accent">identity, tool access, state, billing, or the evidence packet.</span>
 					</p>
 				</div>
 			</section>
@@ -472,8 +472,8 @@ const posts = published(await getCollection('blog')).slice(0, 3);
 				}
 				.hero-portrait {
 					grid-column: 1 / -1;
-					order: -1;
 					max-width: 200px;
+					margin-top: 1.5rem;
 				}
 				.rn {
 					grid-column: 1 / -1;

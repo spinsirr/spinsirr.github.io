@@ -34,12 +34,14 @@ const personLd = {
 	image: `${baseUrl}/avatar.jpg`,
 	sameAs: SOCIALS.filter((s) => s.icon !== 'email').map((s) => s.href),
 	knowsAbout: [
-		'AI agents',
+		'Cloud agents',
 		'Agent infrastructure',
-		'LLM tooling',
+		'Agent memory',
+		'Payment infrastructure',
+		'Model gateways',
 		'TypeScript',
-		'Vercel AI SDK',
-		'Next.js',
+		'Postgres',
+		'Cloudflare Workers',
 	],
 };
 const websiteLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_TITLE, url: baseUrl };
