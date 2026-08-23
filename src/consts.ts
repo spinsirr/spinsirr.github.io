@@ -132,6 +132,33 @@ export const PROJECTS: Project[] = [
 		badge: 'Sunset',
 	},
 	{
+		name: 'Payment Gateway',
+		blurb:
+			'A shared Stripe billing and usage-metering service for CoreSpeed products. Rebuilt on Cloudflare in 2026, then folded into the current platform.',
+		started: '2025-01-20',
+		tags: ['Stripe', 'Usage metering', 'Cloudflare'],
+		group: 'CoreSpeed',
+		badge: 'Absorbed',
+	},
+	{
+		name: 'MCP Gateway',
+		blurb:
+			'A transparent proxy that brought MCP servers behind shared authentication, observability, and billing.',
+		started: '2025-07-24',
+		tags: ['MCP', 'OAuth', 'Observability'],
+		group: 'CoreSpeed',
+		badge: 'Sunset',
+	},
+	{
+		name: 'AI Gateway',
+		blurb:
+			'A multi-provider proxy that normalized model APIs, routed requests, and attached usage billing. Its codebase later became today\'s CoreSpeed platform.',
+		started: '2026-01-27',
+		tags: ['Model routing', 'Vercel AI Gateway', 'Billing'],
+		group: 'CoreSpeed',
+		badge: 'Absorbed',
+	},
+	{
 		name: 'DeckSpeed',
 		blurb:
 			'An AI presentation builder that turned prompts into editable slide decks and reached #1 on Product Hunt.',
