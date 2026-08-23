@@ -5,10 +5,10 @@ import Header from '../components/Header.astro';
 import { PROFILE, PROJECTS, type ProjectGroup } from '../consts';
 
 const title = `Projects — ${PROFILE.name}`;
-const description = 'Selected systems, products, open-source tools, and hardware, ordered by start date.';
+const description = 'Selected systems, products, open-source tools, and hardware, presented chronologically.';
 
 const groupLabels: Record<ProjectGroup, string> = {
-	CoreSpeed: 'Company',
+	CoreSpeed: 'CoreSpeed',
 	Products: 'Product',
 	'Open source': 'Open Source',
 	Hardware: 'Hardware',
@@ -37,7 +37,7 @@ const month = (started: string) =>
 					<span class="year-range">{years.at(-1)} → {years[0]}</span>
 				</div>
 				<h1>Selected<br />Work.</h1>
-				<p class="lead">Ordered by when each project started.</p>
+				<p class="lead">A timeline of shipped work and product chapters.</p>
 			</header>
 
 			<div class="timeline wrap">
@@ -81,7 +81,7 @@ const month = (started: string) =>
 													<ul aria-label={`${project.name} technologies`}>
 														{project.tags.map((tag) => <li translate="no">{tag}</li>)}
 													</ul>
-											{project.repo && project.repo !== project.href && <a href={project.repo} target="_blank" rel="noopener">View source</a>}
+												{project.repo && project.repo !== project.href && <a href={project.repo} target="_blank" rel="noopener">View source</a>}
 												</footer>
 											</article>
 										</li>

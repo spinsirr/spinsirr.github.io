@@ -96,7 +96,7 @@ export type ProjectGroup = 'CoreSpeed' | 'Products' | 'Open source' | 'Hardware'
 export interface Project {
 	name: string;
 	blurb: string;
-	/** When the project began. Used to order the public timeline. */
+	/** Public timeline date: project start or product-phase transition. */
 	started: string;
 	tags: string[];
 	group: ProjectGroup;
@@ -106,7 +106,7 @@ export interface Project {
 	repo?: string;
 	stars?: number;
 	featured?: boolean;
-	/** Small label, e.g. "Live", "OSS". */
+	/** Small status label, e.g. "Live", "Current", "Sunset", or "OSS". */
 	badge?: string;
 }
 
@@ -115,12 +115,60 @@ export const PROJECTS: Project[] = [
 		name: 'CoreSpeed',
 		blurb:
 			'The access and control layer for AI agents. One OAuth connects agents to 50+ apps, built-in tools, and memory. Plain-English policy and agent pay keep actions in bounds.',
-		started: '2025-01-01',
+		started: '2026-06-10',
 		tags: ['Platform', 'Agents', 'Connectors'],
 		group: 'CoreSpeed',
 		href: 'https://corespeed.io',
 		featured: true,
-		badge: 'Live',
+		badge: 'Current',
+	},
+	{
+		name: 'CoreSpeed PaaS',
+		blurb:
+			'CoreSpeed\'s infrastructure-platform phase: a Git-driven PaaS for deploying agent applications, built around Kubernetes and a Rust control plane.',
+		started: '2025-08-22',
+		tags: ['Rust', 'Kubernetes', 'PaaS'],
+		group: 'CoreSpeed',
+		badge: 'Sunset',
+	},
+	{
+		name: 'DeckSpeed',
+		blurb:
+			'An AI presentation builder that turned prompts into editable slide decks and reached #1 on Product Hunt.',
+		started: '2025-02-16',
+		tags: ['AI', 'Presentations', 'Product Hunt'],
+		group: 'CoreSpeed',
+		repo: 'https://github.com/corespeed-io/deckspeed-template',
+		badge: 'Sunset',
+	},
+	{
+		name: 'AG0',
+		blurb:
+			'A hosted agent builder where users described an idea, then edited the generated agent\'s files, skills, and runtime in a browser workspace.',
+		started: '2026-02-10',
+		tags: ['Zypher', 'Sandboxes', 'Templates'],
+		group: 'CoreSpeed',
+		repo: 'https://github.com/corespeed-io/agent0-template',
+		badge: 'Sunset',
+	},
+	{
+		name: 'xclaw',
+		blurb:
+			'One-click OpenClaw deployment on Railway, bundled with a model gateway, reusable skills, and multi-platform messaging.',
+		started: '2026-03-05',
+		tags: ['OpenClaw', 'Railway', 'Skills'],
+		group: 'CoreSpeed',
+		repo: 'https://github.com/corespeed-io/skills-xclaw',
+		badge: 'Sunset',
+	},
+	{
+		name: 'Sarea',
+		blurb:
+			'An ambient-computing app for Mac power users that ran agent tasks quietly in the background. Its billing and gateway work carried into CoreSpeed.',
+		started: '2026-05-22',
+		tags: ['macOS', 'Agents', 'AI Gateway'],
+		group: 'CoreSpeed',
+		badge: 'Sunset',
 	},
 	{
 		name: 'BuildLog',
