@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "check": "astro check",
+    "prebuild": "node scripts/fetch-github-stats.mjs",
     "build": "astro check && astro build && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro"

@@ -1,3 +1,5 @@
+import githubStats from './data/github-stats.json';
+
 // Single source of truth for site content.
 // Edit values here and they update across every page.
 
@@ -22,10 +24,10 @@ export const PROFILE = {
 };
 
 export const STATS = [
-	{ value: '948', label: 'commits · last 12 mo' },
-	{ value: '148', label: 'PRs · last 12 mo' },
-	{ value: '37', label: 'public repos' },
-	{ value: '2020', label: 'on GitHub since' },
+	{ value: githubStats.commitsLast12Months.toLocaleString('en-US'), label: 'commits · last 12 mo' },
+	{ value: githubStats.pullRequestsLast12Months.toLocaleString('en-US'), label: 'PRs · last 12 mo' },
+	{ value: githubStats.publicRepositories.toLocaleString('en-US'), label: 'public repos' },
+	{ value: githubStats.joinedYear.toString(), label: 'on GitHub since' },
 ];
 
 export const WHATIDO = [
