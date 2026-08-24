@@ -87,10 +87,10 @@ export interface StackGroup {
 
 export const STACK: StackGroup[] = [
 	{ label: 'Languages', items: ['TypeScript', 'Python', 'Rust', 'Kotlin', 'C / Verilog'] },
-	{ label: 'Runtimes', items: ['Cloudflare Workers', 'Bun', 'Node.js', 'Deno'] },
-	{ label: 'Web', items: ['React', 'Next.js', 'Astro', 'Hono', 'Tailwind'] },
-	{ label: 'AI', items: ['MCP', 'Vercel AI SDK', 'Claude', 'Codex', 'Gemini'] },
-	{ label: 'Data & infra', items: ['Postgres', 'pgvector', 'Drizzle', 'Stripe', 'Supabase', 'Railway'] },
+	{ label: 'Frontend', items: ['React', 'Next.js', 'Astro', 'Tailwind'] },
+	{ label: 'Backend & runtime', items: ['Cloudflare Workers', 'Hono', 'Bun', 'Node.js', 'Deno'] },
+	{ label: 'AI & agents', items: ['MCP', 'Vercel AI SDK', 'AG-UI', 'Claude', 'Codex', 'Gemini'] },
+	{ label: 'Data & payments', items: ['Postgres', 'pgvector', 'Drizzle', 'Supabase', 'Stripe', 'Railway'] },
 ];
 
 export type ProjectGroup = 'CoreSpeed' | 'Products' | 'Open source' | 'Hardware';
