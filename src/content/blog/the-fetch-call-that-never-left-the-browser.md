@@ -1,5 +1,5 @@
 ---
-title: 'The fetch call that never left the browser'
+title: "Fixing a browser fetch bug in Lore's TypeScript SDK"
 description: 'A TypeScript SDK passed its tests and worked in Bun, but one method receiver made every browser request fail before it reached the network.'
 pubDate: 'Sep 24 2026'
 kind: field-note
