@@ -6,6 +6,8 @@ kind: field-note
 tags: ['AI products', 'Engineering', 'Tooling']
 ---
 
+> **September 2026 update:** Fixo has since evolved into an [AI service advisor for independent repair shops](https://fixo.ink/). The Fixo architecture and payment workflow below describe the earlier product direction; shop subscription billing is not live today.
+
 Building AI products fast is mostly about not re-deciding. The speed doesn't come from a clever framework or a fast model. It comes from a default stack I've stopped re-litigating per project, plus a handful of patterns that keep holding up after a demo turns into a product. The stack is the boring part. The patterns are the part worth writing down.
 
 I'll keep this concrete by anchoring it to two real products. **BuildLog** ([buildlog.ink](https://buildlog.ink)) turns a team's commits, PRs, and releases into draft social posts you review and publish. It is a straight web app built with Next.js 16, Supabase, and the Vercel AI SDK with Gemini. **Fixo** is a mobile-mechanic platform where an agent diagnoses the car fault, writes the estimate, and drives the Stripe payment. It has a Next.js web front, a Deno + Hono agent API, AG-UI carrying the agent's work into the UI, and Supabase + Drizzle underneath. Same defaults, two different shapes.
@@ -29,7 +31,7 @@ The trade-off is explicit, and I think it's right: a fixed stack means I sometim
 
 Where the stack flexes is the shape, not the pieces. BuildLog is plain Next.js + Supabase because generation there is request-shaped: commits in, draft out. Fixo splits the agent backend onto Deno/Hono because an agent that diagnoses a fault and then transacts on it needs its own request lifecycle and control flow.
 
-And TypeScript is a default for products, not a religion. **Amazon Order Wizard** is React 19 + Rust (Axum) + MongoDB because it's offline-first browser-extension work, and that problem wants a different toolset. The point of a default is that you only break it on purpose, when the problem clearly demands it.
+And TypeScript is a default for products, not a religion. **[OrderCue](https://github.com/spinsirr/order-wizard)** (then called Amazon Order Wizard) is React 19 + Rust (Axum) + MongoDB because it's offline-first browser-extension work, and that problem wants a different toolset. The point of a default is that you only break it on purpose, when the problem clearly demands it.
 
 ## Vercel AI SDK patterns for building AI products
 

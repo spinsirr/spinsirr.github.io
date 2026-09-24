@@ -212,18 +212,17 @@ export const PROJECTS: Project[] = [
 	{
 		name: 'Fixo',
 		blurb:
-			'A mobile-mechanic platform where an AI agent diagnoses faults, writes estimates, then handles scheduling and Stripe payments.',
+			'An AI service advisor for independent repair shops that drafts estimates, applies shop pricing, and helps schedule work with human review.',
 		started: '2025-11-21',
-		tags: ['Next.js', 'Deno + Hono', 'Stripe', 'AG-UI'],
+		tags: ['AI service advisor', 'Estimates', 'Shop workflow'],
 		group: 'Products',
-		href: 'https://github.com/hmls-autos/hmls',
-		repo: 'https://github.com/hmls-autos/hmls',
+		href: 'https://fixo.ink',
 		featured: true,
 	},
 	{
-		name: 'Amazon Order Wizard',
+		name: 'OrderCue',
 		blurb:
-			'An offline-first browser extension for tracking Amazon orders, with optional sync through a Rust and MongoDB API.',
+			'A local-first browser extension that turns Amazon orders into a follow-up queue for reimbursements and resale, with optional cloud sync.',
 		started: '2026-01-02',
 		tags: ['Browser extension', 'React', 'Rust'],
 		group: 'Products',

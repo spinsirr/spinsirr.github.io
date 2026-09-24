@@ -6,6 +6,8 @@ kind: essay
 tags: ['Agents', 'Infrastructure', 'Integrations']
 ---
 
+> **September 2026 update:** Fixo has since evolved into an [AI service advisor for independent repair shops](https://fixo.ink/). The Fixo payment workflow below describes the earlier product direction; shop subscription billing is not live today.
+
 Open any agent demo cold and the model looks brilliant. It reads the situation, picks the right action, writes a clean plan. Then it tries to actually do the thing, and the illusion drops. The first call to a real app needs an OAuth flow, a stored token, a refresh path when that token expires, and a server somewhere to run all of it. The model gives you none of that. It decided to act; it can't.
 
 This is the setup tax, and it's where most agent projects quietly die before they ship. The reasoning was never the hard part. Connecting AI agents to apps is the actual job: the long, unglamorous distance between "the agent decided" and "the app responded." I've walked every layer of that distance by hand, more than once, and this post is that walk.
