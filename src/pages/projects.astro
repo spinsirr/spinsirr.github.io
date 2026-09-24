@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import ProjectArtwork from '../components/ProjectArtwork.astro';
 import { PROFILE, PROJECTS, type ProjectGroup } from '../consts';
 
 const title = `Projects | ${PROFILE.name}`;
@@ -73,6 +74,8 @@ const month = (started: string) =>
 														</h3>
 													</div>
 												</header>
+
+												<div class="project-art"><ProjectArtwork art={project.art} /></div>
 
 												<p class="summary">{project.blurb}</p>
 
@@ -209,11 +212,16 @@ const month = (started: string) =>
 				background: var(--accent);
 			}
 			.timeline-item article {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) minmax(160px, 31%);
+				column-gap: clamp(1.3rem, 3vw, 2.6rem);
+				align-items: start;
 				min-width: 0;
 				padding-bottom: clamp(2rem, 5vw, 3.5rem);
 				border-bottom: 1px solid var(--line);
 			}
 			.project-head {
+				grid-column: 1;
 				display: flex;
 				align-items: start;
 				justify-content: space-between;
@@ -221,6 +229,12 @@ const month = (started: string) =>
 			}
 			.project-head > div {
 				min-width: 0;
+			}
+			.project-art {
+				grid-column: 2;
+				grid-row: 1 / span 3;
+				width: 100%;
+				aspect-ratio: 240 / 156;
 			}
 			.kind {
 				margin: 0 0 0.65rem;
@@ -252,6 +266,7 @@ const month = (started: string) =>
 				color: var(--accent);
 			}
 			.summary {
+				grid-column: 1;
 				max-width: 58ch;
 				margin: 1.1rem 0 1.4rem;
 				font-family: var(--font-serif);
@@ -261,6 +276,7 @@ const month = (started: string) =>
 				overflow-wrap: anywhere;
 			}
 			.project-foot {
+				grid-column: 1;
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
@@ -323,6 +339,13 @@ const month = (started: string) =>
 				}
 				.project-head h3 {
 					font-size: clamp(1.75rem, 9vw, 2.7rem);
+				}
+				.timeline-item article {
+					display: block;
+				}
+				.project-art {
+					max-width: 20rem;
+					margin-top: 1.2rem;
 				}
 				.project-foot {
 					align-items: flex-start;

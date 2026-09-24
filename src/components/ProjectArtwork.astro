@@ -1,0 +1,151 @@
+---
+import type { ProjectArtId } from '../consts';
+
+interface Props {
+	art: ProjectArtId;
+}
+
+const { art } = Astro.props;
+---
+
+<svg class="project-artwork" viewBox="0 0 240 156" aria-hidden="true" focusable="false">
+	<rect class="paper" x="0.5" y="0.5" width="239" height="155" />
+	<path class="grid" d="M0 39.5H240M0 78H240M0 116.5H240M60 0V156M120 0V156M180 0V156" />
+	<path class="registration" d="M12 22V12H22M218 144H228V134" />
+
+	{art === 'corespeed' && <g>
+		<path class="wire" d="M40 45H83L99 70M40 111H83L99 86M200 45H157L141 70M200 111H157L141 86" />
+		<rect class="node" x="22" y="33" width="37" height="24" /><rect class="node" x="22" y="99" width="37" height="24" />
+		<rect class="node" x="181" y="33" width="37" height="24" /><rect class="node" x="181" y="99" width="37" height="24" />
+		<circle class="pulse" cx="120" cy="78" r="24" /><circle class="accent-fill" cx="120" cy="78" r="8" />
+		<circle class="dot" cx="40" cy="45" r="3" /><circle class="dot" cx="40" cy="111" r="3" />
+		<circle class="dot" cx="200" cy="45" r="3" /><circle class="dot" cx="200" cy="111" r="3" />
+	</g>}
+
+	{art === 'paas' && <g>
+		<path class="wire" d="M38 78H80M106 78H132M158 78H201" /><path class="accent-stroke" d="m193 71 9 7-9 7" />
+		<rect class="node" x="28" y="61" width="35" height="34" /><path class="wire" d="M35 69H56M35 77H51M35 85H56" />
+		<path class="wire" d="m94 45 27 14v38l-27 14-27-14V59zM67 59l27 14 27-14M94 73v38" />
+		<path class="wire" d="m146 45 27 14v38l-27 14-27-14V59zM119 59l27 14 27-14M146 73v38" />
+		<rect class="accent-stroke" x="197" y="60" width="19" height="36" /><path class="accent-stroke" d="M203 68H210M203 77H210M203 86H210" />
+	</g>}
+
+	{art === 'billing' && <g>
+		<rect class="node" x="33" y="34" width="74" height="88" /><path class="wire" d="M46 52h47M46 63h31M46 92h47M46 105h33" />
+		<path class="accent-stroke" d="M47 80h10l8-11 8 19 8-8h12" />
+		<path class="wire" d="M107 78h28" /><path class="accent-stroke" d="m128 71 8 7-8 7" />
+		<rect class="node" x="151" y="45" width="57" height="66" /><path class="wire" d="M164 62h31M164 73h18M164 96h31" />
+		<circle class="accent-stroke" cx="195" cy="88" r="9" /><path class="accent-stroke" d="M195 81v14m-4-11h7m-7 7h7" />
+	</g>}
+
+	{art === 'mcp' && <g>
+		<rect class="node" x="21" y="35" width="38" height="25" /><rect class="node" x="21" y="96" width="38" height="25" />
+		<path class="wire" d="M59 47h45v31h28M59 108h45V78M161 78h43" /><circle class="accent-fill" cx="104" cy="78" r="4" />
+		<path class="accent-stroke" d="M132 48h30v60h-30zM142 58v40m10-40v40" />
+		<rect class="node" x="203" y="65" width="20" height="26" /><circle class="dot" cx="31" cy="47" r="3" /><circle class="dot" cx="31" cy="108" r="3" />
+	</g>}
+
+	{art === 'ai-gateway' && <g>
+		<circle class="node" cx="44" cy="40" r="15" /><circle class="node" cx="44" cy="78" r="15" /><circle class="node" cx="44" cy="116" r="15" />
+		<path class="wire" d="M59 40h40l25 38M59 78h65M59 116h40l25-38M142 78h40" />
+		<path class="accent-stroke" d="m124 52 25 26-25 26-25-26z" /><circle class="accent-fill" cx="124" cy="78" r="5" />
+		<rect class="node" x="182" y="56" width="34" height="44" /><path class="wire" d="M190 68h18M190 78h18M190 88h12" />
+	</g>}
+
+	{art === 'deckspeed' && <g>
+		<rect class="node" x="41" y="51" width="100" height="65" transform="rotate(-9 91 83)" />
+		<rect class="node" x="58" y="42" width="100" height="65" transform="rotate(-4 108 74)" />
+		<rect class="paper" x="76" y="37" width="112" height="73" /><path class="wire" d="M89 50h38M89 58h27M89 97h86" />
+		<rect class="accent-stroke" x="137" y="50" width="35" height="34" /><path class="accent-stroke" d="m142 78 9-11 7 6 9-16" />
+	</g>}
+
+	{art === 'ag0' && <g>
+		<rect class="node" x="34" y="31" width="172" height="94" /><path class="wire" d="M34 49h172M83 49v76" />
+		<circle class="dot" cx="46" cy="40" r="2" /><circle class="dot" cx="55" cy="40" r="2" /><circle class="dot" cx="64" cy="40" r="2" />
+		<path class="wire" d="M45 63h27M45 73h20M45 83h27M45 93h15M99 64h58M99 73h44M99 82h52M99 91h32" />
+		<path class="accent-stroke" d="m169 68 19 10-19 10z" />
+	</g>}
+
+	{art === 'xclaw' && <g>
+		<rect class="node" x="25" y="34" width="88" height="88" /><path class="wire" d="M25 50h88m-76 18 12 10-12 10m20 0h27" />
+		<path class="accent-stroke" d="M113 78h32m-8-8 9 8-9 8" />
+		<path class="wire" d="M165 99c-16 0-25-10-23-22 1-10 10-18 20-19 3-15 15-26 30-26 16 0 29 12 30 27 11 3 17 12 16 21-1 11-10 19-22 19z" />
+		<circle class="accent-fill" cx="177" cy="75" r="3" /><circle class="accent-fill" cx="190" cy="75" r="3" /><circle class="accent-fill" cx="203" cy="75" r="3" />
+	</g>}
+
+	{art === 'sarea' && <g>
+		<rect class="node" x="33" y="29" width="174" height="103" rx="8" /><path class="wire" d="M33 45h174M94 132v8h52v-8" />
+		<circle class="pulse" cx="120" cy="82" r="25" /><circle class="accent-stroke" cx="120" cy="82" r="12" />
+		<path class="accent-stroke" d="M120 51V42M120 122v-9M89 82h-9M160 82h-9" />
+		<circle class="accent-fill" cx="120" cy="82" r="3" />
+	</g>}
+
+	{art === 'buildlog' && <g>
+		<path class="wire" d="M43 37v82m0-61h34l21 20h32m-87 18h36l19-18" />
+		<circle class="accent-fill" cx="43" cy="37" r="5" /><circle class="accent-fill" cx="43" cy="78" r="5" /><circle class="accent-fill" cx="43" cy="119" r="5" />
+		<rect class="node" x="130" y="35" width="77" height="31" /><rect class="node" x="130" y="78" width="77" height="31" />
+		<path class="wire" d="M140 46h43M140 55h28M140 89h43M140 98h28" /><path class="accent-stroke" d="m195 92 5 5-5 5" />
+	</g>}
+
+	{art === 'fixo' && <g>
+		<rect class="node" x="41" y="25" width="158" height="108" /><path class="wire" d="M41 46h158M41 83h158M68 46v87M140 46v87" />
+		<path class="wire" d="M80 60h45M80 70h32M80 96h46M80 107h39M151 59h33M151 97h33" />
+		<circle class="accent-stroke" cx="54" cy="64" r="6" /><path class="accent-stroke" d="m50 64 3 3 6-7" />
+		<circle class="accent-stroke" cx="54" cy="101" r="6" /><path class="accent-stroke" d="m50 101 3 3 6-7" />
+		<path class="accent-stroke" d="M160 118h24" />
+	</g>}
+
+	{art === 'ordercue' && <g>
+		<path class="wire" d="M30 51h63v65H30zM30 51l31-17 32 17M61 34v65M30 51l31 18 32-18" />
+		<path class="accent-stroke" d="M93 78h30m-8-8 9 8-9 8" />
+		<rect class="node" x="140" y="33" width="72" height="91" /><path class="wire" d="M158 52h43M158 72h43M158 92h43M158 112h30" />
+		<path class="accent-stroke" d="m147 50 3 3 5-7m-8 24 3 3 5-7m-8 24 3 3 5-7" />
+	</g>}
+
+	{art === 'claude-gateway' && <g>
+		<rect class="node" x="30" y="33" width="91" height="90" /><path class="wire" d="M30 49h91m-77 18 9 9-9 9m18 0h31" />
+		<path class="accent-stroke" d="M121 78h37m-9-8 10 8-10 8" />
+		<path class="wire" d="M158 78V47h47M158 78v31h47" /><rect class="node" x="185" y="35" width="36" height="24" /><rect class="node" x="185" y="97" width="36" height="24" />
+		<circle class="accent-fill" cx="158" cy="78" r="5" />
+	</g>}
+
+	{art === 'zypher' && <g>
+		<circle class="accent-stroke" cx="120" cy="78" r="20" /><path class="wire" d="M120 58V34M103 87 68 110M137 87l35 23M100 68 70 50M140 68l30-18" />
+		<rect class="node" x="100" y="19" width="40" height="18" /><rect class="node" x="37" y="36" width="39" height="26" /><rect class="node" x="164" y="36" width="39" height="26" />
+		<rect class="node" x="37" y="102" width="39" height="26" /><rect class="node" x="164" y="102" width="39" height="26" />
+		<circle class="accent-fill" cx="120" cy="78" r="5" />
+	</g>}
+
+	{art === 'lore' && <g>
+		<rect class="node" x="34" y="32" width="89" height="90" /><path class="wire" d="M48 51h62M48 62h51M48 82h62M48 93h44M48 104h57" />
+		<path class="wire" d="M123 77h26" /><circle class="accent-stroke" cx="172" cy="72" r="26" /><path class="accent-stroke" d="m190 92 22 22" />
+		<path class="accent-stroke" d="M158 72h27M158 81h18" /><circle class="accent-fill" cx="150" cy="72" r="3" />
+	</g>}
+
+	{art === 'fpga-clock' && <g>
+		<rect class="node" x="40" y="34" width="160" height="89" />
+		<path class="wire" d="M40 47H27m13 13H27m13 13H27m13 13H27m13 13H27m13 13H27m173-65h13m-13 13h13m-13 13h13m-13 13h13m-13 13h13m-13 13h13" />
+		<text class="clock" x="56" y="94">12:34</text><path class="accent-stroke" d="M55 111h130" />
+	</g>}
+
+	{art === 'mini-ups' && <g>
+		<rect class="node" x="31" y="49" width="77" height="59" /><path class="wire" d="M108 66h9v25h-9M42 62h55M42 96h55" />
+		<path class="accent-stroke" d="m72 63-14 24h12l-3 12 19-27H74l5-9" />
+		<path class="wire" d="M117 78h32m-8-8 9 8-9 8" /><rect class="node" x="150" y="48" width="58" height="61" />
+		<path class="wire" d="M159 62h40M159 73h40M159 84h40M159 95h28" /><circle class="accent-fill" cx="202" cy="96" r="3" />
+	</g>}
+</svg>
+
+<style>
+	.project-artwork { display: block; width: 100%; height: 100%; color: var(--fg); overflow: hidden; }
+	.paper { fill: var(--bg-2); stroke: var(--line); }
+	.grid { fill: none; stroke: var(--fg); stroke-opacity: 0.07; stroke-width: 1; }
+	.registration { fill: none; stroke: var(--accent); stroke-width: 1; }
+	.wire, .node, .dot { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: square; stroke-linejoin: miter; }
+	.node { fill: var(--bg-2); }
+	.dot { fill: var(--bg-2); }
+	.pulse { fill: none; stroke: var(--accent); stroke-opacity: 0.35; stroke-width: 1; }
+	.accent-stroke { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: square; stroke-linejoin: miter; }
+	.accent-fill { fill: var(--accent); }
+	.clock { fill: var(--fg); font: 32px var(--font-mono); letter-spacing: -0.13em; }
+</style>
