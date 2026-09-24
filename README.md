@@ -23,26 +23,8 @@ bun run preview
 
 `bun run build` type-checks the site, builds the static output, and creates the Pagefind index.
 
-## Write
+## Publish
 
-Add a `.md` or `.mdx` file to `src/content/blog/`:
-
-```yaml
----
-title: 'A concrete title'
-description: 'One sentence that says what the reader will learn.'
-pubDate: 'Aug 22 2026'
-kind: research # research | essay | field-note | project-note
-tags: ['Memory systems', 'Evaluation']
-featured: false
-draft: false
-series: # optional
-  slug: 'memory-systems'
-  title: 'Memory systems'
-  order: 1
----
-```
-
-Use Markdown for normal prose and static figures. Reach for MDX only when an article needs an interactive or reusable component.
+[PUBLISHING.md](PUBLISHING.md) is the source of truth for selecting, writing, checking, and releasing articles, including the recurring Memory review.
 
 Site data lives in `src/consts.ts`; publication utilities live in `src/utils/posts.ts`; the visual system starts in `src/styles/global.css`.

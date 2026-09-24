@@ -143,7 +143,7 @@ const isActive = (href: string) => href === pathname || (href !== '/' && pathnam
 	const btn = document.getElementById('theme-toggle');
 	const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
 	const syncThemeColor = () => {
-		if (themeColor) themeColor.content = root.dataset.theme === 'dark' ? '#0c0c0e' : '#f4f3ee';
+		if (themeColor) themeColor.content = getComputedStyle(root).getPropertyValue('--bg').trim();
 		btn?.setAttribute('aria-label', root.dataset.theme === 'dark' ? 'Use light theme' : 'Use dark theme');
 	};
 	syncThemeColor();

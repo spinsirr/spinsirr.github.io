@@ -9,7 +9,16 @@ import { defineConfig, fontProviders } from 'astro/config';
 export default defineConfig({
 	// Deployed to GitHub Pages (user site, served at the root).
 	site: 'https://spinsirr.github.io',
-	integrations: [expressiveCode(), mdx(), sitemap()],
+	integrations: [
+		expressiveCode({
+			// html[data-theme] is the site's theme switch; code follows it, not the OS preference.
+			themes: ['github-light', 'github-dark'],
+			useDarkModeMediaQuery: false,
+			themeCssSelector: (theme) => `[data-theme='${theme.type}']`,
+		}),
+		mdx(),
+		sitemap(),
+	],
 	fonts: [
 		{
 			name: 'Bricolage Grotesque',
