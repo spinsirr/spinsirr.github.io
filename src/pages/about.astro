@@ -5,7 +5,7 @@ import Header from '../components/Header.astro';
 import { CONTACT_PATH, PROFILE, PROJECTS, SOCIALS } from '../consts';
 
 const title = `About | ${PROFILE.name}`;
-const description = `${PROFILE.fullName} is a CoreSpeed cofounder with an M.S. in Computer Engineering from UC Irvine, building agent infrastructure and products.`;
+const description = `${PROFILE.fullName} is a CoreSpeed cofounder with an M.S. in Computer Engineering from UC Irvine, building backend infrastructure and products.`;
 const socialLinks = SOCIALS.filter((social) => social.icon !== 'email');
 
 const projectUrl = (name: string) => {
@@ -35,7 +35,7 @@ const projectUrl = (name: string) => {
 						<p class="hero-lead">
 							My background is in computer engineering. I co-founded
 							<a href={PROFILE.companyUrl} target="_blank" rel="noopener">{PROFILE.company}</a>
-							and build the systems that let cloud agents use apps, tools, and memory.
+							and build backend systems and products, from gateways and billing to app access and memory.
 						</p>
 						<div class="hero-actions">
 							<a class="btn btn-primary" href="/projects/">View work</a>
@@ -52,11 +52,11 @@ const projectUrl = (name: string) => {
 			<section class="statement wrap" aria-labelledby="approach-heading">
 				<p class="section-index">01 / Approach</p>
 				<div class="statement-copy">
-					<h2 id="approach-heading">The work around the model call.</h2>
+					<h2 id="approach-heading">The systems behind the product.</h2>
 					<p>
-						I focus on the boundaries that make an agent useful: identity, tool access,
-						state, model routing, usage, and the evidence it receives. Those details
-						shape whether it can finish a task and whether someone can trust the result.
+						I design and build backend services, infrastructure, and user-facing products.
+						That has meant authentication, tool access, memory, usage metering, billing,
+						and the interfaces where people manage it all.
 					</p>
 				</div>
 			</section>
@@ -72,7 +72,7 @@ const projectUrl = (name: string) => {
 						<div>
 							<h3><a href={PROFILE.companyUrl} target="_blank" rel="noopener">{PROFILE.company} <span aria-hidden="true">↗</span></a></h3>
 							<p class="work-role">Cofounder and engineer</p>
-							<p>I work on managed app access, built-in tools, durable memory, routing, usage metering, and billing for cloud agents. Earlier CoreSpeed products included PaaS, AG0, xclaw, and Sarea.</p>
+							<p>My work spans the backend for app access, tools, and memory, plus gateway, metering, and billing systems across CoreSpeed products. Earlier products included PaaS, AG0, xclaw, and Sarea.</p>
 						</div>
 					</article>
 					<article class="work-item">
@@ -96,7 +96,7 @@ const projectUrl = (name: string) => {
 				<p class="section-index">03 / Background</p>
 				<div class="background-copy">
 					<h2 id="background-heading">Computer engineering by training.</h2>
-					<p>I earned an M.S. in Computer Engineering from the University of California, Irvine. My work spans software systems and hardware, from cloud agent infrastructure to earlier projects in Verilog and embedded power.</p>
+					<p>I earned an M.S. in Computer Engineering from the University of California, Irvine. My work spans backend systems, infrastructure, and hardware, from cloud platforms to earlier projects in Verilog and embedded power.</p>
 					<div class="hardware-links">
 						<a href={projectUrl('FPGA Clock')} target="_blank" rel="noopener">FPGA Clock <span aria-hidden="true">↗</span></a>
 						<a href={projectUrl('Mini-UPS')} target="_blank" rel="noopener">Mini-UPS <span aria-hidden="true">↗</span></a>

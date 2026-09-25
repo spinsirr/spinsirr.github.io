@@ -5,7 +5,7 @@ import githubStats from './data/github-stats.json';
 
 export const SITE_TITLE = 'Spencer Zhao | Cofounder and engineer';
 export const SITE_DESCRIPTION =
-	'Spencer (Yunpeng) Zhao is a CoreSpeed cofounder and engineer building gateways, memory, billing, and product systems for cloud agents.';
+	'Spencer (Yunpeng) Zhao is a CoreSpeed cofounder with a computer engineering background, building backend systems, infrastructure, and products.';
 
 export const CONTACT_EMAIL = 'yunpeng@corespeed.io';
 export const CONTACT_PATH = `mailto:${CONTACT_EMAIL}`;
@@ -20,7 +20,7 @@ export const PROFILE = {
 	location: 'San Jose, CA',
 	email: CONTACT_EMAIL,
 	subhead:
-		'Cofounder and engineer at CoreSpeed. I work on app access, model routing, durable memory, usage metering, and payments. Based in San Jose, California.',
+		'CoreSpeed cofounder with a background in computer engineering. I build backend systems and products, from service APIs and billing to app access and memory. Based in San Jose, California.',
 };
 
 export const STATS = [
@@ -38,8 +38,8 @@ export const WHATIDO = [
 	},
 	{
 		n: '02',
-		title: 'Systems around the model',
-		body: 'I build OAuth and connector paths, model gateways, usage metering, Stripe billing, and the evidence packet sent to the model.',
+		title: 'Backend & infrastructure',
+		body: 'My work spans service APIs, gateways, app access, usage metering, and billing across CoreSpeed products.',
 	},
 	{
 		n: '03',
