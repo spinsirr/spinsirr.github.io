@@ -5,7 +5,7 @@ import Header from '../components/Header.astro';
 import { CONTACT_PATH, PROFILE, PROJECTS, SOCIALS } from '../consts';
 
 const title = `About | ${PROFILE.name}`;
-const description = `${PROFILE.fullName} is a CoreSpeed cofounder and engineer in San Jose, building agent infrastructure, products, and open-source systems.`;
+const description = `${PROFILE.fullName} is a CoreSpeed cofounder with an M.S. in Computer Engineering from UC Irvine, building agent infrastructure and products.`;
 const socialLinks = SOCIALS.filter((social) => social.icon !== 'email');
 
 const projectUrl = (name: string) => {
@@ -33,8 +33,9 @@ const projectUrl = (name: string) => {
 						<p class="eyebrow">Cofounder &amp; engineer</p>
 						<h1>Hi, I'm<br /><span>Spencer.</span></h1>
 						<p class="hero-lead">
-							I co-founded <a href={PROFILE.companyUrl} target="_blank" rel="noopener">{PROFILE.company}</a>
-							and work on the systems that let cloud agents use apps, tools, and memory.
+							My background is in computer engineering. I co-founded
+							<a href={PROFILE.companyUrl} target="_blank" rel="noopener">{PROFILE.company}</a>
+							and build the systems that let cloud agents use apps, tools, and memory.
 						</p>
 						<div class="hero-actions">
 							<a class="btn btn-primary" href="/projects/">View work</a>
@@ -94,8 +95,8 @@ const projectUrl = (name: string) => {
 			<section class="background wrap" aria-labelledby="background-heading">
 				<p class="section-index">03 / Background</p>
 				<div class="background-copy">
-					<h2 id="background-heading">Electrical engineering is part of the story.</h2>
-					<p>I earned an M.S. in Electrical Engineering from the University of California, Irvine. Earlier hardware projects include a digital clock built in Verilog on an FPGA and a compact battery backup for Raspberry Pi and low-power devices.</p>
+					<h2 id="background-heading">Computer engineering by training.</h2>
+					<p>I earned an M.S. in Computer Engineering from the University of California, Irvine. My work spans software systems and hardware, from cloud agent infrastructure to earlier projects in Verilog and embedded power.</p>
 					<div class="hardware-links">
 						<a href={projectUrl('FPGA Clock')} target="_blank" rel="noopener">FPGA Clock <span aria-hidden="true">↗</span></a>
 						<a href={projectUrl('Mini-UPS')} target="_blank" rel="noopener">Mini-UPS <span aria-hidden="true">↗</span></a>
