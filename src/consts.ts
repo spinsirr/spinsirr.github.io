@@ -103,8 +103,10 @@ export interface Project {
 	name: string;
 	art: ProjectArtId;
 	blurb: string;
-	/** Public timeline date: project start or product-phase transition. */
+	/** Public timeline start, as YYYY-MM-DD or YYYY when the month is uncertain. */
 	started: string;
+	/** Visible timeline marker when only a broader period is known. */
+	dateLabel?: string;
 	tags: string[];
 	group: ProjectGroup;
 	/** Primary link — live product or repo. */
@@ -228,8 +230,9 @@ export const PROJECTS: Project[] = [
 		name: 'Fixo',
 		art: 'fixo',
 		blurb:
-			'Evolved from HMLS, a mobile-mechanic platform, into an AI service advisor for independent repair shops. It drafts priced estimates and helps schedule work with human review.',
-		started: '2025-11-21',
+		'Started in late 2024 as HMLS, a mobile-mechanic platform. It evolved into Fixo, an AI service advisor that drafts estimates and helps independent repair shops schedule work with human review.',
+		started: '2024',
+		dateLabel: 'Q4',
 		tags: ['AI service advisor', 'Estimates', 'Shop workflow'],
 		group: 'Products',
 		href: 'https://fixo.ink',

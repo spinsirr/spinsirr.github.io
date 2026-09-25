@@ -3,7 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import ProjectArtwork from '../components/ProjectArtwork.astro';
-import { PROFILE, PROJECTS, type ProjectGroup } from '../consts';
+import { PROFILE, PROJECTS, type Project, type ProjectGroup } from '../consts';
 
 const title = `Projects | ${PROFILE.name}`;
 const description = 'Selected systems, products, open-source tools, and hardware, presented chronologically.';
@@ -21,6 +21,7 @@ const month = (started: string) =>
 	new Intl.DateTimeFormat('en', { month: 'short', timeZone: 'UTC' })
 		.format(new Date(`${started}T00:00:00Z`))
 		.toUpperCase();
+const dateLabel = (project: Project) => project.dateLabel ?? month(project.started);
 ---
 
 <!doctype html>
@@ -56,7 +57,7 @@ const month = (started: string) =>
 									{entries.map((project) => (
 										<li class="timeline-item">
 											<div class="date-rail">
-												<time datetime={project.started}>{month(project.started)}</time>
+												<time datetime={project.started}>{dateLabel(project)}</time>
 												<span class="node" aria-hidden="true"></span>
 											</div>
 
