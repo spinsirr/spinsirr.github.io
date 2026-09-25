@@ -97,11 +97,6 @@ export type ProjectGroup = 'CoreSpeed' | 'Products' | 'Open source' | 'Hardware'
 
 export interface Project {
 	name: string;
-	image: string;
-	/** Generated images are conceptual and must be labeled as such in the UI. */
-	imageKind: 'project' | 'illustration';
-	/** Original public asset, when the image came from a project site. */
-	imageSource?: string;
 	blurb: string;
 	/** Public timeline start, as YYYY-MM-DD or YYYY when the month is uncertain. */
 	started: string;
@@ -121,8 +116,6 @@ export interface Project {
 export const PROJECTS: Project[] = [
 	{
 		name: 'CoreSpeed',
-		image: '/projects/corespeed.webp',
-		imageKind: 'illustration',
 		blurb:
 			'Managed app access, built-in tools, and durable memory for cloud agents. I work on its gateway, billing, and public launch.',
 		started: '2026-06-10',
@@ -134,8 +127,6 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'CoreSpeed PaaS',
-		image: '/projects/paas.webp',
-		imageKind: 'illustration',
 		blurb:
 			'A Git-driven PaaS for agent applications, with Kubernetes underneath and a Rust control plane.',
 		started: '2025-08-22',
@@ -145,8 +136,6 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'CoreSpeed Billing',
-		image: '/projects/billing.webp',
-		imageKind: 'illustration',
 		blurb:
 			'A shared Stripe billing and usage-metering service for CoreSpeed products. Rebuilt on Cloudflare in 2026, then folded into the current platform.',
 		started: '2025-01-20',
@@ -156,8 +145,6 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'MCP Gateway',
-		image: '/projects/mcp.webp',
-		imageKind: 'illustration',
 		blurb:
 			'A transparent proxy that brought MCP servers behind shared authentication, observability, and billing.',
 		started: '2025-07-24',
@@ -167,8 +154,6 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'AI Gateway',
-		image: '/projects/ai-gateway.webp',
-		imageKind: 'illustration',
 		blurb:
 			'A multi-provider proxy that normalized model APIs, routed requests, and attached usage billing. Its codebase later became today\'s CoreSpeed platform.',
 		started: '2026-01-27',
@@ -178,8 +163,6 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'DeckSpeed',
-		image: '/projects/deckspeed.webp',
-		imageKind: 'illustration',
 		blurb:
 			'An AI presentation builder that turned prompts into editable slide decks and reached #1 on Product Hunt.',
 		started: '2025-02-16',
@@ -190,8 +173,6 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'AG0',
-		image: '/projects/ag0.webp',
-		imageKind: 'illustration',
 		blurb:
 			'A hosted agent builder where users described an idea, then edited the generated agent\'s files, skills, and runtime in a browser workspace.',
 		started: '2026-02-10',
@@ -202,8 +183,6 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'xclaw',
-		image: '/projects/xclaw.webp',
-		imageKind: 'illustration',
 		blurb:
 			'One-click OpenClaw deployment on Railway, bundled with a model gateway, reusable skills, and multi-platform messaging.',
 		started: '2026-03-05',
@@ -214,8 +193,6 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'Sarea',
-		image: '/projects/sarea.webp',
-		imageKind: 'illustration',
 		blurb:
 			'An ambient-computing app for Mac power users that ran agent tasks quietly in the background. Its billing and gateway work carried into CoreSpeed.',
 		started: '2026-05-22',
@@ -225,8 +202,6 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'BuildLog',
-		image: '/projects/buildlog.webp',
-		imageKind: 'illustration',
 		blurb: "Turns a team's commits, PRs, and releases into draft posts for X, LinkedIn, and Bluesky.",
 		started: '2026-03-17',
 		tags: ['Next.js 16', 'Supabase', 'AI SDK'],
@@ -238,9 +213,6 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'Fixo',
-		image: '/projects/fixo.webp',
-		imageKind: 'project',
-		imageSource: 'https://fixo.ink/hero-workshop-v2.png',
 		blurb:
 			'Started in late 2024 as HMLS, a mobile-mechanic platform. It evolved into Fixo, an AI service advisor that drafts estimates and helps independent repair shops schedule work with human review.',
 		started: '2024',
@@ -252,8 +224,6 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'OrderCue',
-		image: '/projects/ordercue.webp',
-		imageKind: 'illustration',
 		blurb:
 			'A local-first browser extension that turns Amazon orders into a follow-up queue for reimbursements and resale, with optional cloud sync.',
 		started: '2026-01-02',
@@ -265,8 +235,6 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'Claude Max Gateway',
-		image: '/projects/claude-gateway.webp',
-		imageKind: 'illustration',
 		blurb:
 			'A dual-format API gateway that exposes OpenAI and Anthropic Messages APIs through the Claude Code CLI.',
 		started: '2026-03-15',
@@ -279,8 +247,6 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'Zypher Agent',
-		image: '/projects/zypher.webp',
-		imageKind: 'illustration',
 		blurb:
 			'A minimal, open-source framework for building AI agents with full control over tools, providers, and execution flow.',
 		started: '2025-03-03',
@@ -293,8 +259,6 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'Lore',
-		image: '/projects/lore.webp',
-		imageKind: 'illustration',
 		blurb:
 			'Open-source memory infrastructure on Postgres and pgvector, with row-level tenant isolation and evaluations that distinguish retrieval hits from answer-bearing evidence.',
 		started: '2026-06-26',
@@ -306,8 +270,6 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'FPGA Clock',
-		image: '/projects/fpga-clock.webp',
-		imageKind: 'illustration',
 		blurb: 'A multi-function digital clock built in Verilog, running on an FPGA.',
 		started: '2021-12-22',
 		tags: ['Verilog', 'FPGA', 'Hardware'],
@@ -318,8 +280,6 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'Mini-UPS',
-		image: '/projects/mini-ups.webp',
-		imageKind: 'illustration',
 		blurb:
 			'A USB-powered lithium-battery uninterruptible power supply for Raspberry Pi and low-power MCUs.',
 		started: '2021-12-22',
