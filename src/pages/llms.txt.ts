@@ -17,7 +17,7 @@ export const GET: APIRoute = async ({ site }) => {
 	);
 	out.push('');
 	out.push(
-		`Spencer builds infrastructure for cloud agents at CoreSpeed (${PROFILE.companyUrl}), with work across connectors, memory, gateways, billing, and the public product surface. He also builds complete products such as BuildLog and Fixo, and open-source systems including Lore, Zypher Agent, and Claude Max Gateway. Every blog post is available as raw Markdown by appending \`.md\` to its URL.`,
+		`Spencer builds infrastructure for cloud agents at CoreSpeed (${PROFILE.companyUrl}), with work across connectors, memory, gateways, billing, and the public product surface. He also builds complete products such as BuildLog and Fixo, and open-source systems including Lore and Zypher Agent. Every blog post is available as raw Markdown by appending \`.md\` to its URL.`,
 	);
 	out.push('');
 	out.push('## Pages');

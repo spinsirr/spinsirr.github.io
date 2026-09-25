@@ -61,6 +61,12 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 											</div>
 
 											<article class="project-card">
+												<img class="project-image" src={project.image} alt="" loading="lazy" decoding="async" width="1280" height="720" />
+												{project.imageKind === 'project' && project.imageSource ? (
+													<a class="image-note" href={project.imageSource} target="_blank" rel="noopener">Project site image ↗</a>
+												) : (
+													<span class="image-note">AI-generated concept image</span>
+												)}
 												<div class="project-content">
 													<header class="project-head">
 														<div>
@@ -212,15 +218,50 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 				background: var(--accent);
 			}
 			.project-card {
+				position: relative;
+				isolation: isolate;
+				display: flex;
+				align-items: stretch;
 				min-width: 0;
-				border-top: 1px solid var(--line);
-				border-bottom: 1px solid var(--line);
-				background: var(--bg-2);
+				min-height: 20rem;
+				overflow: hidden;
+				background: #111419;
+				color: #fff;
+			}
+			.project-card::before {
+				content: '';
+				position: absolute;
+				z-index: -1;
+				inset: 0;
+				background: linear-gradient(90deg, rgba(9, 12, 17, 0.97) 0%, rgba(9, 12, 17, 0.82) 49%, rgba(9, 12, 17, 0.28) 100%);
+			}
+			.project-image {
+				position: absolute;
+				z-index: -2;
+				inset: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center;
+			}
+			.image-note {
+				position: absolute;
+				top: 1rem;
+				right: 1rem;
+				font-family: var(--font-mono);
+				font-size: 0.55rem;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: rgba(255, 255, 255, 0.8);
+				text-shadow: 0 1px 6px #000;
+			}
+			.project-card a.image-note {
+				color: rgba(255, 255, 255, 0.8);
 			}
 			.project-content {
 				display: flex;
 				flex-direction: column;
-				min-height: 13rem;
+				width: min(100%, 37rem);
 				padding: clamp(1.4rem, 3vw, 2.2rem);
 			}
 			.project-head {
@@ -238,14 +279,14 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 				font-size: 0.65rem;
 				letter-spacing: 0.08em;
 				text-transform: uppercase;
-				color: var(--accent);
+				color: #b6c8ff;
 			}
 			.project-head h3 {
 				font-size: clamp(1.8rem, 4.5vw, 3.4rem);
 				line-height: 0.95;
 				text-wrap: balance;
 				overflow-wrap: anywhere;
-				color: var(--fg);
+				color: #fff;
 			}
 			.project-head h3 a {
 				display: inline-flex;
@@ -261,7 +302,7 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 				font-family: var(--font-mono);
 				font-size: 0.36em;
 				line-height: 1;
-				color: var(--accent);
+				color: #b6c8ff;
 			}
 			.summary {
 				max-width: 58ch;
@@ -269,7 +310,7 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 				font-family: var(--font-serif);
 				font-size: clamp(1.08rem, 1.7vw, 1.3rem);
 				line-height: 1.55;
-				color: var(--fg-2);
+				color: rgba(255, 255, 255, 0.9);
 				text-wrap: pretty;
 				overflow-wrap: anywhere;
 			}
@@ -292,11 +333,11 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 			.project-foot > a {
 				font-family: var(--font-mono);
 				font-size: 0.68rem;
-				color: var(--fg-3);
+				color: rgba(255, 255, 255, 0.74);
 			}
 			.project-foot li::before {
 				content: '#';
-				color: var(--accent);
+				color: #b6c8ff;
 			}
 			.project-foot > a {
 				min-height: 2.75rem;
@@ -307,8 +348,9 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 				touch-action: manipulation;
 			}
 			.project-foot > a:hover,
-			.project-head h3 a:hover {
-				color: var(--accent);
+			.project-head h3 a:hover,
+			.project-card a.image-note:hover {
+				color: #b6c8ff;
 			}
 
 			@media (max-width: 720px) {
@@ -342,9 +384,23 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 				.project-head h3 {
 					font-size: clamp(1.75rem, 9vw, 2.7rem);
 				}
+				.project-card {
+					min-height: 25rem;
+				}
+				.project-card::before {
+					background: linear-gradient(90deg, rgba(9, 12, 17, 0.94) 0%, rgba(9, 12, 17, 0.69) 100%);
+				}
+				.project-image {
+					object-position: 60% center;
+				}
 				.project-content {
-					min-height: 0;
-					padding: 1.2rem;
+					padding: 1.2rem 1.2rem 2.4rem;
+				}
+				.image-note {
+					top: auto;
+					bottom: 0.65rem;
+					right: 0.65rem;
+					font-size: 0.48rem;
 				}
 				.project-foot {
 					align-items: flex-start;
