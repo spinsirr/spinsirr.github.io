@@ -2,7 +2,6 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import ProjectArtwork from '../components/ProjectArtwork.astro';
 import { PROFILE, PROJECTS, type Project, type ProjectGroup } from '../consts';
 
 const title = `Projects | ${PROFILE.name}`;
@@ -61,31 +60,37 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 												<span class="node" aria-hidden="true"></span>
 											</div>
 
-											<article>
-												<header class="project-head">
-													<div>
-														<p class="kind">{groupLabels[project.group]}{project.badge && project.badge !== 'OSS' && ` / ${project.badge}`}</p>
-														<h3>
-															{project.href ? (
-																<a href={project.href} target="_blank" rel="noopener">
-																	<span>{project.name}</span>
-																	<span class="title-arrow" aria-hidden="true">↗</span>
-																</a>
-															) : project.name}
-														</h3>
-													</div>
-												</header>
+											<article class="project-card">
+												<img class="project-image" src={project.image} alt="" loading="lazy" decoding="async" width="1280" height="720" />
+												{project.imageKind === 'project' && project.imageSource ? (
+													<a class="image-note" href={project.imageSource} target="_blank" rel="noopener">Project site image ↗</a>
+												) : (
+													<span class="image-note">AI-generated concept image</span>
+												)}
+												<div class="project-content">
+													<header class="project-head">
+														<div>
+															<p class="kind">{groupLabels[project.group]}{project.badge && project.badge !== 'OSS' && ` / ${project.badge}`}</p>
+															<h3>
+																{project.href ? (
+																	<a href={project.href} target="_blank" rel="noopener">
+																		<span>{project.name}</span>
+																		<span class="title-arrow" aria-hidden="true">↗</span>
+																	</a>
+																) : project.name}
+															</h3>
+														</div>
+													</header>
 
-												<div class="project-art"><ProjectArtwork art={project.art} /></div>
+													<p class="summary">{project.blurb}</p>
 
-												<p class="summary">{project.blurb}</p>
-
-												<footer class="project-foot">
-													<ul aria-label={`${project.name} technologies`}>
-														{project.tags.map((tag) => <li translate="no">{tag}</li>)}
-													</ul>
-												{project.repo && project.repo !== project.href && <a href={project.repo} target="_blank" rel="noopener">View source</a>}
-												</footer>
+													<footer class="project-foot">
+														<ul aria-label={`${project.name} technologies`}>
+															{project.tags.map((tag) => <li translate="no">{tag}</li>)}
+														</ul>
+														{project.repo && project.repo !== project.href && <a href={project.repo} target="_blank" rel="noopener">View source</a>}
+													</footer>
+												</div>
 											</article>
 										</li>
 									))}
@@ -212,17 +217,54 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 				outline: 1px solid var(--accent);
 				background: var(--accent);
 			}
-			.timeline-item article {
-				display: grid;
-				grid-template-columns: minmax(0, 1fr) minmax(160px, 31%);
-				column-gap: clamp(1.3rem, 3vw, 2.6rem);
-				align-items: start;
+			.project-card {
+				position: relative;
+				isolation: isolate;
+				display: flex;
+				align-items: stretch;
 				min-width: 0;
-				padding-bottom: clamp(2rem, 5vw, 3.5rem);
-				border-bottom: 1px solid var(--line);
+				min-height: 20rem;
+				overflow: hidden;
+				background: #111419;
+				color: #fff;
+			}
+			.project-card::before {
+				content: '';
+				position: absolute;
+				z-index: -1;
+				inset: 0;
+				background: linear-gradient(90deg, rgba(9, 12, 17, 0.97) 0%, rgba(9, 12, 17, 0.82) 49%, rgba(9, 12, 17, 0.28) 100%);
+			}
+			.project-image {
+				position: absolute;
+				z-index: -2;
+				inset: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center;
+			}
+			.image-note {
+				position: absolute;
+				top: 1rem;
+				right: 1rem;
+				font-family: var(--font-mono);
+				font-size: 0.55rem;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: rgba(255, 255, 255, 0.8);
+				text-shadow: 0 1px 6px #000;
+			}
+			.project-card a.image-note {
+				color: rgba(255, 255, 255, 0.8);
+			}
+			.project-content {
+				display: flex;
+				flex-direction: column;
+				width: min(100%, 37rem);
+				padding: clamp(1.4rem, 3vw, 2.2rem);
 			}
 			.project-head {
-				grid-column: 1;
 				display: flex;
 				align-items: start;
 				justify-content: space-between;
@@ -231,25 +273,20 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 			.project-head > div {
 				min-width: 0;
 			}
-			.project-art {
-				grid-column: 2;
-				grid-row: 1 / span 3;
-				width: 100%;
-				aspect-ratio: 240 / 156;
-			}
 			.kind {
 				margin: 0 0 0.65rem;
 				font-family: var(--font-mono);
 				font-size: 0.65rem;
 				letter-spacing: 0.08em;
 				text-transform: uppercase;
-				color: var(--accent);
+				color: #b6c8ff;
 			}
 			.project-head h3 {
 				font-size: clamp(1.8rem, 4.5vw, 3.4rem);
 				line-height: 0.95;
 				text-wrap: balance;
 				overflow-wrap: anywhere;
+				color: #fff;
 			}
 			.project-head h3 a {
 				display: inline-flex;
@@ -257,6 +294,7 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 				gap: 0.35em;
 				min-height: 2.75rem;
 				text-decoration: none;
+				color: inherit;
 			}
 			.title-arrow {
 				flex: 0 0 auto;
@@ -264,24 +302,24 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 				font-family: var(--font-mono);
 				font-size: 0.36em;
 				line-height: 1;
-				color: var(--accent);
+				color: #b6c8ff;
 			}
 			.summary {
-				grid-column: 1;
 				max-width: 58ch;
 				margin: 1.1rem 0 1.4rem;
 				font-family: var(--font-serif);
 				font-size: clamp(1.08rem, 1.7vw, 1.3rem);
 				line-height: 1.55;
+				color: rgba(255, 255, 255, 0.9);
 				text-wrap: pretty;
 				overflow-wrap: anywhere;
 			}
 			.project-foot {
-				grid-column: 1;
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
 				gap: 1rem;
+				margin-top: auto;
 			}
 			.project-foot ul {
 				display: flex;
@@ -295,11 +333,11 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 			.project-foot > a {
 				font-family: var(--font-mono);
 				font-size: 0.68rem;
-				color: var(--fg-3);
+				color: rgba(255, 255, 255, 0.74);
 			}
 			.project-foot li::before {
 				content: '#';
-				color: var(--accent);
+				color: #b6c8ff;
 			}
 			.project-foot > a {
 				min-height: 2.75rem;
@@ -308,6 +346,11 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 				text-decoration: underline;
 				text-underline-offset: 0.18em;
 				touch-action: manipulation;
+			}
+			.project-foot > a:hover,
+			.project-head h3 a:hover,
+			.project-card a.image-note:hover {
+				color: #b6c8ff;
 			}
 
 			@media (max-width: 720px) {
@@ -341,12 +384,23 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 				.project-head h3 {
 					font-size: clamp(1.75rem, 9vw, 2.7rem);
 				}
-				.timeline-item article {
-					display: block;
+				.project-card {
+					min-height: 25rem;
 				}
-				.project-art {
-					max-width: 20rem;
-					margin-top: 1.2rem;
+				.project-card::before {
+					background: linear-gradient(90deg, rgba(9, 12, 17, 0.94) 0%, rgba(9, 12, 17, 0.69) 100%);
+				}
+				.project-image {
+					object-position: 60% center;
+				}
+				.project-content {
+					padding: 1.2rem 1.2rem 2.4rem;
+				}
+				.image-note {
+					top: auto;
+					bottom: 0.65rem;
+					right: 0.65rem;
+					font-size: 0.48rem;
 				}
 				.project-foot {
 					align-items: flex-start;
