@@ -111,7 +111,7 @@ export interface Project {
 	group: ProjectGroup;
 	/** Primary link — live product or repo. */
 	href?: string;
-	/** Source link, when different from href. */
+	/** Actual public project source, when different from href. Never link private repos or adjacent templates here. */
 	repo?: string;
 	featured?: boolean;
 	/** Small status label, e.g. "Live", "Current", "Sunset", or "OSS". */
@@ -185,7 +185,6 @@ export const PROJECTS: Project[] = [
 		started: '2025-02-16',
 		tags: ['AI', 'Presentations', 'Product Hunt'],
 		group: 'CoreSpeed',
-		repo: 'https://github.com/corespeed-io/deckspeed-template',
 		badge: 'Sunset',
 	},
 	{
@@ -197,7 +196,6 @@ export const PROJECTS: Project[] = [
 		started: '2026-02-10',
 		tags: ['Zypher', 'Sandboxes', 'Templates'],
 		group: 'CoreSpeed',
-		repo: 'https://github.com/corespeed-io/agent0-template',
 		badge: 'Sunset',
 	},
 	{
@@ -209,7 +207,6 @@ export const PROJECTS: Project[] = [
 		started: '2026-03-05',
 		tags: ['OpenClaw', 'Railway', 'Skills'],
 		group: 'CoreSpeed',
-		repo: 'https://github.com/corespeed-io/skills-xclaw',
 		badge: 'Sunset',
 	},
 	{
