@@ -39,7 +39,7 @@ The evaluation's retrieval target was the answer-bearing **session**. A fact she
 
 ![Session-level retrieval stayed near 99%, while answer accuracy fell after the source was compressed into a fact sheet](/blog/why-we-do-not-extract-facts-by-default/retrieval-vs-answer.png)
 
-*Figure 2. Session-level retrieval barely changed, while answer accuracy fell. The bottom row isolates questions about earlier assistant replies.*
+*Figure 2. A near-flat session recall line concealed the answer loss. The two panels use separate scales and measure different stages.*
 
 The clearest category was questions about what the **assistant** had said in an earlier session. The original-session run scored **100%**; the fact-sheet run scored **73.2%**. The [earlier analysis of the same run](/blog/how-we-took-longmemeval-from-80-to-94-without-touching-retrieval/) also found losses in questions that required combining details across sessions. A compact sheet may preserve a topic or decision while omitting a name, qualifier, count, or the speaker responsible for a statement. Once that happens, a better search query cannot recover the omitted text from the fact sheet.
 
