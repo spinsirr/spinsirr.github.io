@@ -16,9 +16,9 @@ An agent cannot remember a detail that its memory system discarded on the way in
 
 We tested that boundary in [Lore](https://github.com/corespeed-io/lore). We made a compact fact sheet from each conversation session in a [500-question LongMemEval-S run](https://github.com/xiaowu0162/LongMemEval), then compared answers from those fact sheets with answers from the original sessions. The smaller representation saved roughly 90% of the reader's input tokens. It also lowered answer accuracy by **6.4 percentage points**. Our [earlier article](/blog/how-we-took-longmemeval-from-80-to-94-without-touching-retrieval/) covered improvements to the reader; this article looks at what happens when the source is compressed before search.
 
-![Two representations of the same conversation workload: original sessions scored 94.2% at about 28,000 reader tokens per question; extracted fact sheets scored 87.8% at about 2,800](/blog/why-we-do-not-extract-facts-by-default/cover.png)
+![Abstract illustration of conversation pages passing through a prism into compact fact sheets while one amber detail falls away](/blog/why-we-do-not-extract-facts-by-default/cover.png)
 
-*Figure 1. The measured tradeoff. These are end-to-end answer scores, not retrieval scores.*
+*Figure 1. A visual metaphor for the write-time risk: a detail omitted from the derived record cannot be recovered by searching that record.*
 
 ## What we actually changed
 
@@ -39,7 +39,7 @@ The evaluation's retrieval target was the answer-bearing **session**. A fact she
 
 ![Session-level retrieval stayed near 99%, while answer accuracy fell after the source was compressed into a fact sheet](/blog/why-we-do-not-extract-facts-by-default/retrieval-vs-answer.png)
 
-*Figure 2. A near-flat session recall line concealed the answer loss. The two panels use separate scales and measure different stages.*
+*Figure 2. Session recall barely changed while answer accuracy fell. The rows measure different stages, and every bar starts at zero.*
 
 The clearest category was questions about what the **assistant** had said in an earlier session. The original-session run scored **100%**; the fact-sheet run scored **73.2%**. The [earlier analysis of the same run](/blog/how-we-took-longmemeval-from-80-to-94-without-touching-retrieval/) also found losses in questions that required combining details across sessions. A compact sheet may preserve a topic or decision while omitting a name, qualifier, count, or the speaker responsible for a statement. Once that happens, a better search query cannot recover the omitted text from the fact sheet.
 
