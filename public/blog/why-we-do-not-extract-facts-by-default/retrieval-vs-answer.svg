@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Recall stayed high. Answers did not.</title>
+  <desc id="desc">Session recall at ten changed from 98.98 to 98.69 percent. Overall answer accuracy changed from 94.2 to 87.8 percent. Assistant-side answer accuracy changed from 100 to 73.2 percent.</desc>
+  <rect width="1800" height="1000" fill="#f4f3ee"/>
+  <rect x="110" y="64" width="16" height="16" fill="#2438ff"/>
+  <text x="148" y="81" fill="#100f0d" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="2.5">LORE / EVALUATION NOTE</text>
+  <text x="1690" y="81" text-anchor="end" fill="#55534c" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="2">LONGMEMEVAL-S · 500 QUESTIONS</text>
+  <path d="M110 117 H1690" stroke="#100f0d" stroke-width="2"/>
+  <text x="105" y="259" fill="#100f0d" font-family="Arial, Helvetica, sans-serif" font-size="118" font-weight="800" letter-spacing="-7">Recall stayed high.</text>
+  <text x="105" y="389" fill="#2438ff" font-family="Arial, Helvetica, sans-serif" font-size="118" font-weight="800" letter-spacing="-7">Answers didn't.</text>
+
+  <rect x="110" y="466" width="760" height="420" fill="#ebe9e1"/>
+  <text x="153" y="534" fill="#55534c" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="2.5">SESSION RECALL@10</text>
+  <text x="150" y="697" fill="#100f0d" font-family="Arial, Helvetica, sans-serif" font-size="97" font-weight="800" letter-spacing="-5">98.98%</text>
+  <path d="M730 639 V771" stroke="#100f0d" stroke-width="5"/>
+  <path d="m730 771 -13 -17 m13 17 13 -17" fill="none" stroke="#100f0d" stroke-width="5"/>
+  <text x="150" y="809" fill="#100f0d" font-family="Arial, Helvetica, sans-serif" font-size="97" font-weight="800" letter-spacing="-5">98.69%</text>
+  <text x="810" y="850" text-anchor="end" fill="#55534c" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">−0.29 pts</text>
+
+  <rect x="910" y="466" width="780" height="420" fill="#2438ff"/>
+  <text x="953" y="534" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="2.5">OVERALL ANSWER ACCURACY</text>
+  <text x="950" y="697" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="97" font-weight="800" letter-spacing="-5">94.2%</text>
+  <path d="M1550 639 V771" stroke="#ffffff" stroke-width="5"/>
+  <path d="m1550 771 -13 -17 m13 17 13 -17" fill="none" stroke="#ffffff" stroke-width="5"/>
+  <text x="950" y="809" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="97" font-weight="800" letter-spacing="-5">87.8%</text>
+  <text x="1630" y="850" text-anchor="end" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">−6.4 pts</text>
+
+  <path d="M110 921 H1690" stroke="#100f0d" stroke-width="2"/>
+  <text x="110" y="967" fill="#55534c" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="1">ASSISTANT-SIDE QUESTIONS</text>
+  <text x="1690" y="967" text-anchor="end" fill="#2438ff" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700">100% → 73.2%  /  −26.8 pts</text>
+</svg>

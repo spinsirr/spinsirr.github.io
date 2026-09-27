@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1980" height="900" viewBox="0 0 1980 900" role="img" aria-labelledby="title desc">
+  <title id="title">Ten times less input, thirty-two answers lost</title>
+  <desc id="desc">On 500 LongMemEval-S questions, original sessions scored 94.2 percent at about 28,000 reader tokens per question. Extracted fact sheets scored 87.8 percent at about 2,800 reader tokens per question.</desc>
+  <rect width="1980" height="900" fill="#f4f3ee"/>
+  <rect x="112" y="65" width="16" height="16" fill="#2438ff"/>
+  <text x="150" y="82" fill="#100f0d" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" letter-spacing="3">LORE / MEMORY SYSTEMS</text>
+  <text x="1868" y="82" text-anchor="end" fill="#55534c" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="2">LONGMEMEVAL-S · 500 QUESTIONS</text>
+  <path d="M112 117 H1868" stroke="#100f0d" stroke-width="2"/>
+
+  <text x="107" y="295" fill="#100f0d" font-family="Arial, Helvetica, sans-serif" font-size="150" font-weight="800" letter-spacing="-9">10× less input.</text>
+  <text x="106" y="458" fill="#2438ff" font-family="Arial, Helvetica, sans-serif" font-size="150" font-weight="800" letter-spacing="-9">32</text>
+  <text x="312" y="458" fill="#100f0d" font-family="Arial, Helvetica, sans-serif" font-size="150" font-weight="800" letter-spacing="-9">answers lost.</text>
+
+  <path d="M112 528 H1868" stroke="#100f0d" stroke-width="2"/>
+  <path d="M987 528 V813" stroke="#100f0d" stroke-width="2"/>
+
+  <text x="112" y="589" fill="#55534c" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="3">01 / ORIGINAL SESSIONS</text>
+  <text x="112" y="745" fill="#100f0d" font-family="Arial, Helvetica, sans-serif" font-size="151" font-weight="800" letter-spacing="-9">94.2%</text>
+  <text x="116" y="796" fill="#55534c" font-family="Arial, Helvetica, sans-serif" font-size="30">~28k reader tokens / question</text>
+
+  <text x="1035" y="589" fill="#55534c" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="3">02 / EXTRACTED FACT SHEETS</text>
+  <text x="1033" y="745" fill="#100f0d" font-family="Arial, Helvetica, sans-serif" font-size="151" font-weight="800" letter-spacing="-9">87.8%</text>
+  <text x="1039" y="796" fill="#55534c" font-family="Arial, Helvetica, sans-serif" font-size="30">~2.8k reader tokens / question</text>
+
+  <path d="M112 813 H1868" stroke="#100f0d" stroke-width="2"/>
+  <text x="112" y="863" fill="#55534c" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="1.2">SAME READER AND JUDGE</text>
+  <text x="1868" y="863" text-anchor="end" fill="#2438ff" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="1.2">−6.4 POINTS IN ANSWER ACCURACY</text>
+</svg>
