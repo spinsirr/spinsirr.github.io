@@ -6,7 +6,12 @@ kind: field-note
 tags: ['Memory systems', 'Postgres', 'API design']
 featured: false
 draft: false
+ogImage: '/blog/adding-writable-links-to-lore-memory-graph/cover.png'
 ---
+
+![A writable memory link requires a writable source and a visible target; a capped graph read reports lower-bound counts](/blog/adding-writable-links-to-lore-memory-graph/figure.svg)
+
+*A link write checks both endpoints. A capped graph read reports that its counts are incomplete.*
 
 A graph in a memory product is easy to draw when its edges only arrive through import. It gets harder when a user or agent can add a link after both memories already exist. A link is then a write to shared state: it needs an identity, authorization, retry behavior, and a budget. Its read path also needs to admit when the graph is incomplete.
 

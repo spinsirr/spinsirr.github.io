@@ -15,6 +15,8 @@ This is the source of truth for article selection, writing, checks, and release.
 
 Add a `.md` file to `src/content/blog/`. Use `.mdx` only when an article needs an interactive or reusable component; static figures belong in Markdown. Link directly to the public evidence for specific technical claims. Give the article a clear, searchable title and a stable filename.
 
+Every new article needs at least one relevant image in its body and a post-specific social image (`ogImage`). Use a real project image, an evidence-backed chart, or a diagram that explains the article's actual system or result. Keep editable source files for original diagrams and charts. Do not use generic decoration or invented product imagery as a substitute for evidence. Give body images descriptive alt text and a caption when the image needs context; check legibility in both site themes and at article width.
+
 ```yaml
 ---
 title: 'A concrete title'
@@ -33,6 +35,6 @@ The schema in `src/content.config.ts` defines the supported fields and kinds. Th
 
 1. Update the local checkout from `main` and check the current posts for duplication.
 2. Draft the article, verify every public link and attribution, and remove details that are not ready to be public.
-3. Run `bun run build`. Inspect the rendered page, including code blocks in both site themes. The site's `html[data-theme]` state controls the code theme as well as the rest of the page.
+3. Run `bun run build`. Inspect the rendered page, including images and code blocks in both site themes. The site's `html[data-theme]` state controls the code theme as well as the rest of the page.
 4. Commit and push the finished post to `main`. Wait for the GitHub Pages workflow and verify the public URL shows the intended title and content.
 5. Notify only when a post is live, publication fails, or a decision is needed. An uneventful review stays quiet.
