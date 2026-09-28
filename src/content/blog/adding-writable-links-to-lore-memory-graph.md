@@ -6,12 +6,12 @@ kind: field-note
 tags: ['Memory systems', 'Postgres', 'API design']
 featured: false
 draft: false
-ogImage: '/blog/adding-writable-links-to-lore-memory-graph/link-contract-cover.png'
+ogImage: '/blog/adding-writable-links-to-lore-memory-graph/put-outcomes-cover.png'
 ---
 
-![Conceptual memory link graph: a directed supports link runs from a writable source to a visible target; source, target and kind form its natural key](/blog/adding-writable-links-to-lore-memory-graph/link-contract.svg)
+![An illustrative supports link from a decision to evidence: PUT creates it with 201, replaces it with 200, then repeats the same state with 200 and no write](/blog/adding-writable-links-to-lore-memory-graph/put-outcomes.svg)
 
-*Conceptual schematic of a Memory Link. Its key is `(source, target, kind)`; writing it requires a writable source and a visible target, as enforced in [Lore’s graph engine](https://github.com/corespeed-io/lore/blob/f1e60b5135b99de2fab85ccae3e9002f2d4b161f/packages/lore-core/src/graph.ts#L710-L720).*
+*An illustrative write to one Memory Link: `(source, target, kind)` stays the same while its weight changes. The third call repeats the same state and performs no write. The example values are illustrative; the behavior and endpoint checks come from [Lore’s graph engine](https://github.com/corespeed-io/lore/blob/f1e60b5135b99de2fab85ccae3e9002f2d4b161f/packages/lore-core/src/graph.ts).*
 
 Before [Lore PR #129](https://github.com/corespeed-io/lore/pull/129), Workspace import could write Memory Links, but users and agents could not add one between existing memories. Exposing that write required a stable key, permission checks on both endpoints, and limits on link creation and graph reads.
 

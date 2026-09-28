@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="840" viewBox="0 0 1600 840" role="img" aria-labelledby="title desc">
+  <title id="title">Memory Link: one key, three PUT outcomes</title>
+  <desc id="desc">A source and target form a supports link. Three calls to the same key create it, replace it, and finally leave it unchanged.</desc>
+  <rect width="1600" height="840" fill="#f5f0e7"/>
+  <line x1="82" y1="110" x2="1518" y2="110" stroke="#22332d" stroke-width="2"/>
+  <text x="82" y="72" fill="#22332d" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="29" letter-spacing="2">LORE / MEMORY LINK</text>
+  <text x="1518" y="72" text-anchor="end" fill="#69746d" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="25">PR #129 · f1e60b5</text>
+
+  <text x="82" y="246" fill="#17251e" font-family="Arial, Helvetica, sans-serif" font-size="79" font-weight="700">One key.</text>
+  <text x="82" y="345" fill="#17251e" font-family="Arial, Helvetica, sans-serif" font-size="79" font-weight="700">Three PUTs.</text>
+  <text x="84" y="418" fill="#56665c" font-family="Arial, Helvetica, sans-serif" font-size="31">Same source, target, and kind.</text>
+
+  <text x="84" y="586" fill="#22332d" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Decision</text>
+  <path d="M247 575 H471" fill="none" stroke="#bd4e2e" stroke-width="5"/>
+  <path d="M454 563 L475 575 L454 587" fill="none" stroke="#bd4e2e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="357" y="553" text-anchor="middle" fill="#a74124" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23">supports</text>
+  <text x="492" y="586" fill="#22332d" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Evidence</text>
+  <text x="84" y="635" fill="#69746d" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24">source: editable · target: visible</text>
+
+  <rect x="742" y="162" width="776" height="163" fill="#e7eae1"/>
+  <rect x="742" y="340" width="776" height="163" fill="#e7eae1"/>
+  <rect x="742" y="518" width="776" height="163" fill="#e7eae1"/>
+  <rect x="742" y="162" width="9" height="163" fill="#bd4e2e"/>
+  <rect x="742" y="340" width="9" height="163" fill="#bd4e2e"/>
+  <rect x="742" y="518" width="9" height="163" fill="#77877c"/>
+
+  <text x="782" y="220" fill="#56665c" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23">01 / PUT · weight 0.8</text>
+  <text x="782" y="291" fill="#bd4e2e" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="700">201</text>
+  <text x="1458" y="283" text-anchor="end" fill="#22332d" font-family="Arial, Helvetica, sans-serif" font-size="33" font-weight="700">CREATED</text>
+
+  <text x="782" y="398" fill="#56665c" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23">02 / PUT · weight 0.9</text>
+  <text x="782" y="469" fill="#bd4e2e" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="700">200</text>
+  <text x="1458" y="461" text-anchor="end" fill="#22332d" font-family="Arial, Helvetica, sans-serif" font-size="33" font-weight="700">REPLACED</text>
+
+  <text x="782" y="576" fill="#56665c" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23">03 / PUT · weight 0.9</text>
+  <text x="782" y="647" fill="#77877c" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="700">200</text>
+  <text x="1458" y="639" text-anchor="end" fill="#22332d" font-family="Arial, Helvetica, sans-serif" font-size="33" font-weight="700">NO WRITE</text>
+
+  <line x1="82" y1="744" x2="1518" y2="744" stroke="#22332d" stroke-width="2"/>
+  <text x="82" y="794" fill="#69746d" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23">(source, target, kind) IS THE LINK IDENTITY</text>
+  <text x="1518" y="794" text-anchor="end" fill="#69746d" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23">ILLUSTRATIVE VALUES</text>
+</svg>
