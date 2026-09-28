@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="840" viewBox="0 0 1600 840" role="img" aria-labelledby="title desc">
+  <title id="title">Writable Memory Links in Lore</title>
+  <desc id="desc">One directed supports link between a writable source memory and a visible target memory within a larger graph.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="8" refY="5.5" orient="auto" viewBox="0 0 11 11"><path d="M1 1 L9 5.5 L1 10" fill="none" stroke="#f3a26d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <pattern id="grid" width="35" height="35" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#64736e" opacity=".35"/></pattern>
+  </defs>
+  <rect width="1600" height="840" fill="#111716"/>
+  <rect x="700" y="102" width="815" height="600" fill="url(#grid)"/>
+  <text x="84" y="105" fill="#d2d9d4" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="30" letter-spacing="3">LORE / GRAPH</text>
+  <line x1="84" y1="137" x2="1516" y2="137" stroke="#52605b" stroke-width="2"/>
+  <text x="84" y="294" fill="#e4eeea" font-family="Inter, Helvetica, Arial, sans-serif" font-size="78" font-weight="700">Writable</text>
+  <text x="84" y="384" fill="#e4eeea" font-family="Inter, Helvetica, Arial, sans-serif" font-size="78" font-weight="700">Memory Links</text>
+  <text x="88" y="474" fill="#aebeb6" font-family="Inter, Helvetica, Arial, sans-serif" font-size="29">source · target · kind</text>
+  <line x1="84" y1="654" x2="1516" y2="654" stroke="#52605b" stroke-width="2"/>
+
+  <g fill="none" stroke="#53625d" stroke-width="2" opacity=".55">
+    <path d="M738 244 L820 198 L951 227 L1086 188 L1242 211 L1410 193 L1511 260"/>
+    <path d="M744 531 L828 575 L965 549 L1097 588 L1245 542 L1412 573 L1517 526"/>
+    <path d="M820 198 L828 575 M951 227 L965 549 M1086 188 L1097 588 M1242 211 L1245 542 M1410 193 L1412 573"/>
+  </g>
+  <g fill="#111716" stroke="#6b7a73" stroke-width="2" opacity=".8">
+    <circle cx="738" cy="244" r="9"/><circle cx="820" cy="198" r="9"/><circle cx="951" cy="227" r="9"/><circle cx="1086" cy="188" r="9"/><circle cx="1242" cy="211" r="9"/><circle cx="1410" cy="193" r="9"/><circle cx="1511" cy="260" r="9"/>
+    <circle cx="744" cy="531" r="9"/><circle cx="828" cy="575" r="9"/><circle cx="965" cy="549" r="9"/><circle cx="1097" cy="588" r="9"/><circle cx="1245" cy="542" r="9"/><circle cx="1412" cy="573" r="9"/><circle cx="1517" cy="526" r="9"/>
+  </g>
+  <path d="M969 359 C1068 309 1177 312 1281 365" fill="none" stroke="#f3a26d" stroke-width="5" marker-end="url(#arrow)"/>
+  <text x="1120" y="286" fill="#f3a26d" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="28" font-weight="600">supports</text>
+  <circle cx="884" cy="395" r="82" fill="#111716" stroke="#b1cdc5" stroke-width="5"/>
+  <circle cx="884" cy="395" r="70" fill="none" stroke="#405a53" stroke-width="2"/>
+  <text x="884" y="414" text-anchor="middle" fill="#e4eeea" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="64">S</text>
+  <circle cx="1366" cy="395" r="82" fill="#111716" stroke="#f3a26d" stroke-width="5"/>
+  <circle cx="1366" cy="395" r="70" fill="none" stroke="#6f4d37" stroke-width="2"/>
+  <text x="1366" y="414" text-anchor="middle" fill="#fff2e8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="64">T</text>
+  <text x="884" y="529" fill="#e2eae5" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="29" font-weight="700">SOURCE</text>
+  <text x="884" y="568" fill="#aebeb6" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="25">writable</text>
+  <text x="1366" y="529" fill="#e2eae5" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="29" font-weight="700">TARGET</text>
+  <text x="1366" y="568" fill="#aebeb6" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="25">visible</text>
+  <text x="84" y="722" fill="#aebeb6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="26">(source, target, kind)</text>
+  <text x="1516" y="722" text-anchor="end" fill="#7f9188" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21">PR 129 · CONCEPTUAL SCHEMATIC</text>
+</svg>

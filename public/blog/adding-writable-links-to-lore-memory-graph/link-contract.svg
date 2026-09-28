@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="760" viewBox="0 0 900 760" role="img" aria-labelledby="title desc">
+  <title id="title">Memory Link write contract</title>
+  <desc id="desc">One highlighted directed link joins a writable source memory to a visible target memory. The key is source, target, and kind.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="8" refY="5.5" orient="auto" viewBox="0 0 11 11"><path d="M1 1 L9 5.5 L1 10" fill="none" stroke="#f3a26d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#64736e" opacity=".35"/></pattern>
+  </defs>
+  <rect width="900" height="760" fill="#111716"/>
+  <rect x="50" y="112" width="800" height="490" fill="url(#grid)"/>
+  <line x1="50" y1="85" x2="850" y2="85" stroke="#52605b" stroke-width="1.5"/>
+  <text x="50" y="61" fill="#d2d9d4" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="23" letter-spacing="2">LORE / MEMORY LINK</text>
+  <text x="850" y="61" fill="#85958e" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19">PR 129</text>
+
+  <g fill="none" stroke="#53625d" stroke-width="1.7" opacity=".55">
+    <path d="M87 252 L155 184 L281 214 L382 149 L519 201 L697 167 L805 247"/>
+    <path d="M94 481 L166 541 L296 505 L392 566 L524 512 L727 552 L816 473"/>
+    <path d="M155 184 L166 541 M281 214 L296 505 M382 149 L392 566 M519 201 L524 512 M697 167 L727 552"/>
+  </g>
+  <g fill="#111716" stroke="#6b7a73" stroke-width="2" opacity=".8">
+    <circle cx="87" cy="252" r="8"/><circle cx="155" cy="184" r="8"/><circle cx="281" cy="214" r="8"/><circle cx="382" cy="149" r="8"/><circle cx="519" cy="201" r="8"/><circle cx="697" cy="167" r="8"/><circle cx="805" cy="247" r="8"/>
+    <circle cx="94" cy="481" r="8"/><circle cx="166" cy="541" r="8"/><circle cx="296" cy="505" r="8"/><circle cx="392" cy="566" r="8"/><circle cx="524" cy="512" r="8"/><circle cx="727" cy="552" r="8"/><circle cx="816" cy="473" r="8"/>
+  </g>
+
+  <path d="M304 356 C410 296 495 298 592 356" fill="none" stroke="#f3a26d" stroke-width="4" marker-end="url(#arrow)"/>
+  <text x="450" y="271" text-anchor="middle" fill="#f3a26d" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="600">kind = supports</text>
+  <circle cx="225" cy="381" r="79" fill="#111716" stroke="#b1cdc5" stroke-width="5"/>
+  <circle cx="225" cy="381" r="68" fill="none" stroke="#405a53" stroke-width="1.5"/>
+  <text x="225" y="399" text-anchor="middle" fill="#e4eeea" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="58">S</text>
+  <circle cx="675" cy="381" r="79" fill="#111716" stroke="#f3a26d" stroke-width="5"/>
+  <circle cx="675" cy="381" r="68" fill="none" stroke="#6f4d37" stroke-width="1.5"/>
+  <text x="675" y="399" text-anchor="middle" fill="#fff2e8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="58">T</text>
+  <text x="225" y="501" text-anchor="middle" fill="#e2eae5" font-family="Inter, Helvetica, Arial, sans-serif" font-size="26" font-weight="700">SOURCE</text>
+  <text x="225" y="535" text-anchor="middle" fill="#aebeb6" font-family="Inter, Helvetica, Arial, sans-serif" font-size="23">writable</text>
+  <text x="675" y="501" text-anchor="middle" fill="#e2eae5" font-family="Inter, Helvetica, Arial, sans-serif" font-size="26" font-weight="700">TARGET</text>
+  <text x="675" y="535" text-anchor="middle" fill="#aebeb6" font-family="Inter, Helvetica, Arial, sans-serif" font-size="23">visible</text>
+
+  <line x1="50" y1="619" x2="850" y2="619" stroke="#52605b" stroke-width="1.5"/>
+  <text x="50" y="669" fill="#9caca4" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22">NATURAL KEY</text>
+  <text x="850" y="669" text-anchor="end" fill="#e3eae5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="28">(source, target, kind)</text>
+  <text x="50" y="721" fill="#72837a" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19">CONCEPTUAL SCHEMATIC · graph.ts / f1e60b5</text>
+</svg>

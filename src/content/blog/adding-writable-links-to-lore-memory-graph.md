@@ -6,12 +6,12 @@ kind: field-note
 tags: ['Memory systems', 'Postgres', 'API design']
 featured: false
 draft: false
-ogImage: '/blog/adding-writable-links-to-lore-memory-graph/source-query-cover.png'
+ogImage: '/blog/adding-writable-links-to-lore-memory-graph/link-contract-cover.png'
 ---
 
-![SQL from Lore graph.ts: a source row is locked only when the target memory exists and is visible](/blog/adding-writable-links-to-lore-memory-graph/source-query.svg)
+![Conceptual memory link graph: a directed supports link runs from a writable source to a visible target; source, target and kind form its natural key](/blog/adding-writable-links-to-lore-memory-graph/link-contract.svg)
 
-*Reformatted excerpt from [the query in `graph.ts`](https://github.com/corespeed-io/lore/blob/f1e60b5135b99de2fab85ccae3e9002f2d4b161f/packages/lore-core/src/graph.ts#L710-L720). Row-level security requires a writable source and a visible target.*
+*Conceptual schematic of a Memory Link. Its key is `(source, target, kind)`; writing it requires a writable source and a visible target, as enforced in [Lore’s graph engine](https://github.com/corespeed-io/lore/blob/f1e60b5135b99de2fab85ccae3e9002f2d4b161f/packages/lore-core/src/graph.ts#L710-L720).*
 
 Before [Lore PR #129](https://github.com/corespeed-io/lore/pull/129), Workspace import could write Memory Links, but users and agents could not add one between existing memories. Exposing that write required a stable key, permission checks on both endpoints, and limits on link creation and graph reads.
 
@@ -19,7 +19,7 @@ The merged change exposes link creation, listing, and deletion through the HTTP 
 
 ## Give the edge a stable identity
 
-A link is identified by **source memory, target memory, and kind**. For example, a decision can `support` an evidence memory. The reverse direction is a different link, and another kind between the same pair is another link too.
+A link is identified by **source memory, target memory, and kind**. For example, a decision can have a `supports` link to an evidence memory. The reverse direction is a different link, and another kind between the same pair is another link too.
 
 The [HTTP write](https://github.com/corespeed-io/lore/blob/f1e60b5135b99de2fab85ccae3e9002f2d4b161f/src/modules/graph/routes.ts) is a `PUT` to `/api/v1/memories/{source}/links/{target}?kind=supports`. The first call creates the link and returns 201; another call to the same key replaces its weight and metadata and returns 200. An unchanged repeat does no write and emits no link event. Omitting weight or metadata resets them to their defaults, because this is a replacement of the link's fields, not a patch.
 
