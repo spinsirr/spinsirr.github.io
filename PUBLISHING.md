@@ -15,7 +15,7 @@ This is the source of truth for article selection, writing, checks, and release.
 
 Add a `.md` file to `src/content/blog/`. Use `.mdx` only when an article needs an interactive or reusable component; static figures belong in Markdown. Link directly to the public evidence for specific technical claims. Give the article a clear, searchable title and a stable filename.
 
-Every new article needs at least one relevant image in its body and a post-specific social image (`ogImage`). Use a real project image, an evidence-backed chart, or a diagram that explains the article's actual system or result. Keep editable source files for original diagrams and charts. Do not use generic decoration or invented product imagery as a substitute for evidence. Give body images descriptive alt text and a caption when the image needs context; check legibility in both site themes and at article width.
+Every new article needs at least one relevant image in its body and a post-specific social image (`ogImage`). Prefer real project images, direct code or data figures, and evidence-backed charts. A diagram must explain a specific mechanism that the prose cannot show as clearly. Keep editable source files for original figures. Avoid slogan-led covers, decorative cards, fake interfaces, and invented product imagery. Give body images descriptive alt text and a caption when the image needs context; check legibility in both site themes and at article width.
 
 ```yaml
 ---
