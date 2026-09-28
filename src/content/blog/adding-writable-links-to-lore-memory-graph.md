@@ -9,9 +9,20 @@ draft: false
 ogImage: '/blog/adding-writable-links-to-lore-memory-graph/put-outcomes-cover.png'
 ---
 
-![An illustrative supports link from a decision to evidence: PUT creates it with 201, replaces it with 200, then repeats the same state with 200 and no write](/blog/adding-writable-links-to-lore-memory-graph/put-outcomes.svg)
-
-*An illustrative write to one Memory Link: `(source, target, kind)` stays the same while its weight changes. The third call repeats the same state and performs no write. The example values are illustrative; the behavior and endpoint checks come from [Lore’s graph engine](https://github.com/corespeed-io/lore/blob/f1e60b5135b99de2fab85ccae3e9002f2d4b161f/packages/lore-core/src/graph.ts).*
+<figure class="memory-link-figure" aria-label="Three PUT calls to the same Memory Link">
+  <div class="link-endpoints">
+    <div class="link-memory"><span class="link-role">Source memory</span><strong>Decision</strong><span>Caller can edit</span></div>
+    <div class="link-direction"><code>supports</code><span aria-hidden="true">⟶</span></div>
+    <div class="link-memory"><span class="link-role">Target memory</span><strong>Evidence</strong><span>Caller can see</span></div>
+  </div>
+  <div class="link-key"><span>Same link key</span><code>(source, target, supports)</code></div>
+  <ol class="link-writes" aria-label="Sequential PUT requests">
+    <li><span class="link-request">First PUT</span><code>weight = 0.8</code><strong class="link-status">201</strong><span class="link-outcome">Created</span></li>
+    <li><span class="link-request">Change weight</span><code>weight = 0.9</code><strong class="link-status">200</strong><span class="link-outcome">Replaced</span></li>
+    <li><span class="link-request">Repeat PUT</span><code>weight = 0.9</code><strong class="link-status link-unchanged">200</strong><span class="link-outcome">No write</span></li>
+  </ol>
+  <figcaption>Example values; all other fields stay the same. The third call repeats the stored state without writing. Behavior and permissions follow <a href="https://github.com/corespeed-io/lore/blob/f1e60b5135b99de2fab85ccae3e9002f2d4b161f/packages/lore-core/src/graph.ts">Lore’s graph engine</a>.</figcaption>
+</figure>
 
 Before [Lore PR #129](https://github.com/corespeed-io/lore/pull/129), Workspace import could write Memory Links, but users and agents could not add one between existing memories. Exposing that write required a stable key, permission checks on both endpoints, and limits on link creation and graph reads.
 
