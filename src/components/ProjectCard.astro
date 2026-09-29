@@ -25,7 +25,7 @@ const showRepo = repo && repo !== href;
 	<footer>
 		<span class="actions">
 			{showRepo ? <a class="link" href={repo} target="_blank" rel="noopener">Source</a> : null}
-			{href ? <a class="link" href={href} target="_blank" rel="noopener">{showRepo ? 'Visit' : 'GitHub'} ↗</a> : null}
+			{href ? <a class="link" href={href} target="_blank" rel="noopener">{href.startsWith('https://github.com/') ? 'GitHub' : 'Visit'} ↗</a> : null}
 		</span>
 	</footer>
 </article>
