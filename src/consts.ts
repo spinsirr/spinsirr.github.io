@@ -248,6 +248,21 @@ export const PROJECTS: Project[] = [
 		featured: true,
 	},
 	{
+		name: 'Hive',
+		image: '/projects/hive.webp',
+		imageKind: 'project',
+		imageSource: 'https://hive-roan-mu.vercel.app/demo/tasks/demo-menu',
+		blurb:
+			'A multiplayer coding-agent workspace. Claude Code or Codex runs in a cloud sandbox while teammates join the task to steer the agent and review its changes.',
+		started: '2026-09-02',
+		tags: ['Claude Code', 'Codex', 'Vercel Sandbox'],
+		group: 'Products',
+		href: 'https://hive-roan-mu.vercel.app/',
+		repo: 'https://github.com/spinsirr/hive',
+		featured: true,
+		badge: 'Live',
+	},
+	{
 		name: 'OrderCue',
 		image: '/projects/ordercue.webp',
 		imageKind: 'illustration',
