@@ -9,6 +9,16 @@ draft: false
 ogImage: '/blog/adding-writable-links-to-lore-memory-graph/put-outcomes-cover.png'
 ---
 
+Before [Lore PR #129](https://github.com/corespeed-io/lore/pull/129), Workspace import could write Memory Links, but users and agents could not add one between existing memories. Exposing that write required a stable key, permission checks on both endpoints, and limits on link creation and graph reads.
+
+The merged change exposes link creation, listing, and deletion through the HTTP API, TypeScript SDK, CLI, and MCP. The permission checks matter because a source memory may be read-only to the caller, and a target may be private.
+
+## Give the edge a stable identity
+
+A link is identified by **source memory, target memory, and kind**. For example, a decision can have a `supports` link to an evidence memory. The reverse direction is a different link, and another kind between the same pair is another link too.
+
+The [HTTP write](https://github.com/corespeed-io/lore/blob/f1e60b5135b99de2fab85ccae3e9002f2d4b161f/src/modules/graph/routes.ts) is a `PUT` to `/api/v1/memories/{source}/links/{target}?kind=supports`. The first call creates the link and returns 201; another call to the same key replaces its weight and metadata and returns 200. An unchanged repeat does no write and emits no link event. Omitting weight or metadata resets them to their defaults, because this is a replacement of the link's fields, not a patch.
+
 <figure class="memory-link-figure" aria-label="Three PUT calls to the same Memory Link">
   <div class="link-endpoints">
     <div class="link-memory"><span class="link-role">Source memory</span><strong>Decision</strong><span>Caller can edit</span></div>
@@ -24,16 +34,6 @@ ogImage: '/blog/adding-writable-links-to-lore-memory-graph/put-outcomes-cover.pn
   </ol>
   <figcaption>Example values; other fields stay the same. Repeating the stored state performs no write. <a href="https://github.com/corespeed-io/lore/blob/f1e60b5135b99de2fab85ccae3e9002f2d4b161f/packages/lore-core/src/graph.ts">Source: Lore’s graph engine</a>.</figcaption>
 </figure>
-
-Before [Lore PR #129](https://github.com/corespeed-io/lore/pull/129), Workspace import could write Memory Links, but users and agents could not add one between existing memories. Exposing that write required a stable key, permission checks on both endpoints, and limits on link creation and graph reads.
-
-The merged change exposes link creation, listing, and deletion through the HTTP API, TypeScript SDK, CLI, and MCP. The permission checks matter because a source memory may be read-only to the caller, and a target may be private.
-
-## Give the edge a stable identity
-
-A link is identified by **source memory, target memory, and kind**. For example, a decision can have a `supports` link to an evidence memory. The reverse direction is a different link, and another kind between the same pair is another link too.
-
-The [HTTP write](https://github.com/corespeed-io/lore/blob/f1e60b5135b99de2fab85ccae3e9002f2d4b161f/src/modules/graph/routes.ts) is a `PUT` to `/api/v1/memories/{source}/links/{target}?kind=supports`. The first call creates the link and returns 201; another call to the same key replaces its weight and metadata and returns 200. An unchanged repeat does no write and emits no link event. Omitting weight or metadata resets them to their defaults, because this is a replacement of the link's fields, not a patch.
 
 That gives callers a simple retry rule: repeat the `PUT` for the desired state. Deletion addresses the same key. A second `DELETE` returns 404 because the link is already absent. The [SDK example](https://github.com/corespeed-io/lore/blob/f1e60b5135b99de2fab85ccae3e9002f2d4b161f/docs/developer-integration.md#working-with-memory-links) shows both operations and the distinction between a missing endpoint and a capacity refusal.
 
