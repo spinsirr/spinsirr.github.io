@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="550" viewBox="0 0 960 550" role="img" aria-labelledby="title desc">
+  <title id="title">Network waits for a Lore memory read</title>
+  <desc id="desc">Previous path: 11 to 12 waits. Pipelined Bun or self-host: 1 wait. Worker with pipelining disabled: 6 waits.</desc>
+  <rect width="960" height="550" fill="#f8f7f3"/>
+  <text x="56" y="71" fill="#1d2530" font-family="Arial,sans-serif" font-size="31" font-weight="700">Memory read · network waits</text>
+  <text x="56" y="106" fill="#526171" font-family="Arial,sans-serif" font-size="17">Network wait counts, not production latency</text>
+  <line x1="283" y1="454" x2="887" y2="454" stroke="#aab4bc" stroke-width="2"/>
+  <g fill="#526171" font-family="Arial,sans-serif" font-size="16">
+    <text x="278" y="484">0</text><text x="426" y="484">3</text><text x="577" y="484">6</text><text x="728" y="484">9</text><text x="870" y="484">12</text>
+  </g>
+  <g stroke="#e0e3e3" stroke-width="1"><line x1="434" y1="145" x2="434" y2="454"/><line x1="585" y1="145" x2="585" y2="454"/><line x1="736" y1="145" x2="736" y2="454"/><line x1="887" y1="145" x2="887" y2="454"/></g>
+  <g fill="#1d2530" font-family="Arial,sans-serif" font-size="19" font-weight="600">
+    <text x="56" y="205">Before</text><text x="56" y="308">Pipelined connection</text><text x="56" y="411">Worker today</text>
+  </g>
+  <g fill="#526171" font-family="Arial,sans-serif" font-size="15"><text x="56" y="232">sequential statements</text><text x="56" y="335">Bun / self-host</text><text x="56" y="438">pipelining off</text></g>
+  <rect x="283" y="175" width="553" height="52" rx="3" fill="#526171"/>
+  <rect x="283" y="278" width="50" height="52" rx="3" fill="#167a68"/>
+  <rect x="283" y="381" width="302" height="52" rx="3" fill="#276d99"/>
+  <g fill="#1d2530" font-family="Arial,sans-serif" font-size="22" font-weight="700"><text x="780" y="165">11–12</text><text x="346" y="312">1</text><text x="597" y="415">6</text></g>
+  <line x1="887" y1="175" x2="887" y2="227" stroke="#1d2530" stroke-width="3"/>
+  <text x="56" y="526" fill="#526171" font-family="Arial,sans-serif" font-size="14">Source: Lore DB wave spec and round-trip-budget.test.ts · merged Oct 2026</text>
+</svg>

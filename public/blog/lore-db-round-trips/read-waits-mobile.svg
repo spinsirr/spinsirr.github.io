@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="780" viewBox="0 0 600 780" role="img" aria-labelledby="title desc">
+  <title id="title">Network waits for a Lore memory read</title>
+  <desc id="desc">Before: 11 to 12 waits. Pipelined Bun or self-host: 1 wait. Worker with pipelining disabled: 6 waits.</desc>
+  <rect width="600" height="780" fill="#f8f7f3"/>
+  <text x="36" y="66" fill="#1d2530" font-family="Arial,sans-serif" font-size="34" font-weight="700">Memory read · network waits</text>
+  <text x="36" y="103" fill="#526171" font-family="Arial,sans-serif" font-size="23">Counts, not production latency</text>
+  <g fill="#1d2530" font-family="Arial,sans-serif" font-size="29" font-weight="600"><text x="36" y="184">Before</text><text x="36" y="364">Pipelined connection</text><text x="36" y="544">Worker today</text></g>
+  <g fill="#526171" font-family="Arial,sans-serif" font-size="23"><text x="36" y="217">sequential statements</text><text x="36" y="397">Bun / self-host</text><text x="36" y="577">pipelining off</text></g>
+  <rect x="36" y="240" width="473" height="58" rx="3" fill="#526171"/>
+  <rect x="36" y="420" width="43" height="58" rx="3" fill="#167a68"/>
+  <rect x="36" y="600" width="258" height="58" rx="3" fill="#276d99"/>
+  <line x1="552" y1="240" x2="552" y2="298" stroke="#1d2530" stroke-width="3"/>
+  <g fill="#1d2530" font-family="Arial,sans-serif" font-size="30" font-weight="700"><text x="448" y="232">11–12</text><text x="96" y="462">1</text><text x="310" y="642">6</text></g>
+  <line x1="36" y1="712" x2="564" y2="712" stroke="#cbd2d5"/>
+  <text x="36" y="747" fill="#526171" font-family="Arial,sans-serif" font-size="19">Source: Lore DB wave spec and budget tests</text>
+</svg>
