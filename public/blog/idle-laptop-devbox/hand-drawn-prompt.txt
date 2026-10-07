@@ -1,0 +1,5 @@
+Original raster: cover.png
+Web derivative: hand-drawn.webp
+Editable flow source: src/content/blog/turning-an-idle-laptop-into-a-devbox.md
+
+Prompt: Relaxed hand-drawn editorial blog illustration on warm ivory paper. Two unbranded laptops on a simple desk with lots of whitespace. Left an everyday laptop closed beside a coffee cup. Right an older laptop with its lid slightly open, connected to a power cable, quietly running tiny abstract terminal task marks on the screen. A loose periwinkle dotted connection between the two, and a small moon outside a sketched window to suggest the work continues. Muted periwinkle and apricot watercolor, dark pencil outlines, friendly understated style. No text, no logos, no fake product screenshot. Landscape 3:2. Concept for repurposing an idle laptop as a remote Linux development machine while the primary laptop is closed.
