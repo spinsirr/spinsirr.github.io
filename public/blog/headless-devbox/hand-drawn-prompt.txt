@@ -1,0 +1,6 @@
+Conceptual editorial illustration, generated for "A headless devbox still needs a browser".
+Warm ivory paper, relaxed dark ink lines, muted periwinkle and apricot watercolor.
+A laptop connects to a compact server. A browser and terminal above the server exchange an envelope locally.
+No logos or text. This is a conceptual illustration, not a literal screenshot of the user's hardware or deployment.
+Original raster and social image: cover.png. Web derivative: hand-drawn.webp.
+The article's editable flowchart source is in src/content/blog/a-headless-devbox-still-needs-a-browser.md.
