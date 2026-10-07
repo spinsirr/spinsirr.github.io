@@ -13,6 +13,20 @@ Lore used to send many database statements one after another for a single reques
 
 The [merged database wave](https://github.com/corespeed-io/lore/pull/135) tackled the transaction shape first. The request’s identity and workspace admission now run at the start of its business transaction. The database adapter can send independent statements as a batch, then wait once for the results. The application still performs the authorization checks and reads through row-level security; fewer waits do not mean skipping either one.
 
+
+<figure class="post-sketch">
+  <img src="/blog/reducing-lore-database-round-trips/hand-drawn.webp" width="1400" height="933" loading="lazy" alt="Individual database messages compared with two tidy bundled crossings." />
+  <figcaption>A sketch of statement batching: fewer network waits, with statements still executed.</figcaption>
+</figure>
+<figure class="post-flow">
+  <ol aria-label="Database request sequence">
+    <li><strong>Admit in transaction</strong><span>Identity and workspace checks start the business transaction.</span></li>
+    <li><strong>Batch independent SQL</strong><span>The adapter sends statements together where possible.</span></li>
+    <li><strong>Wait for results</strong><span>Reads need one wait on a pipelined connection; dependent writes need two.</span></li>
+  </ol>
+  <figcaption>Flowchart: Database request sequence. The article text and linked evidence explain the boundaries in detail.</figcaption>
+</figure>
+
 ## What one wait means
 
 The round-trip tests count a wait whenever a statement goes out while nothing else is in flight. They run the real OSS database adapter over a test PostgreSQL session, with only the socket replaced to count statements and waits. On a pipelined Bun or self-hosted connection, a human memory read now sends six statements in **one network wait**. A keyed memory creation sends 13 statements in **two waits**. The write needs a second batch because its final response and replay record depend on the result of the first batch. [The test pins both budgets](https://github.com/corespeed-io/lore/blob/55a1439dbf4c5abe5c6a6646327c72aa2e1bab51/tests/server/round-trip-budget.test.ts).

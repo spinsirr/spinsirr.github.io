@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Lore indexed lexical search under PostgreSQL RLS</title>
+  <desc id="desc">Local PostgreSQL 18 benchmark at 76,000 chunks: median lexical-only search time was 10.7 seconds before and 128 milliseconds after the indexed candidate change.</desc>
+  <rect width="1200" height="630" fill="#f8f7f3"/>
+  <text x="72" y="88" fill="#1d2530" font-family="Arial,sans-serif" font-size="40" font-weight="700">Lore lexical search under RLS</text>
+  <text x="72" y="128" fill="#526171" font-family="Arial,sans-serif" font-size="21">Median query time · 76,000 chunks · PostgreSQL 18</text>
+  <text x="72" y="235" fill="#1d2530" font-family="Arial,sans-serif" font-size="25">Before</text>
+  <text x="72" y="274" fill="#526171" font-family="Arial,sans-serif" font-size="18">workspace scan</text>
+  <rect x="330" y="210" width="713" height="72" fill="#526171"/>
+  <text x="1059" y="259" fill="#1d2530" font-family="Arial,sans-serif" font-size="30" font-weight="700">10.7 s</text>
+  <text x="72" y="388" fill="#1d2530" font-family="Arial,sans-serif" font-size="25">After</text>
+  <text x="72" y="427" fill="#526171" font-family="Arial,sans-serif" font-size="18">indexed candidates</text>
+  <rect x="330" y="363" width="9" height="72" fill="#167a68"/>
+  <text x="356" y="412" fill="#1d2530" font-family="Arial,sans-serif" font-size="30" font-weight="700">128 ms</text>
+  <line x1="72" y1="524" x2="1128" y2="524" stroke="#cbd2d5"/>
+  <text x="72" y="568" fill="#526171" font-family="Arial,sans-serif" font-size="18">Source: corespeed-io/lore PR #146 · same-database local benchmark, not production latency</text>
+</svg>

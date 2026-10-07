@@ -14,6 +14,20 @@ I'll keep this concrete by anchoring it to two real products. **BuildLog** ([bui
 
 This isn't a survey of options. It's the opinionated set I reach for, and the reason a fixed set is worth having: once the plumbing is decided, the interesting decisions move up to the product.
 
+
+<figure class="post-sketch">
+  <img src="/blog/building-ai-products-fast/hand-drawn.webp" width="1400" height="933" loading="lazy" alt="A workbench with reusable conversation, backend, database, and payment building blocks." />
+  <figcaption>A sketch of the recurring product stack described in this article.</figcaption>
+</figure>
+<figure class="post-flow">
+  <ol aria-label="Product-building sequence">
+    <li><strong>Choose defaults</strong><span>Use a familiar stack across web, agent, data, and payments.</span></li>
+    <li><strong>Build the product path</strong><span>Connect the pieces around one real user workflow.</span></li>
+    <li><strong>Ship and refine</strong><span>Keep scope narrow enough to validate the end-to-end result.</span></li>
+  </ol>
+  <figcaption>Flowchart: Product-building sequence. The article text and linked evidence explain the boundaries in detail.</figcaption>
+</figure>
+
 ## The stack, and why I stopped choosing
 
 Here's the default, with the one-line reason each piece earns its slot:

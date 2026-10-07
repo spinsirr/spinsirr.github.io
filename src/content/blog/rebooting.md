@@ -16,3 +16,16 @@ a clean home for my projects, the stack I use, and notes grounded in the work.
 
 It's built with [Astro](https://astro.build/) and shipped as a static site. Expect posts
 on agent infrastructure, memory evaluation, and projects as they ship.
+
+<figure class="post-sketch">
+  <img src="/blog/rebooting/hand-drawn.webp" width="1400" height="933" loading="lazy" alt="A calm desk with a refreshed personal website on a laptop and notes nearby." />
+  <figcaption>A sketch of the rebuilt site as a home for current work.</figcaption>
+</figure>
+<figure class="post-flow">
+  <ol aria-label="Site reboot sequence">
+    <li><strong>Retire stale framing</strong><span>The older student-blog focus no longer reflected current work.</span></li>
+    <li><strong>Rebuild the site</strong><span>Astro provides a static home for projects and writing.</span></li>
+    <li><strong>Publish field notes</strong><span>New posts follow concrete work as it ships.</span></li>
+  </ol>
+  <figcaption>Flowchart: Site reboot sequence. The article text and linked evidence explain the boundaries in detail.</figcaption>
+</figure>

@@ -1,0 +1,36 @@
+.prose figure.lexical-sketch { margin: 1.75rem 0 2.5rem; }
+.prose .lexical-sketch img { display: block; width: 100%; height: auto; border: 1px solid var(--line); }
+.prose .lexical-sketch figcaption { margin-top: 0.65rem; color: var(--fg-2); font: 0.95rem/1.5 var(--font-sans); }
+.prose figure.lexical-search-figure {
+  container-type: inline-size;
+  margin: 2rem 0 2.5rem;
+  color: var(--fg);
+  font: 1rem/1.6 var(--font-sans);
+}
+.prose .lexical-search-figure ol { list-style: none; padding: 0; margin: 0 0 1rem; }
+.prose .lexical-search-figure li {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: start;
+  padding: 1rem 0;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+.lexical-search-figure .step-number { color: var(--accent); font: 700 0.9rem/1.8 var(--font-mono); }
+.lexical-search-figure li:not(:last-child) .step-number::after { content: '↓'; display: block; padding-top: 0.3rem; font: 700 1.2rem/1 var(--font-sans); }
+.lexical-search-figure li div { display: grid; gap: 0.15rem; }
+.lexical-search-figure li strong { font-weight: 650; }
+.lexical-search-figure li div span, .prose .lexical-search-figure figcaption { color: var(--fg-2); }
+.prose .lexical-search-figure code {
+  padding: 0.25rem 0.5rem;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  color: var(--fg);
+  font: 0.85rem/1.5 var(--font-mono);
+  white-space: nowrap;
+}
+@container (max-width: 600px) {
+  .prose .lexical-search-figure li { grid-template-columns: 2rem minmax(0, 1fr); gap: 0.5rem 0.75rem; }
+  .lexical-search-figure li code { grid-column: 2; justify-self: start; white-space: normal; }
+}

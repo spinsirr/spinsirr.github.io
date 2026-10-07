@@ -22,6 +22,20 @@ Same queries. Same retrieval profile. Same run.
 
 The first score asked whether search found the right record. The second asked whether the answer-bearing passage from that record actually survived chunk selection and reached the reader. We had been treating those as the same event. They were not.
 
+
+<figure class="post-sketch">
+  <img src="/blog/we-retrieved-the-memory-then-dropped-the-answer/hand-drawn.webp" width="1400" height="933" loading="lazy" alt="A highlighted answer page falling through a gap before reaching the reader desk." />
+  <figcaption>A sketch of evidence lost after retrieval and before answering.</figcaption>
+</figure>
+<figure class="post-flow">
+  <ol aria-label="Retrieval to answer boundaries">
+    <li><strong>Find the parent memory</strong><span>The first boundary measures retrieved records.</span></li>
+    <li><strong>Assemble evidence</strong><span>Chunk selection can omit the answer-bearing passage.</span></li>
+    <li><strong>Ask the reader</strong><span>The model can only use evidence that reached its prompt.</span></li>
+  </ol>
+  <figcaption>Flowchart: Retrieval to answer boundaries. The article text and linked evidence explain the boundaries in detail.</figcaption>
+</figure>
+
 ## The number was right at the wrong boundary
 
 In [Lore](https://github.com/corespeed-io/lore), a Memory is the authorized record. Retrieval ranks candidate Memories and their chunks, then a later stage assembles a bounded evidence packet for the model.

@@ -13,6 +13,20 @@ Before [Lore PR #129](https://github.com/corespeed-io/lore/pull/129), Workspace 
 
 The merged change exposes link creation, listing, and deletion through the HTTP API, TypeScript SDK, CLI, and MCP. The permission checks matter because a source memory may be read-only to the caller, and a target may be private.
 
+
+<figure class="post-sketch">
+  <img src="/blog/adding-writable-links-to-lore-memory-graph/hand-drawn.webp" width="1400" height="933" loading="lazy" alt="Two memory cards tied together beside a lock and a bounded stack of related cards." />
+  <figcaption>A conceptual sketch of a writable Memory Link and its permission boundary.</figcaption>
+</figure>
+<figure class="post-flow">
+  <ol aria-label="Memory Link write and read path">
+    <li><strong>Name the edge</strong><span>Source, target, and kind form one stable key.</span></li>
+    <li><strong>Check both ends</strong><span>The caller needs the required access to each memory.</span></li>
+    <li><strong>Write or read within limits</strong><span>Replacement writes and bounded graph reads preserve the contract.</span></li>
+  </ol>
+  <figcaption>Flowchart: Memory Link write and read path. The article text and linked evidence explain the boundaries in detail.</figcaption>
+</figure>
+
 ## Give the edge a stable identity
 
 A link is identified by **source memory, target memory, and kind**. For example, a decision can have a `supports` link to an evidence memory. The reverse direction is a different link, and another kind between the same pair is another link too.

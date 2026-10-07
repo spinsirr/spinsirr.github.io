@@ -10,6 +10,20 @@ The Lore dashboard said it could not complete a request. On a fresh self-hosted 
 
 This was not an API outage or a bad response. The TypeScript SDK threw before the browser could start a request. The [public fix is in Lore PR #122](https://github.com/corespeed-io/lore/pull/122).
 
+
+<figure class="post-sketch">
+  <img src="/blog/the-fetch-call-that-never-left-the-browser/hand-drawn.webp" width="1400" height="933" loading="lazy" alt="A browser request stops at a disconnected coupling, then succeeds when connected." />
+  <figcaption>A sketch of the method-receiver bug before any network request was sent.</figcaption>
+</figure>
+<figure class="post-flow">
+  <ol aria-label="Browser fetch failure and fix">
+    <li><strong>Store the fetch function</strong><span>The SDK chose a custom fetch or global fetch.</span></li>
+    <li><strong>Call with wrong receiver</strong><span>The browser rejected the method invocation.</span></li>
+    <li><strong>Preserve the receiver</strong><span>The corrected call lets the request reach the network.</span></li>
+  </ol>
+  <figcaption>Flowchart: Browser fetch failure and fix. The article text and linked evidence explain the boundaries in detail.</figcaption>
+</figure>
+
 ## The receiver changed at the call site
 
 The SDK's transport accepted an optional custom `fetch` implementation. Otherwise it used `globalThis.fetch`. In simplified form, it stored that function on the transport and later called it as a method:

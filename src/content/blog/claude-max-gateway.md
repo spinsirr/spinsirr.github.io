@@ -16,3 +16,16 @@ and just work, backed by your Max plan.
 
 The point is leverage: stop maintaining two integrations and stop paying twice for access you
 already have. Code's on [GitHub](https://github.com/spinsirr/claude-max-gateway).
+
+<figure class="post-sketch">
+  <img src="/blog/claude-max-gateway/hand-drawn.webp" width="1400" height="933" loading="lazy" alt="Two different connectors joining an adapter that leads to one model endpoint." />
+  <figcaption>A sketch of the gateway accepting two request formats.</figcaption>
+</figure>
+<figure class="post-flow">
+  <ol aria-label="Gateway request path">
+    <li><strong>OpenAI or Anthropic SDK</strong><span>Existing clients send their usual request format.</span></li>
+    <li><strong>Gateway translates</strong><span>The local service accepts both formats.</span></li>
+    <li><strong>Claude Code CLI</strong><span>Requests use the subscription-backed path described here.</span></li>
+  </ol>
+  <figcaption>Flowchart: Gateway request path. The article text and linked evidence explain the boundaries in detail.</figcaption>
+</figure>

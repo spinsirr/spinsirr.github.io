@@ -22,6 +22,20 @@ The short version: none of them came from retrieval. Retrieval recall was 0.99 o
 
 *Figure 1. The full ladder. Retrieval recall@10 stayed 0.99 at every step.*
 
+
+<figure class="post-sketch">
+  <img src="/blog/how-we-took-longmemeval-from-80-to-94-without-touching-retrieval/hand-drawn.webp" width="1400" height="933" loading="lazy" alt="Evidence pages from a retrieval shelf reaching a well-lit reader desk." />
+  <figcaption>A sketch of the unchanged retriever and the tuned answering stage.</figcaption>
+</figure>
+<figure class="post-flow">
+  <ol aria-label="LongMemEval tuning path">
+    <li><strong>Retrieve evidence</strong><span>Recall@10 remained 0.99 throughout the experiment.</span></li>
+    <li><strong>Give the reader context</strong><span>Increase the evidence budget without changing retrieval.</span></li>
+    <li><strong>Improve answering</strong><span>Reader choice and instructions raised end-to-end accuracy.</span></li>
+  </ol>
+  <figcaption>Flowchart: LongMemEval tuning path. The article text and linked evidence explain the boundaries in detail.</figcaption>
+</figure>
+
 ## The setup, so the numbers mean something
 
 Every number below is the same protocol: the official cleaned LongMemEval-S split, all 500 questions, each question in its own isolated workspace with a private tripwire memory owned by a different user. One leak fails the entire run, and we finished at 0/500. Retrieval is our production hybrid path (full-text, dense vectors at 1536 dimensions, reciprocal-rank fusion) under row-level security. Grading uses the official upstream judge prompts reproduced verbatim, pinned to the exact repository commit, temperature 0, the same `'yes' in response` labeling as the reference script. We tuned the answering pipeline. We never touched the exam.

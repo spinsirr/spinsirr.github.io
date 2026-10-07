@@ -14,6 +14,20 @@ This is the setup tax, and it's where most agent projects quietly die before the
 
 The anchor I'll keep coming back to is Fixo, the mobile-mechanic platform I built. Its agent diagnoses a car fault, writes the estimate, then drives a Stripe payment. The diagnosis and the estimate are the easy part. That is the model doing what models do. Making the Stripe call actually fire, under real auth, against real failures, for a real customer's card, is where the work lives.
 
+
+<figure class="post-sketch">
+  <img src="/blog/the-setup-tax/hand-drawn.webp" width="1400" height="933" loading="lazy" alt="An agent hub tangled in per-app locks, refresh clocks, paging stacks, and event bells." />
+  <figcaption>A sketch of the repeated integration work behind an agent action.</figcaption>
+</figure>
+<figure class="post-flow">
+  <ol aria-label="Agent integration workload">
+    <li><strong>Connect each app</strong><span>OAuth and scopes differ between providers.</span></li>
+    <li><strong>Keep it working</strong><span>Refresh, rate limits, pagination, and webhooks need handling.</span></li>
+    <li><strong>Maintain the fleet</strong><span>Every added service expands operational work.</span></li>
+  </ol>
+  <figcaption>Flowchart: Agent integration workload. The article text and linked evidence explain the boundaries in detail.</figcaption>
+</figure>
+
 ## OAuth, per service, forever
 
 Every app has its own OAuth dialect. Different authorize and token endpoints. Different consent screens. Different rules about redirect URIs: exact-match versus wildcard, http versus https. Different client registration, where some give you a dashboard and some make you email a form. You do not write "OAuth" once and reuse it. You write Gmail's, then Slack's, then GitHub's, then Stripe's, and each one has a quirk that costs you an afternoon.

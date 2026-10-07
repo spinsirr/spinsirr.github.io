@@ -62,8 +62,12 @@ const dateLabel = (project: Project) => project.dateLabel ?? month(project.start
 
 											<article class="project-card">
 												<img class="project-image" src={project.image} alt="" loading="lazy" decoding="async" width="1280" height="720" />
-												{project.imageKind === 'project' && project.imageSource ? (
-													<a class="image-note" href={project.imageSource} target="_blank" rel="noopener">Project site image ↗</a>
+												{project.imageKind === 'project' ? (
+													project.imageSource ? (
+														<a class="image-note" href={project.imageSource} target="_blank" rel="noopener">Project site image ↗</a>
+													) : (
+														<span class="image-note">Project image</span>
+													)
 												) : (
 													<span class="image-note">AI-generated concept image</span>
 												)}

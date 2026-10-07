@@ -1,0 +1,3 @@
+Generated editorial illustration prompt (source for hand-drawn-search.webp):
+
+Wide hand-drawn ink-and-watercolor schematic on warm off-white paper. A library card catalog with green index tabs and blue data cards on the left, a brass sieve allowing a few cards through in the middle, and a locked gate checking cards before an approved stack emerges on the right. Left-to-right arrows. Restrained charcoal, teal, blue, and gray palette. No words, numerals, people, logos, or fake UI. Metaphor for indexed candidate retrieval followed by authorized readback; not an exact database diagram.

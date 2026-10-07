@@ -20,6 +20,20 @@ We tested that boundary in [Lore](https://github.com/corespeed-io/lore). We made
 
 *Figure 1. A visual metaphor for the write-time risk: a detail omitted from the derived record cannot be recovered by searching that record.*
 
+
+<figure class="post-sketch">
+  <img src="/blog/why-we-do-not-extract-facts-by-default/hand-drawn.webp" width="1400" height="933" loading="lazy" alt="An open conversation book compressed into index cards while one golden detail slips away." />
+  <figcaption>A sketch of the write-time information loss tested in this article.</figcaption>
+</figure>
+<figure class="post-flow">
+  <ol aria-label="Fact-extraction information path">
+    <li><strong>Keep the conversation</strong><span>The source contains answer-bearing detail.</span></li>
+    <li><strong>Extract compact facts</strong><span>A shorter representation omits some details.</span></li>
+    <li><strong>Retrieve and answer</strong><span>Search cannot recover facts absent from the indexed source.</span></li>
+  </ol>
+  <figcaption>Flowchart: Fact-extraction information path. The article text and linked evidence explain the boundaries in detail.</figcaption>
+</figure>
+
 ## What we actually changed
 
 The [experiment](https://github.com/corespeed-io/lore/commit/4976fa162a29e9a082a1f53f3276f86c622b164b) used the official cleaned LongMemEval-S split. Each of the 500 questions had its own isolated workspace. The original corpus held the conversation sessions. For the alternative corpus, an extractor distilled each session into **one compact fact-sheet Memory** and indexed that derived record in a separate benchmark partition. This tested a particular compression method, not every possible fact-extraction design.

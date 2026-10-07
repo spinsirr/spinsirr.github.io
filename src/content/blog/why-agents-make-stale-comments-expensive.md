@@ -15,6 +15,20 @@ The pull request merged with 83 changed files. Ten carry the logic. Most of the 
 
 ![83 changed files drawn as squares, split into 42 inside the identity module and 41 elsewhere. Ten carry logic, four hold barrel and docs-map edits from the same commits, seven have only import path edits, 23 have import and comment path edits, and 39 have only comment or doc path edits. 37 of those 39 sit outside the module.](/blog/why-agents-make-stale-comments-expensive/fig-83-files.png)
 
+
+<figure class="post-sketch">
+  <img src="/blog/why-agents-make-stale-comments-expensive/hand-drawn.webp" width="1400" height="933" loading="lazy" alt="An old path note pointing to an empty shelf after a folder moved." />
+  <figcaption>A sketch of how a path comment can outlive the code it describes.</figcaption>
+</figure>
+<figure class="post-flow">
+  <ol aria-label="Refactor and stale-comment sequence">
+    <li><strong>Move the implementation</strong><span>Imports break and the compiler finds them.</span></li>
+    <li><strong>Leave an old path comment</strong><span>Text references can remain stale without a failing check.</span></li>
+    <li><strong>Next agent reads it</strong><span>An outdated comment becomes misleading context.</span></li>
+  </ol>
+  <figcaption>Flowchart: Refactor and stale-comment sequence. The article text and linked evidence explain the boundaries in detail.</figcaption>
+</figure>
+
 ## Where the other 73 came from
 
 The agent wrote five commits. Three move the agent, org and `/me` flows. The fourth splits the feature into domain folders, so `agents-pg.ts` becomes `agents/data.ts`.
