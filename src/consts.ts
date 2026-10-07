@@ -20,7 +20,7 @@ export const PROFILE = {
 	location: 'San Jose, CA',
 	email: CONTACT_EMAIL,
 	subhead:
-		'CoreSpeed cofounder with a background in computer engineering. I build backend systems and products, from service APIs and billing to app access and memory. Based in San Jose, California.',
+		'I’m building CoreSpeed and working on agents, memory, and backend systems. Here you’ll find my projects and notes on the decisions, bugs, and details along the way.',
 };
 
 export const STATS = [
@@ -86,11 +86,13 @@ export interface StackGroup {
 }
 
 export const STACK: StackGroup[] = [
-	{ label: 'Languages', items: ['TypeScript', 'Python', 'Rust', 'Kotlin', 'C / Verilog'] },
-	{ label: 'Frontend', items: ['React', 'Next.js', 'Astro', 'Tailwind'] },
-	{ label: 'Backend & runtime', items: ['Cloudflare Workers', 'Hono', 'Bun', 'Node.js', 'Deno'] },
-	{ label: 'AI & agents', items: ['MCP', 'Vercel AI SDK', 'AG-UI', 'Claude', 'Codex', 'Gemini'] },
-	{ label: 'Data & payments', items: ['Postgres', 'pgvector', 'Drizzle', 'Supabase', 'Stripe', 'Railway'] },
+	{ label: 'Languages & runtime', items: ['TypeScript', 'SQL', 'Python', 'Rust', 'Bun', 'Node.js'] },
+	{ label: 'Web', items: ['React', 'Next.js', 'React Router', 'TanStack Router', 'Tailwind CSS', 'Astro'] },
+	{ label: 'Backend', items: ['Cloudflare Workers', 'Durable Objects', 'Hono'] },
+	{ label: 'Data', items: ['Postgres', 'pgvector', 'Neon', 'Drizzle', 'Supabase'] },
+	{ label: 'Agents', items: ['MCP', 'Vercel AI SDK', 'Zypher Agent'] },
+	{ label: 'Auth & billing', items: ['WorkOS', 'Neon Auth', 'Stripe'] },
+	{ label: 'Dev tools', items: ['Claude Code', 'Codex', 'Vitest', 'Playwright', 'Storybook'] },
 ];
 
 export type ProjectGroup = 'CoreSpeed' | 'Products' | 'Open source' | 'Hardware';

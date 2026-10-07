@@ -32,7 +32,8 @@ const posts = published(await getCollection('blog')).slice(0, 3);
 				<hr class="rule" />
 				<div class="hero-grid g12">
 					<div class="hero-copy">
-						<h1 class="hero-h">I build products and the <span class="accent">infrastructure behind them</span>.</h1>
+						<h1 class="hero-h">Spencer <span class="accent">Zhao</span></h1>
+						<p class="hero-intro">Engineer, cofounder, occasional side-project starter.</p>
 						<p class="lead">{PROFILE.subhead}</p>
 						<div class="cta">
 							<a class="btn btn-primary" href="/projects">View work</a>
@@ -81,7 +82,7 @@ const posts = published(await getCollection('blog')).slice(0, 3);
 			<section class="section wrap">
 				<div class="head">
 					<h2>Stack</h2>
-					<span class="seeall">what I build with</span>
+					<span class="seeall">across my projects</span>
 				</div>
 				<div class="stack">
 					{
@@ -199,8 +200,13 @@ const posts = published(await getCollection('blog')).slice(0, 3);
 				max-width: 14ch;
 				font-size: clamp(2.6rem, 7vw, 5rem);
 			}
+			.hero-intro {
+				margin: 1.2rem 0 0;
+				font-size: clamp(1.15rem, 2vw, 1.5rem);
+				line-height: 1.5;
+			}
 			.hero-copy .lead {
-				margin: 1.6rem 0 0;
+				margin: 1rem 0 0;
 			}
 			.cta {
 				display: flex;
