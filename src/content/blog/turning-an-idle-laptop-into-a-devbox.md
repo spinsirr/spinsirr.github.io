@@ -1,6 +1,6 @@
 ---
 title: 'Turning an idle laptop into a devbox'
-description: 'How an idle laptop with 32GB of RAM and a 1TB SSD became my remote development machine, and the laptop defaults that needed attention.'
+description: 'How an idle laptop with 32GB of RAM and a 1TB SSD became my remote development machine, the tradeoffs behind using it, and the laptop defaults that needed attention.'
 pubDate: 'Oct 07 2026'
 kind: field-note
 tags: ['Linux', 'Developer tools', 'Infrastructure']
@@ -29,11 +29,36 @@ Here is the hardware I ended up using:
 | Storage | 1TB NVMe SSD |
 | Operating system | Ubuntu |
 
-Those numbers describe this machine, rather than a minimum specification for a devbox. I have no hardware comparison benchmark to attach to them.
+The starting question was whether this machine could take over a useful part of my development workflow. The specification gave me a place to start; it was not a promise about how many agents or builds it could run simultaneously.
 
-For this job, I care about room for the development workload: repositories, dependencies, worktrees, builds, and running tools. Memory and disk capacity are useful things to check before buying anything. They are also things I can watch as the workload grows, instead of guessing a future requirement from a processor ranking.
+### Size the whole workspace
 
-Already owning the laptop settled the first decision. It did not settle whether the setup would behave like a machine I could leave running.
+An agent session is only one part of the workload. The tools it starts need resources too. A workspace might have a development server, a compiler watching files, and a browser running tests. Open another worktree and some of those processes may be duplicated. The useful unit for capacity planning is the set of things running together.
+
+That makes the 32GB of memory worth paying attention to. I would check available memory and swap activity during an ordinary busy session before deciding that the CPU needs an upgrade. If a machine becomes unresponsive only when several jobs overlap, increasing concurrency further is unlikely to make the overall workflow feel faster.
+
+The SSD has a similar story. Source code is only part of what occupies it. Dependencies, build output, container images, and abandoned worktrees can accumulate. A 1TB disk gives this setup room to start, but I would still check what is growing before treating a full disk as a reason to buy another computer.
+
+The processor matters for the work executed locally, including builds and tests. The useful question is which step keeps me waiting. I have not benchmarked this laptop against other machines, so I cannot turn its core count into a throughput claim.
+
+## What would make another option worth it?
+
+Because I already had the laptop, there was no new computer to purchase to try this arrangement. That makes the decision different from choosing equipment from scratch. Electricity, maintenance, and my time still count; I have not measured a monthly operating cost or calculated a break-even point against a cloud instance.
+
+The comparison I find useful is what would justify changing the arrangement:
+
+| Option | Reason to consider it | Question to resolve first |
+| --- | --- | --- |
+| Keep everything on the everyday laptop | Keep one environment and work without a remote connection | Is tying the work to that laptop’s availability actually a problem? |
+| Reuse the idle laptop | Give remote sessions a home using hardware already available | Can it stay awake, connected, and responsive under the workload? |
+| Buy a dedicated machine | Address a specific capacity, placement, or maintenance constraint | What observed limitation would the purchase remove? |
+| Rent a cloud machine | Move the runtime out of the house and choose a provider-managed host | What persistent storage, access, and ongoing cost does the workflow require? |
+
+This is a framework for the choice, not a record of four machines I tested. The idle laptop was the option available to me. A cloud machine becomes more interesting if keeping the runtime at home is itself the problem. A new physical machine becomes more interesting if the existing one hits a resource limit or is awkward to keep running.
+
+There is also a cost to introducing a remote machine at all: development now depends on being able to reach it. If I need to work somewhere without that connection, the everyday laptop has an advantage. Separating the runtime is useful only when the independence it gives the work is worth that dependency.
+
+For my setup, the next step was making the existing machine behave consistently in its new role.
 
 ## Give the work a home
 
@@ -81,6 +106,20 @@ The machine also has lingering enabled for my user. As the [loginctl documentati
 That is useful for services managed there. It does not turn every command launched in an arbitrary shell into a persistent job. I still need to know which service or runtime owns a long-running process.
 
 A headless machine has other small desktop assumptions to untangle, too. I wrote about one of those separately: [opening browser URLs from a remote development environment](/blog/a-headless-devbox-still-needs-a-browser/).
+
+## What I would check before upgrading
+
+I would want a specific symptom before replacing this machine. “The devbox feels slow” leaves too many possibilities open:
+
+- **A build is slow even when it runs alone.** Time that build and inspect resource use while it runs. This gives a much clearer hardware question than timing a busy machine with unrelated jobs competing for resources.
+- **Everything slows down when several workspaces are active.** Check memory pressure and the processes each workspace leaves running. The first useful experiment is to reduce overlap and see whether responsiveness returns.
+- **The disk keeps filling up.** Separate active project data from disposable caches and old build output. More storage can be justified, but it should be clear what needs to be retained.
+- **The client cannot reach the workspace.** Check the remote machine’s power and network state. A faster CPU will not fix a suspended server or a broken connection.
+- **A session disappears after logout or a restart.** Inspect who owns the process and how it starts. That is a lifecycle question to resolve before spending on hardware.
+
+These are checks I would use to guide the next decision, rather than results from a benchmark suite. I have not established a maximum number of simultaneous agents for this laptop.
+
+Recovery deserves its own check as well. Reconnecting to a running session is convenient, but the machine can still fail. Pushed commits, uncommitted work, and local service data have different recovery paths. A second machine is not automatically a backup of the first, especially when a project has one active home.
 
 ## The selection was pleasantly short
 
