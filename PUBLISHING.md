@@ -5,9 +5,10 @@ This is the source of truth for article selection, writing, checks, and release.
 ## Choose a topic
 
 - Read the existing posts in `src/content/blog/` before choosing a topic. Publish at most one substantial new article per review; skip the review if nothing qualifies.
-- Ground each post in a concrete project, incident, code change, or measured result. Short concept-only explainers and posts written to fill a schedule do not belong here.
-- CoreSpeed Memory is **read-only** in the Personal Website/CV project. It can suggest a topic, but it is not a publishable source. Do not create, change, or delete memories through any tool or account as part of this workflow.
-- Verify factual claims, dates, and Spencer's contribution against public code, merged PRs, documentation, or other public evidence. Check newer evidence when Memory entries conflict or describe an earlier state.
+- This is a personal site. Software is one subject, not a required frame. Cars and repair work, hardware projects, product decisions, places, and personal observations also belong when Spencer has real material he wants to share. Do not force these subjects into an engineering lesson.
+- Ground each post in a concrete project, incident, code change, measured result, or firsthand experience. Short concept-only explainers and posts written to fill a schedule do not belong here.
+- Lore and CoreSpeed Memory are **read-only** in the Personal Website/CV project. They can suggest a topic, but they are not publishable sources or permission to disclose personal details. Do not create, change, or delete memories through any tool or account as part of this workflow.
+- Verify factual claims and dates against public code, merged PRs, documentation, public artifacts, or material Spencer has explicitly approved for publication. A memory-only personal story is not enough. Check newer evidence when memories conflict or describe an earlier state.
 - Check current product names and GitHub's canonical repository URLs before linking them. The curated project list in `src/consts.ts` is the site's source of truth; link a private project to its public product page rather than a repository visitors cannot access.
 - Keep private Memory text, credentials, internal plans and decisions, customer information, and personal data out of the site. Do not present team work as solely Spencer's work or invent first-person experience.
 

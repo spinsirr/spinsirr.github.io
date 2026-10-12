@@ -9,7 +9,7 @@ import { PROFILE } from '../../consts';
 import { KIND_LABELS, published, readingTime } from '../../utils/posts';
 
 const title = `Writing | ${PROFILE.name}`;
-const description = 'Notes on agent infrastructure, memory, evaluation, and shipping software.';
+const description = 'Notes on what I build, learn, and notice along the way.';
 const posts = published(await getCollection('blog'));
 const featured = posts.find((post) => post.data.featured) ?? posts[0];
 const remaining = posts.filter((post) => post.id !== featured?.id);
