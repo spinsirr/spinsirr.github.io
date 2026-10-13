@@ -1,6 +1,6 @@
 ---
-title: 'Making a devbox my development machine'
-description: 'What changed when I moved the repository, worktrees, terminals, and agent sessions onto one remote machine.'
+title: 'Moving development onto my devbox'
+description: 'The migration took two attempts. Keeping a working copy on each machine was where I went wrong.'
 pubDate: 'Oct 12 2026'
 kind: field-note
 tags: ['Linux', 'Developer tools', 'Git', 'Infrastructure']
@@ -9,44 +9,46 @@ draft: false
 ogImage: '/blog/devbox-development/checkout-topology.png'
 ---
 
-I first treated my devbox as a place to run things. The code stayed on my everyday laptop, and I sent work to the remote machine when I needed more time or a process that would survive closing the lid. That arrangement worked for a small test. It became awkward when I started developing a real project on both machines.
+I had an unused laptop and wanted somewhere for coding agents to keep running after I closed my MacBook. I installed Linux on it, called it `devbox`, and connected over SSH. Getting a shell was straightforward. Deciding where to keep the code took longer.
 
-The decisive change was simpler than another sync script: I chose one machine to own each project. For a project on the devbox, the main checkout, its worktrees, dependencies, terminals, and running agents all live there. My laptop is the interface.
+At first, I kept developing on the Mac and treated the devbox as a second place to run the project. I added an rsync wrapper to copy files over. Then I had a checkout on each machine, on different branches, with uncommitted changes in both.
 
-<figure class="post-sketch">
-  <img src="/blog/devbox-development/checkout-topology-article.svg" width="800" height="850" loading="lazy" alt="Two divergent checkouts on a laptop and devbox give way to one devbox checkout with task worktrees, reached from a laptop client." />
-  <figcaption>One project has one active home. The laptop connects to the devbox; Git worktrees branch from the checkout on that same machine. This is a conceptual map of my development workflow.</figcaption>
+I was also forwarding services onto different local ports so the two development stacks could coexist. That made the remote app accessible, but every change still came with a question: which copy was I editing?
+
+## Moving it twice
+
+I moved the project to the devbox, changed my mind and went back to using the Mac copy, then moved it again. The final decision was to do the development directly on the devbox through Orca. I removed the Mac checkout and the sync wrapper.
+
+The project now has its main checkout and task worktrees on the same machine. Other projects still live on my Mac. I choose where each project lives rather than maintaining a matching copy on both.
+
+<figure class="devbox-paths">
+  <div class="devbox-paths-client"><strong>MacBook</strong><span>Orca client</span></div>
+  <div class="devbox-paths-host"><strong>devbox</strong><pre>~/Workspace/&lt;project&gt;/
+    main checkout
+
+~/orca/workspaces/&lt;project&gt;/
+    task-a/
+    task-b/</pre></div>
+  <figcaption>The directory layout on the remote machine. Project and task names are placeholders.</figcaption>
 </figure>
 
-## The duplicate checkout was the problem
+<style>
+.devbox-paths { margin: 2rem 0; color: var(--fg); }
+.devbox-paths-client, .devbox-paths-host { border-top: 1px solid var(--line); padding: 1rem 0; }
+.devbox-paths strong { display: block; margin-bottom: .5rem; }
+.devbox-paths-client span, .devbox-paths figcaption { color: var(--fg-2); }
+.devbox-paths pre { margin: 0; padding: .5rem 0; background: transparent; border: 0; font-size: .9rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.devbox-paths figcaption { border-top: 1px solid var(--line); padding-top: 1rem; font-size: .85rem; }
+</style>
 
-I briefly kept a copy of the same project on each machine. Both copies accumulated local changes. A sync command could move files, but it could not decide which uncommitted edits were authoritative, which branch a task belonged to, or which local service matched the code I was looking at. Port forwarding made the two environments feel closer while leaving those questions open.
+## Getting the tools onto the right machine
 
-I stopped treating the devbox as a mirror. The project moved there, and the laptop copy was removed after its changes were accounted for. This is a project-by-project decision: a different repository can still live on the laptop. What matters is that a single repository does not have two competing working homes.
+[Orca's remote server](https://github.com/stablyai/orca/blob/main/docs/site/content/docs/remote-servers.mdx) runs the terminals and agents on the devbox. The Mac app connects to it. I can close the client and come back to the remote session later.
 
-Git remains the record for commits. It does not automatically preserve an uncommitted worktree, a running development server, or a local database. Those need their own handling when moving a project. I checked the repository state and runtime on the destination before retiring the other copy.
+Moving the repository did not move the rest of the environment. The remote machine needed its own runtime, dependencies, Git access, and CLI logins. For the first project, cloning over HTTPS failed because the remote shell had no credential helper configured. Cloning over SSH worked with the key already on that machine.
 
-## Put the whole working session beside the code
+Browser logins were another job. A CLI running remotely could ask to open a URL, but the machine had no desktop browser handler. Fixing that led to the `xdg-open` problem described in [A headless devbox still needs a browser](/blog/a-headless-devbox-still-needs-a-browser/).
 
-I use [Orca's remote-server model](https://github.com/stablyai/orca/blob/main/docs/site/content/docs/remote-servers.mdx) to open the devbox from my laptop. The server owns the project, terminal, browser runtime, and agent processes. The client displays and controls them. A worktree created for a separate task is another directory on the devbox, not a new checkout on my laptop.
+The setup I use now has fewer moving parts than the one I started with: Orca connects to the devbox, the project runs there, and I open its remote worktree to continue. There is no copy step before running a command and no sync step when I finish.
 
-That changes what “disconnect” means. Closing the client no longer means closing the terminal that runs the task. The remote process can keep working, and I can return to its existing workspace. I still check the process and its output after reconnecting; a surviving session is not proof that the task succeeded.
-
-The same distinction matters for previews and sign-in flows. A browser window shown on the laptop may be backed by a browser process on the devbox. `localhost` belongs to whichever machine runs that process. I wrote about the URL-handler failure this exposed in [A headless devbox still needs a browser](/blog/a-headless-devbox-still-needs-a-browser/).
-
-## The daily loop
-
-I start from the remote project's main checkout, create a worktree for focused work, run the project's checks there, and inspect its preview. When I return later, I reopen the same workspace and read the actual state of the branch, process, and tests before deciding what is finished.
-
-<figure class="post-flow">
-  <ol aria-label="A development loop with the repository on the devbox">
-    <li><strong>Open the remote project</strong><span>The devbox owns the checkout and its dependencies.</span></li>
-    <li><strong>Work in a task worktree</strong><span>Terminal, agent, and preview run beside that code.</span></li>
-    <li><strong>Return and verify</strong><span>Read the branch, output, and checks after reconnecting.</span></li>
-  </ol>
-  <figcaption>The client can come and go; the project's working state stays on one machine.</figcaption>
-</figure>
-
-This setup also makes the boundary less forgiving. Installing a CLI on my laptop does not install it on the devbox. Logging into a service locally does not authenticate the remote process. A remote agent has the devbox's permissions, so I account for its credentials and network access as part of that machine's setup rather than imagining it is an isolated sandbox.
-
-The earlier [idle-laptop walkthrough](/blog/turning-an-idle-laptop-into-a-devbox/) covers SSH, power settings, reconnecting, and a first preview. The useful next step for me was deciding where the work truly lives. Once that was explicit, the devbox stopped being an extra place to run code and became the development machine for the projects assigned to it.
+For the Linux, SSH, and power configuration, I kept the commands in [How to turn an idle laptop into a Linux devbox](/blog/turning-an-idle-laptop-into-a-devbox/).
