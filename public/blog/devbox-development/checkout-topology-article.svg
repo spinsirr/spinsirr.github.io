@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="850" viewBox="0 0 800 850" role="img" aria-labelledby="title desc">
+  <title id="title">One active home for a project</title>
+  <desc id="desc">A duplicate checkout on the laptop and devbox can diverge. One remote checkout keeps the project and its task worktrees together.</desc>
+  <rect width="800" height="850" fill="#f8f7f4"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#202425">
+    <text x="48" y="68" font-size="35" font-weight="700">One active home for a project</text>
+    <text x="48" y="118" font-size="20" font-weight="700" letter-spacing="2">BEFORE: TWO CHECKOUTS</text>
+    <text x="48" y="170" font-size="24" font-weight="700">Laptop</text>
+    <text x="48" y="200" font-size="19">checkout A · local edits</text>
+    <text x="465" y="170" font-size="24" font-weight="700">Devbox</text>
+    <text x="465" y="200" font-size="19">checkout B · other edits</text>
+    <text x="48" y="279" font-size="20" fill="#a4563c">Which working tree wins?</text>
+    <text x="48" y="365" font-size="20" font-weight="700" letter-spacing="2">AFTER: ONE REMOTE CHECKOUT</text>
+    <text x="48" y="424" font-size="24" font-weight="700">Laptop</text>
+    <text x="48" y="454" font-size="19">client window</text>
+    <text x="465" y="424" font-size="24" font-weight="700">Devbox</text>
+    <text x="465" y="454" font-size="19">main checkout + runtime</text>
+    <text x="48" y="540" font-size="20" fill="#3f7167">Work stays on the devbox.</text>
+    <text x="48" y="812" font-size="17" fill="#5c6461">Conceptual map of the author's development workflow.</text>
+  </g>
+  <g fill="none" stroke="#b9bdb9" stroke-width="2">
+    <rect x="32" y="134" width="320" height="91" rx="5"/>
+    <rect x="449" y="134" width="320" height="91" rx="5"/>
+    <path d="M352 180h97" stroke="#c2775b" stroke-dasharray="7 8"/>
+    <rect x="32" y="388" width="320" height="91" rx="5"/>
+    <rect x="449" y="388" width="320" height="91" rx="5"/>
+    <path d="M352 434h97" stroke="#558077"/>
+  </g>
+  <g fill="none" stroke="#558077" stroke-width="2">
+    <path d="M610 479v119M140 598h535M140 598v28M407 598v28M675 598v28"/>
+    <rect x="52" y="626" width="176" height="95" rx="5"/>
+    <rect x="319" y="626" width="176" height="95" rx="5"/>
+    <rect x="587" y="626" width="176" height="95" rx="5"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#202425" font-size="20" text-anchor="middle">
+    <text x="140" y="664">worktree</text><text x="140" y="694">task A</text>
+    <text x="407" y="664">worktree</text><text x="407" y="694">task B</text>
+    <text x="675" y="664">worktree</text><text x="675" y="694">task C</text>
+  </g>
+  <path d="M48 773h704" stroke="#d5d8d3"/>
+</svg>
