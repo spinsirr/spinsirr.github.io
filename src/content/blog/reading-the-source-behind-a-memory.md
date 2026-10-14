@@ -1,6 +1,6 @@
 ---
 title: 'Reading the source behind a memory'
-description: 'On 500 LongMemEval questions, reading the sessions behind retrieved memories raised accuracy from 84.4% to 89.6%, without a raw-text search index.'
+description: 'We tried keyword search, wider excerpts, and whole conversations. Then we checked what the extra accuracy would cost to keep.'
 pubDate: 'Oct 13 2026'
 kind: research
 tags: ['Memory systems', 'Evaluation', 'LongMemEval', 'PostgreSQL']
@@ -8,69 +8,62 @@ featured: false
 ogImage: '/blog/reading-the-source-behind-a-memory/results.png'
 ---
 
-In an [earlier Lore experiment](/blog/why-we-do-not-extract-facts-by-default/), compact fact sheets saved reader tokens but dropped details needed to answer later questions. Keeping the original conversation solved the retention problem. It left a practical question: when should the reader see it?
+The first attempt to add raw conversation search to Lore barely helped. On 500 LongMemEval-S questions, the reader got three more answers right. Most questions received no raw text at all.
 
-We tested eleven ways to combine retrieved Memory with raw conversation text on all 500 LongMemEval-S questions. One of the simpler approaches answered **448 questions correctly, up from 422**: take a retrieved Memory, find the session it came from, and give the reader that session too. No second search over the raw corpus was needed.
+We had [already measured what fact extraction loses](/blog/why-we-do-not-extract-facts-by-default/). A compact Memory could retain the topic of a conversation while dropping a shop name or something the assistant had said. This experiment was about getting those details back into the answer.
 
-The [public experiment report](https://github.com/corespeed-io/lore/blob/d6c18572b2204d06850060810100d33895dd719a/docs/research/memory-source-expansion.md) includes the full comparisons, regressions, and reproduction instructions. This is a benchmark result, not a deployed agent workflow.
+## The query was too strict
 
-## The search had already found the conversation
+The raw search passed the question to PostgreSQL's `websearch_to_tsquery`. A chunk had to contain every content word. Only 85 questions found any raw evidence. Restricting search to the sessions behind the Memory hits did not change that.
 
-In the earlier baseline's 79 failed questions, 70 had every answer-bearing session represented in the top ten Memory hits. Search had found the right place. The extracted facts, or the excerpt sent to the reader, did not contain enough of what was said there.
+We relaxed the query to accept any distinctive keyword, then tried adding one neighboring chunk on each side. We also tried reading the source sessions directly, without searching inside them.
 
-That suggested a specific experiment. Freeze the ten Memory excerpts for each question and replay them unchanged. Add source text within the remaining reader budget. If an answer improves, it cannot be because we quietly improved Memory retrieval.
+To keep the comparison useful, every version received the same ten saved Memory excerpts. Raw text had to fit around them within a 24,000 UTF-16-unit limit. None of the original excerpts could be cut.
 
-Every arm kept those ten excerpts intact inside the same **24,000 UTF-16-unit cap**. That is a text-length limit, not a 24,000-token allowance. The reader was Gemini 3.5 Flash; GPT-5.5 judged the answers using LongMemEval's official V1 rubric. These numbers belong to that reader-and-judge profile. They should not be subtracted from scores in our earlier articles, which used different profiles.
-
-## A whole session beat a narrower window
-
-We started with several ways to select text inside the sessions Memory had already found. Searching those sessions with the original question barely helped: accuracy moved from 84.4% to 85.2%. The lexical query demanded all its content words in one chunk. Only 85 of the 500 questions received any raw text.
-
-Relaxing the query to match any distinctive keyword helped. Adding neighboring chunks helped again. Reading whole source sessions did better still.
-
-| Evidence added to the same Memory hits | Correct / 500 | Mean reader input tokens |
+| Added evidence | Correct / 500 | Mean reader input tokens |
 | --- | ---: | ---: |
 | None | 422 | 2,469 |
-| Keyword excerpts from their sources | 435 | 4,701 |
-| Keyword excerpts plus neighboring chunks | 440 | 5,986 |
-| Whole source sessions, within the cap | **448** | **6,041** |
+| Independent raw search with the original question | 425 | 2,550 |
+| Keywords within Memory-hit sources | 435 | 4,701 |
+| Keywords plus neighboring chunks | 440 | 5,986 |
+| Whole source sessions, within the limit | 448 | 6,041 |
 
-Almost the same input budget bought different results: windows across several hits answered 440 questions; whole sessions from the highest-ranked hits answered 448. On average, 1.75 whole sessions fit. In this run, the extra context within those sessions was more useful than covering more hits with short windows.
+The last two rows cost almost the same number of tokens. The windows covered five or six hits; the whole-session version fit roughly one or two. Reading further into fewer conversations worked better here.
 
-Questions about things the assistant had said showed the largest change: **42 to 54 correct out of 56**. The report describes lost details such as a chord progression, a shop name, and a shift-rota entry. A fact sheet could preserve the subject of a conversation without preserving the particular answer a later question needed.
+The largest improvement was in questions about what the assistant had said. The extracted facts had omitted details such as a chord progression and a shift-rota entry. Those details were still in the original conversation.
 
-## Keeping text and indexing text have different costs
+The [full report](https://github.com/corespeed-io/lore/blob/d6c18572b2204d06850060810100d33895dd719a/docs/research/memory-source-expansion.md) covers eleven variants. We used Gemini 3.5 Flash to answer and GPT-5.5 with the official rubric to judge. Earlier posts used different profiles, so their scores are not directly comparable.
 
-The next question was whether storing both Memory and its source would be too expensive. The database measurements separated two costs that are easy to lump together: retaining raw text and making all of it searchable.
+## The highest score needed another index
 
-![Three measured configurations: Memory alone scores 84.4% at 32 MB per 1,000 sessions; adding source sessions scores 89.6% at 38 MB; adding lexical and dense raw search scores 91.8% at 243 MB.](/blog/reading-the-source-behind-a-memory/results.png)
+We then combined source sessions with independent raw search. Half the remaining text budget went to the sessions; the rest went to excerpts from other conversations. Adding vector search produced the highest score in the run.
 
-*Storage estimates per 1,000 benchmark sessions. The source-link table was not implemented; its small expected overhead is not a measured table size. These are within-run comparisons, not production forecasts.*
+![Accuracy and storage for Memory alone, Memory with source sessions, and Memory with source sessions plus lexical and dense raw search.](/blog/reading-the-source-behind-a-memory/results.png)
 
-Memory facts, chunks, and vectors accounted for about **32 MB per 1,000 sessions**. Retaining the raw Observations added about **6 MB**. Reading those Observations by source key needed no raw search index.
+*Storage per 1,000 benchmark sessions, using 1,536-dimension vectors. Memory storage is apportioned by chunk count; source-link overhead is estimated. These are not production capacity estimates.*
 
-Lexical chunks and indexes added another **51 MB**. Adding dense vectors and their HNSW index added **154 MB** beyond that. The vectors in this experiment had 1,536 dimensions; Lore deployments use 1,024, which was not measured here. The Memory allocation was also estimated by its share of chunk counts in a database that held both fact and whole-session Memories.
+That prompted my next question: would keeping Memory and the original conversation be too expensive?
 
-The keyword combination scored the same 448 as reading source sessions alone, at roughly 89 MB rather than 38 MB. They did not answer exactly the same questions correctly. But the extra index did not improve the aggregate score in this comparison.
+The raw text was a small part of the bill. The lexical chunks and indexes alone took about eight times as much space as the stored text. Reading a session by its source key needed neither that index nor a second set of embeddings.
 
-Dense raw search combined with source sessions reached **459 correct, or 91.8%**. It was the highest score, at about 243 MB. Its advantage over the keyword combination was less settled than the headline suggests: a second independent judgment preserved the direction but moved the paired comparison from p = 0.027 to p = 0.15. That is a reason to run another dataset or judging profile before committing to the extra indexing machinery.
+The keyword combination reached the same aggregate score as reading source sessions alone, despite using more storage. Vector search improved on it, but the margin was uncertain: a second judgment moved that comparison from p = 0.027 to p = 0.15.
 
-## Read more only when the first answer declines?
+I chose to keep the raw indexes optional. Independent search still has a use when Memory misses a conversation entirely. I wanted another dataset or judging profile before committing to a background pipeline that embeds every raw session.
 
-Always attaching source sessions raised reader input from 2,469 to 6,041 tokens. We also replayed a two-step rule: answer from Memory first; if that answer says the evidence is insufficient, use the source-enriched answer.
+## Paying for the second read
 
-That rule scored **439 out of 500, or 87.8%**, at **3,385 mean input tokens**. The token count includes both reader calls for questions that escalated. It excludes output and thinking tokens. This was a replay of saved answers, not a live measurement of a production router.
+Storage was only one cost. Feeding source sessions to the reader on every question more than doubled its input. We replayed a cheaper rule against the saved answers: use Memory first, and consult the source only when the answer says it lacks evidence.
 
-It kept 17 of the 26 additional correct answers for about a quarter of the additional input. But it has a hard limit: **37 of Memory's 78 failures were confident wrong answers**. A rule that waits for the model to decline will never revisit those.
+That scored 439 out of 500 at 3,385 mean input tokens, counting both calls when it escalated. It recovered fewer answers, but used about a quarter of the extra input of always reading the source. Output and thinking tokens were excluded.
 
-More text also introduced errors. Reading source sessions lost six questions that Memory alone answered correctly, including two false-premise questions. Details in an old assistant response sometimes persuaded the reader to accept something the user had never actually stated. The combined dense arm lost three of the 30 abstention questions. Source text needs speaker and evidence boundaries, not just room in the prompt.
+It also left 37 confident wrong answers untouched. Those answers never asked for more evidence.
 
-## The missing piece is a real source link
+Reading the source could introduce mistakes too. In one case, an intention expressed as “by the end of this month” became an event date. In others, old assistant suggestions helped the reader accept a premise the user had never stated.
 
-The benchmark made one thing easy that the product does not yet guarantee. Each extracted Memory carried a session key. We used that key to find its raw Observation.
+## What I agreed to build
 
-At the [PR #150 merge](https://github.com/corespeed-io/lore/pull/150), production Memories did not have that source relationship. Proposals retained evidence Observation IDs, but accepting a Proposal did not copy them into a durable Memory-to-Observation link. An agent could also write a Memory directly without citing a source. Memory-to-Memory graph links are a different relationship and cannot fill that gap.
+The chosen direction was Memory, retained raw text, and a link between them, with a second read when Memory is insufficient. The benchmark had made the link easy: every extracted fact sheet already named its source session.
 
-The experiment therefore supports a next step: preserve the source relationship, then measure a reader that follows it when needed. Raw indexes can remain an explicit cost for workloads that need independent raw search. The merged PR exposed Episode evidence search and the evaluation; it did not turn the benchmark's source-expansion strategy into the default read path.
+At the [PR #150 merge](https://github.com/corespeed-io/lore/pull/150), the product did not preserve that relationship on accepted Memories. Proposal evidence IDs existed, but acceptance did not copy them across. Direct Memory writes could have no source citation at all.
 
-What convinced me was the small comparison in the middle of the run: **6,041 tokens of whole source sessions beat 5,986 tokens of selected windows**. We already had the right conversations. Giving the reader more of those conversations recovered details that another short excerpt still missed.
+The follow-up therefore needs to carry those citations into a durable link and test the reader against actual linked records. PR #150 added raw evidence search and this evaluation. Automatic source expansion was still unbuilt.
