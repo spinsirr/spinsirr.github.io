@@ -9,7 +9,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import type { Post } from '../utils/posts';
-import { KIND_LABELS, readingTime, tagSlug } from '../utils/posts';
+import { KIND_LABELS, readingTime, socialImage, tagSlug } from '../utils/posts';
 
 interface Props {
 	post: Post;
@@ -21,7 +21,7 @@ interface Props {
 
 const { post, headings, related, previous, next } = Astro.props;
 const { title, description, pubDate, updatedDate, kind, tags, series } = post.data;
-const ogImage = post.data.ogImage ?? `/og/${post.id}.png`;
+const ogImage = socialImage(post);
 const postUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const blogLd = {
 	'@context': 'https://schema.org',

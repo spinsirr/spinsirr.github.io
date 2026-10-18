@@ -26,6 +26,13 @@ export function readingTime(post: Post) {
 	return Math.max(1, Math.ceil(latinWords / 220 + cjkCharacters / 420));
 }
 
+export function socialImage(post: Post) {
+	// Astro has already resolved Markdown and HTML images into their reading order.
+	const html = post.rendered?.html.replace(/<!--[\s\S]*?-->/g, '');
+	const firstImage = html?.match(/<img\b[^>]*\bsrc\s*=\s*(["'])(.*?)\1/i)?.[2];
+	return post.data.ogImage ?? firstImage?.replaceAll('&amp;', '&') ?? `/og/${post.id}.png`;
+}
+
 export function tagSlug(tag: string) {
 	return tag
 		.toLowerCase()
