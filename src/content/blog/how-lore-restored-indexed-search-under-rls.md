@@ -6,7 +6,7 @@ kind: field-note
 tags: ['Postgres', 'Architecture', 'Performance']
 featured: false
 draft: false
-ogImage: '/blog/lore-rls-indexed-search/cover.png'
+ogImage: '/blog/lore-rls-indexed-search/hand-drawn-search.webp'
 ---
 
 Lore’s earlier [database-wave work](https://github.com/corespeed-io/lore/pull/135) reduced the number of network waits in a memory request. A different bottleneck remained inside PostgreSQL: lexical search could scan visible chunks even though the search columns had GIN indexes. In a same-database benchmark with 76,000 chunks, the old lexical-only search had a **10.7-second median**. The [merged search change](https://github.com/corespeed-io/lore/pull/146) brought that median to **128 milliseconds**. Those are local PostgreSQL 18 measurements from the PR, not production request latency.

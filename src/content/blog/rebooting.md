@@ -4,6 +4,7 @@ description: 'Why I rebuilt my corner of the internet and what I am working on n
 pubDate: 'Jun 19 2026'
 kind: field-note
 tags: ['Meta', 'Astro']
+ogImage: '/blog/rebooting/hand-drawn.webp'
 ---
 
 This is a reboot. The old version of this site was a student blog full of JavaScript

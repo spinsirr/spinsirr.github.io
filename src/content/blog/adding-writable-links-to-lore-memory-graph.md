@@ -6,7 +6,7 @@ kind: field-note
 tags: ['Memory systems', 'Postgres', 'API design']
 featured: false
 draft: false
-ogImage: '/blog/adding-writable-links-to-lore-memory-graph/put-outcomes-cover.png'
+ogImage: '/blog/adding-writable-links-to-lore-memory-graph/hand-drawn.webp'
 ---
 
 Before [Lore PR #129](https://github.com/corespeed-io/lore/pull/129), Workspace import could write Memory Links, but users and agents could not add one between existing memories. Exposing that write required a stable key, permission checks on both endpoints, and limits on link creation and graph reads.

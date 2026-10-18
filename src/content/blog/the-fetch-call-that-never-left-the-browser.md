@@ -4,6 +4,7 @@ description: 'A TypeScript SDK passed its tests and worked in Bun, but one metho
 pubDate: 'Sep 24 2026'
 kind: field-note
 tags: ['TypeScript', 'Browser', 'SDK']
+ogImage: '/blog/the-fetch-call-that-never-left-the-browser/hand-drawn.webp'
 ---
 
 The Lore dashboard said it could not complete a request. On a fresh self-hosted installation, it even offered to create a workspace although workspaces already existed. The surprising clue: **no network request had left the page**.

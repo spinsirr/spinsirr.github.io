@@ -9,7 +9,7 @@ series:
   slug: 'memory-systems'
   title: 'Memory systems'
   order: 1
-ogImage: '/blog/we-retrieved-the-memory-then-dropped-the-answer/cover.png'
+ogImage: '/blog/we-retrieved-the-memory-then-dropped-the-answer/hand-drawn.webp'
 ---
 
 ![A retrieved memory losing its answer before the reader](/blog/we-retrieved-the-memory-then-dropped-the-answer/cover.png)

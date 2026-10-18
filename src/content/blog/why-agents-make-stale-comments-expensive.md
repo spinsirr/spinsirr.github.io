@@ -6,7 +6,7 @@ kind: essay
 tags: ['Agents', 'Refactoring', 'TypeScript']
 featured: false
 draft: false
-ogImage: '/blog/why-agents-make-stale-comments-expensive/cover-83-files.png'
+ogImage: '/blog/why-agents-make-stale-comments-expensive/hand-drawn.webp'
 ---
 
 An agent refactored the identity module in our API worker this week. The goal was narrow: move flows that coordinate several modules out of the route files.

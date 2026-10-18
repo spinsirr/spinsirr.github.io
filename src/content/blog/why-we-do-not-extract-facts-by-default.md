@@ -9,7 +9,7 @@ series:
   slug: 'memory-systems'
   title: 'Memory systems'
   order: 3
-ogImage: '/blog/why-we-do-not-extract-facts-by-default/cover.png'
+ogImage: '/blog/why-we-do-not-extract-facts-by-default/hand-drawn.webp'
 ---
 
 An agent cannot remember a detail that its memory system discarded on the way in. That sounds obvious, but a successful retrieval score can hide the loss: search finds the right record, and the record no longer contains the answer.

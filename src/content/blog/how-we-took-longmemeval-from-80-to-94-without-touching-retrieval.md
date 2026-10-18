@@ -9,7 +9,7 @@ series:
   slug: 'memory-systems'
   title: 'Memory systems'
   order: 2
-ogImage: '/blog/how-we-took-longmemeval-from-80-to-94-without-touching-retrieval/cover-5x2.png'
+ogImage: '/blog/how-we-took-longmemeval-from-80-to-94-without-touching-retrieval/hand-drawn.webp'
 ---
 
 *By [Spencer Zhao](https://spinsirr.github.io/about/)*

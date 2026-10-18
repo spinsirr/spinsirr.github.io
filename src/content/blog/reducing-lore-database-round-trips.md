@@ -6,7 +6,7 @@ kind: field-note
 tags: ['Postgres', 'Memory systems', 'Performance']
 featured: false
 draft: false
-ogImage: '/blog/lore-db-round-trips/cover.png'
+ogImage: '/blog/reducing-lore-database-round-trips/hand-drawn.webp'
 ---
 
 Lore used to send many database statements one after another for a single request. A typical memory read took 11–12 network waits, while a keyed memory write took 15–20. With a database connection behind a network proxy, those waits can dominate the request even when each query is quick. These are [statement and wait counts from Lore’s database-wave specification](https://github.com/corespeed-io/lore/blob/55a1439dbf4c5abe5c6a6646327c72aa2e1bab51/docs/research/lore-core-db-wave-spec.md), not a production latency benchmark.

@@ -6,7 +6,7 @@ kind: field-note
 tags: ['Linux', 'Developer tools', 'Infrastructure', 'OAuth']
 featured: false
 draft: false
-ogImage: '/blog/headless-devbox/cover.png'
+ogImage: '/blog/headless-devbox/hand-drawn.webp'
 ---
 
 One of the more useful pieces of configuration on my development machine is a small shell script for opening URLs.

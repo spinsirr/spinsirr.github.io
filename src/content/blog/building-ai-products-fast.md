@@ -4,6 +4,7 @@ description: 'The stack and patterns I use for building AI products fast, drawn 
 pubDate: 'Jun 20 2026'
 kind: field-note
 tags: ['AI products', 'Engineering', 'Tooling']
+ogImage: '/blog/building-ai-products-fast/hand-drawn.webp'
 ---
 
 > **September 2026 update:** Fixo has since evolved into an [AI service advisor for independent repair shops](https://fixo.ink/). The Fixo architecture and payment workflow below describe the earlier product direction; shop subscription billing is not live today.

@@ -4,6 +4,7 @@ description: 'Connecting AI agents to apps means OAuth, token refresh, scopes, r
 pubDate: 'Jun 21 2026'
 kind: essay
 tags: ['Agents', 'Infrastructure', 'Integrations']
+ogImage: '/blog/the-setup-tax/hand-drawn.webp'
 ---
 
 > **September 2026 update:** Fixo has since evolved into an [AI service advisor for independent repair shops](https://fixo.ink/). The Fixo payment workflow below describes the earlier product direction; shop subscription billing is not live today.

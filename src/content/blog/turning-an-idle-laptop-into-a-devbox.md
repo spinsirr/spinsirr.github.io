@@ -6,7 +6,7 @@ kind: field-note
 tags: ['Linux', 'Developer tools', 'Infrastructure']
 featured: false
 draft: false
-ogImage: '/blog/idle-laptop-devbox/cover.png'
+ogImage: '/blog/idle-laptop-devbox/hand-drawn.webp'
 ---
 
 My devbox started as a laptop I already owned: an Intel Core i5-13500H, 32GB of RAM, and a 1TB NVMe SSD. It was sitting idle. Now it gives my development work a place to run while my everyday laptop acts as the screen and keyboard.

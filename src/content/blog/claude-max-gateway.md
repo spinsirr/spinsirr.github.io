@@ -4,6 +4,7 @@ description: 'Point your existing OpenAI- or Anthropic-SDK code at a Claude Max 
 pubDate: 'Jun 05 2026'
 kind: project-note
 tags: ['Open source', 'LLM infrastructure', 'Claude']
+ogImage: '/blog/claude-max-gateway/hand-drawn.webp'
 ---
 
 If you pay for Claude Max, you already have a lot of model access, but most tools and SDKs
