@@ -20,7 +20,7 @@ In CoreSpeed's connection authorization design, grants and environments serve di
 
 Selecting a connection in an environment cannot create access to it. The caller must already have access. For each selected connection, the allowed tools come from the intersection of the grant's tool list and the environment's tool list.
 
-![Existing connection grants and task scope overlap at reading a Slack discussion. Sending messages is outside the task scope, and a connection without a grant is outside existing access.](/blog/scoping-permissions-for-an-agent-task/permissions.png)
+![Existing connection grants and task scope overlap at reading a Slack discussion. Sending messages is outside the task scope, and a connection without a grant is outside existing access.](/blog/scoping-permissions-for-an-agent-task/permissions.svg)
 
 This distinction also keeps an environment from becoming another identity. Creating a separate agent identity changes attribution and other identity settings. Selecting an environment narrows access while preserving the agent's identity.
 
