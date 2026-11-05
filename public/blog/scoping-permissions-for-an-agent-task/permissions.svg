@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+<title id="title">Connection grants and task scope</title>
+<desc id="desc">The example task summarizes a Slack discussion. Existing grants and the selected task scope overlap at reading the discussion. Sending messages is outside the task scope. A connection without a grant is outside existing access.</desc>
+<rect width="100%" height="100%" fill="white"/>
+<defs><clipPath id="grant"><ellipse cx="540" cy="480" rx="340" ry="245"/></clipPath><clipPath id="env"><ellipse cx="900" cy="480" rx="340" ry="245"/></clipPath></defs>
+<g clip-path="url(#grant)"><g clip-path="url(#env)">
+<path d="M-900,900 L0,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-886,900 L14,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-872,900 L28,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-858,900 L42,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-844,900 L56,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-830,900 L70,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-816,900 L84,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-802,900 L98,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-788,900 L112,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-774,900 L126,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-760,900 L140,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-746,900 L154,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-732,900 L168,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-718,900 L182,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-704,900 L196,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-690,900 L210,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-676,900 L224,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-662,900 L238,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-648,900 L252,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-634,900 L266,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-620,900 L280,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-606,900 L294,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-592,900 L308,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-578,900 L322,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-564,900 L336,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-550,900 L350,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-536,900 L364,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-522,900 L378,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-508,900 L392,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-494,900 L406,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-480,900 L420,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-466,900 L434,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-452,900 L448,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-438,900 L462,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-424,900 L476,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-410,900 L490,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-396,900 L504,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-382,900 L518,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-368,900 L532,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-354,900 L546,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-340,900 L560,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-326,900 L574,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-312,900 L588,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-298,900 L602,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-284,900 L616,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-270,900 L630,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-256,900 L644,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-242,900 L658,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-228,900 L672,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-214,900 L686,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-200,900 L700,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-186,900 L714,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-172,900 L728,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-158,900 L742,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-144,900 L756,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-130,900 L770,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-116,900 L784,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-102,900 L798,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-88,900 L812,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-74,900 L826,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-60,900 L840,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-46,900 L854,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-32,900 L868,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-18,900 L882,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M-4,900 L896,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M10,900 L910,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M24,900 L924,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M38,900 L938,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M52,900 L952,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M66,900 L966,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M80,900 L980,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M94,900 L994,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M108,900 L1008,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M122,900 L1022,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M136,900 L1036,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M150,900 L1050,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M164,900 L1064,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M178,900 L1078,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M192,900 L1092,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M206,900 L1106,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M220,900 L1120,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M234,900 L1134,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M248,900 L1148,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M262,900 L1162,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M276,900 L1176,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M290,900 L1190,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M304,900 L1204,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M318,900 L1218,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M332,900 L1232,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M346,900 L1246,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M360,900 L1260,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M374,900 L1274,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M388,900 L1288,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M402,900 L1302,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M416,900 L1316,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M430,900 L1330,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M444,900 L1344,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M458,900 L1358,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M472,900 L1372,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M486,900 L1386,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M500,900 L1400,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M514,900 L1414,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M528,900 L1428,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M542,900 L1442,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M556,900 L1456,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M570,900 L1470,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M584,900 L1484,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M598,900 L1498,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M612,900 L1512,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M626,900 L1526,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M640,900 L1540,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M654,900 L1554,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M668,900 L1568,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M682,900 L1582,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M696,900 L1596,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M710,900 L1610,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M724,900 L1624,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M738,900 L1638,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M752,900 L1652,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M766,900 L1666,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M780,900 L1680,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M794,900 L1694,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M808,900 L1708,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M822,900 L1722,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M836,900 L1736,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M850,900 L1750,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M864,900 L1764,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M878,900 L1778,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M892,900 L1792,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M906,900 L1806,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M920,900 L1820,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M934,900 L1834,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M948,900 L1848,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M962,900 L1862,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M976,900 L1876,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M990,900 L1890,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1004,900 L1904,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1018,900 L1918,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1032,900 L1932,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1046,900 L1946,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1060,900 L1960,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1074,900 L1974,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1088,900 L1988,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1102,900 L2002,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1116,900 L2016,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1130,900 L2030,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1144,900 L2044,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1158,900 L2058,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1172,900 L2072,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1186,900 L2086,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1200,900 L2100,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1214,900 L2114,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1228,900 L2128,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1242,900 L2142,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1256,900 L2156,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1270,900 L2170,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1284,900 L2184,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1298,900 L2198,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1312,900 L2212,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1326,900 L2226,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1340,900 L2240,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1354,900 L2254,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1368,900 L2268,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1382,900 L2282,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1396,900 L2296,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1410,900 L2310,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1424,900 L2324,0" stroke="#d3d3d3" stroke-width="1"/>
+<path d="M1438,900 L2338,0" stroke="#d3d3d3" stroke-width="1"/>
+</g></g>
+<ellipse cx="540" cy="480" rx="340" ry="245" fill="none" stroke="#202020" stroke-width="2"/>
+<ellipse cx="900" cy="480" rx="340" ry="245" fill="none" stroke="#202020" stroke-width="2"/>
+<text x="64" y="53" font-family="Noto Sans CJK SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="38" fill="#202020" text-anchor="start" dominant-baseline="text-before-edge">Connection grants and task scope</text>
+<text x="66" y="112" font-family="Noto Sans CJK SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" fill="#666666" text-anchor="start" dominant-baseline="text-before-edge">Example task: summarize a Slack discussion</text>
+<text x="460" y="185" font-family="Noto Sans CJK SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" fill="#202020" text-anchor="middle" dominant-baseline="text-before-edge">Existing grants</text>
+<text x="980" y="185" font-family="Noto Sans CJK SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="27" fill="#202020" text-anchor="middle" dominant-baseline="text-before-edge">Task scope</text>
+<text x="372" y="470" font-family="Noto Sans CJK SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="29" fill="#202020" text-anchor="middle" dominant-baseline="text-before-edge">Send messages</text>
+<text x="720" y="470" font-family="Noto Sans CJK SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="29" fill="#202020" text-anchor="middle" dominant-baseline="text-before-edge">Read discussion</text>
+<text x="1068" y="451" font-family="Noto Sans CJK SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="25" fill="#202020" text-anchor="middle" dominant-baseline="text-before-edge">Connection</text>
+<text x="1068" y="491" font-family="Noto Sans CJK SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="25" fill="#202020" text-anchor="middle" dominant-baseline="text-before-edge">without a grant</text>
+<rect x="599" y="463" width="242" height="50" fill="white"/>
+<text x="720" y="470" font-family="Noto Sans CJK SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="29" fill="#202020" text-anchor="middle" dominant-baseline="text-before-edge">Read discussion</text>
+<text x="720" y="807" font-family="Noto Sans CJK SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="26" fill="#202020" text-anchor="middle" dominant-baseline="text-before-edge">Effective access = existing grants ∩ task scope</text>
+</svg>
